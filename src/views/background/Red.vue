@@ -1,7 +1,7 @@
 <template>
   <div class="red-background">
     <div class="content">
-      <Landing/>
+      <router-view/>
     </div>
 		<footer>
 			<a href="">PT. Jumpa Daring Indonesia</a>

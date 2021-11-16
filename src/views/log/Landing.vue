@@ -7,7 +7,9 @@
     <div class="button-groups">
       <button class="button fill-white rounded-full">JOIN MEETING</button>
       <div class="flex justify-between gap-5">
-        <button class="button outlined-white-button rounded-full">SIGN UP</button>
+        <router-link to="/sign-up">
+          <button class="button outlined-white-button rounded-full">SIGN UP</button>
+        </router-link>
         <button class="button outlined-white-button rounded-full">SIGN IN</button>
       </div>
     </div>

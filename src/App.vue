@@ -3,5 +3,13 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </div> -->
-  <router-view/>
+  <Red/>
 </template>
+<script>
+import Red from '@/views/background/Red.vue'
+export default {
+  components: {
+    Red
+  }
+}
+</script>
