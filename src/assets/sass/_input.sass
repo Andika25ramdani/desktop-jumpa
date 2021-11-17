@@ -8,7 +8,19 @@ input, select
 	border: 1px solid #CECECE
 	min-height: 33px
 	outline: none
-	&::placeholder
+	min-width: 252px
+	&:focus, &::placeholder
 		padding: 8px 15px
-		font-size: 12px
-		line-height: 18px
+	&:focus 
+		&::placeholder
+			padding: 0
+// select
+// 	padding: 8px 15px
+// 	&:focus 
+// 		padding: 0
+input[type=submit]
+	background-color: $jumpa-primary
+	text-transform: uppercase
+	font-weight: 700
+	color: $white
+	line-height: 18px

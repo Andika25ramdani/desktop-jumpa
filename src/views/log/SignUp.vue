@@ -1,18 +1,20 @@
 <template>
 	<div class="sign-up">
-		<router-link to="/">Back</router-link>
+		 
 		<div class="card">
-			<h2 class="font-bold text-2xl text-center mb-5">Sign Up</h2>
+			<h2 class="card-header-text font-bold text-2xl text-center mb-5">Sign Up</h2>
 			<form action="">
 				<input type="email" name="" id="" placeholder="Email">
 				<input type="text" name="" id="" placeholder="Display name">
 				<input type="text" name="" id="" placeholder="Nickname">
 				<select name="" id="">
-					<option value="" disabled>Country</option>
+					<option value="" disabled selected>Country</option>
 				</select>
-				<input type="submit" value="">
+				<input type="submit" value="sign up" class="mt-5">
 			</form>
-			<p class="">Already have an account? Sign In</p>
+			<p class="card-footer-text">Already have an account? 
+				<router-link to="/sign-in">Sign In</router-link>
+			</p>
 		</div>
 	</div>
 </template>

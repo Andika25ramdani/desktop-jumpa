@@ -1,18 +1,35 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import Landing from '../views/log/Landing.vue'
+import HostMeeting from '../views/log/HostMeeting.vue'
+import JoinMeeting from '../views/log/JoinMeeting.vue'
+import SignIn from '../views/log/SignIn.vue'
 import SignUp from '../views/log/SignUp.vue'
+import Welcome from '../views/log/Welcome.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'Landing',
-    component: Landing
+    name: 'Welcome',
+    component: Welcome
   },
   {
     path: '/sign-up',
     name: 'SignUp',
     component: SignUp
+  },
+  {
+    path: '/sign-in',
+    name: 'SignIn',
+    component: SignIn
+  },
+  {
+    path: '/join-meeting',
+    name: 'JoinMeeting',
+    component: JoinMeeting
+  },
+  {
+    path: '/host-meeting',
+    name: 'HostMeeting',
+    component: HostMeeting
   },
   {
     path: '/about',

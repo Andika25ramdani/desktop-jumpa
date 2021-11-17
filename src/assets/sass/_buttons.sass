@@ -1,6 +1,5 @@
 .button
 	font-weight: 700
-	font-size: 12px
 	line-height: 18px
 	outline: none
 
@@ -17,3 +16,14 @@
 	padding: 9px 1rem
 	border: 1px solid $white
 	min-width: 125px
+
+.back-button
+	color: $white
+	position: absolute
+	top: 25px
+	left: 45px
+	&::before
+		content: '<'
+		position: absolute
+		font-size: 1.5rem
+		margin-left: -20px

@@ -1,5 +1,8 @@
 <template>
   <div class="red-background">
+    <router-link to="/">
+      <div class="back-button">Back</div>
+    </router-link>
     <div class="content">
       <router-view/>
     </div>
@@ -11,12 +14,12 @@
 
 <script>
 // @ is an alias to /src
-import Landing from '../log/Landing.vue'
+import Welcome from '../log/Welcome.vue'
 
 export default {
   name: 'Red',
   components: {
-    Landing
+    Welcome
   }
 }
 </script>
