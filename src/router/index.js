@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import Home from '../views/pages/Home.vue'
 import HostMeeting from '../views/log/HostMeeting.vue'
 import JoinMeeting from '../views/log/JoinMeeting.vue'
 import SignIn from '../views/log/SignIn.vue'
@@ -30,6 +31,11 @@ const routes = [
     path: '/host-meeting',
     name: 'HostMeeting',
     component: HostMeeting
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: Home
   },
   {
     path: '/about',
