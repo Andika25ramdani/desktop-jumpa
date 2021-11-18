@@ -7,8 +7,8 @@
       </form>
     </div>
     <ul class="flex gap-10">
-      <router-link to="/home" class="menu-link">Home</router-link>
-      <router-link to="/home" class="menu-link">History</router-link>
+      <router-link to="/" class="menu-link">Home</router-link>
+      <router-link to="/meeting-history" class="menu-link">History</router-link>
       <router-link to="/home" class="menu-link">Recording</router-link>
       <router-link to="/home" class="menu-link">Contacts</router-link>
     </ul>
