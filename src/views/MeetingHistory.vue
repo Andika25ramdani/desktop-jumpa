@@ -1,7 +1,32 @@
 <template>
   <div class="meet-history">
-		<h2>Meeting History</h2>
-		<table>
+		<h2 class="page-header">Meeting History</h2>
+		<v-simple-table>
+			<template v-slot:default>
+				<thead>
+					<tr>
+						<th>Date/Time</th>
+						<th>Subject</th>
+						<th>Meeting ID</th>
+						<th>Status</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr
+						v-for="item in meetingHistories"
+						:key="item.name"
+					>
+						<td>{{ item.date }} {{ item.time }}</td>
+						<td>{{ item.subject }}</td>
+						<td>{{ item.id }}</td>
+						<td>{{ item.status }}</td>
+						<td></td>
+					</tr>
+				</tbody>
+			</template>
+		</v-simple-table>
+		<!-- <table>
 			<thead>
 				<td>Date/Time</td>
 				<td>Subject</td>
@@ -18,7 +43,7 @@
 					<td><button>Actions</button></td>
 				</tr>
 			</tbody>
-		</table>
+		</table> -->
   </div>
 </template>
 

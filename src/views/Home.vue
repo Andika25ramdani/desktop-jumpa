@@ -74,33 +74,33 @@ export default {
           timezone: 'WIB',
           hostName: 'Kepala Sekolah SDN Cibaduyut'
         },
-        {
-          id: 5,
-          title: 'Pengukuhan Pengurus Ikal dan Kerja Ke-IV Guru SD Cibaduyut',
-          date: '1 Oktober 2021',
-          start: '13:00',
-          end: '14:00',
-          timezone: 'WIB',
-          hostName: 'Kepala Sekolah SDN Cibaduyut'
-        },
-        {
-          id: 6,
-          title: 'Pengukuhan Pengurus Ikal dan Kerja Ke-IV Guru SD Cibaduyut',
-          date: '1 Oktober 2021',
-          start: '14:00',
-          end: '15:00',
-          timezone: 'WIB',
-          hostName: 'Kepala Sekolah SDN Cibaduyut'
-        },
-        {
-          id: 7,
-          title: 'Pengukuhan Pengurus Ikal dan Kerja Ke-IV Guru SD Cibaduyut',
-          date: '1 Oktober 2021',
-          start: '15:00',
-          end: '16:00',
-          timezone: 'WIB',
-          hostName: 'Kepala Sekolah SDN Cibaduyut'
-        },
+        // {
+        //   id: 5,
+        //   title: 'Pengukuhan Pengurus Ikal dan Kerja Ke-IV Guru SD Cibaduyut',
+        //   date: '1 Oktober 2021',
+        //   start: '13:00',
+        //   end: '14:00',
+        //   timezone: 'WIB',
+        //   hostName: 'Kepala Sekolah SDN Cibaduyut'
+        // },
+        // {
+        //   id: 6,
+        //   title: 'Pengukuhan Pengurus Ikal dan Kerja Ke-IV Guru SD Cibaduyut',
+        //   date: '1 Oktober 2021',
+        //   start: '14:00',
+        //   end: '15:00',
+        //   timezone: 'WIB',
+        //   hostName: 'Kepala Sekolah SDN Cibaduyut'
+        // },
+        // {
+        //   id: 7,
+        //   title: 'Pengukuhan Pengurus Ikal dan Kerja Ke-IV Guru SD Cibaduyut',
+        //   date: '1 Oktober 2021',
+        //   start: '15:00',
+        //   end: '16:00',
+        //   timezone: 'WIB',
+        //   hostName: 'Kepala Sekolah SDN Cibaduyut'
+        // },
       ]
     }
   }
