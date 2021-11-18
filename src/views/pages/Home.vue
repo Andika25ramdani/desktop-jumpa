@@ -1,18 +1,28 @@
 <template>
-  <div class="home bg-red-500">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="">
+    <div class="">
+      <img src="img/icons/jumpa-logo.png" alt="Logo Jumpa">
+      <form action="">
+        <input type="search" name="" id="">
+      </form>
+    </div>
+    <div class="">
+      <ul>
+        <router-link to="/home">Home</router-link>
+        <router-link>History</router-link>
+        <router-link>Recording</router-link>
+        <router-link>Contacts</router-link>
+      </ul>
+      <div class="">
+        <button></button>
+        <button></button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
+  name: 'Home'
 }
 </script>

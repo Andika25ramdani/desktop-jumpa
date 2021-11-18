@@ -3,10 +3,11 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </div> -->
-  <div>
+  <!-- <div>
     <Gray v-show="isLogin == true"/>
     <Red v-show="isLogin == false"/>
-  </div>
+  </div> -->
+  <Gray />
 </template>
 <script>
 import Gray from '@/views/background/Gray.vue'
@@ -17,7 +18,7 @@ export default {
   },
   data(){
     return{
-      isLogin: true
+      isLogin: false
     }
   }
 }

@@ -13,9 +13,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import Welcome from '../log/Welcome.vue'
-
 export default {
   name: 'Red'
 }
