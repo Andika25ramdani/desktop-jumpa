@@ -1,21 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/pages/Home.vue'
-import HostMeeting from '../views/log/HostMeeting.vue'
-import JoinMeeting from '../views/log/JoinMeeting.vue'
+import Home from '../views/Home.vue'
+import HostMeeting from '../views/meeting/HostMeeting.vue'
+import JoinMeeting from '../views/meeting/JoinMeeting.vue'
 import SignIn from '../views/log/SignIn.vue'
 import SignUp from '../views/log/SignUp.vue'
-import Welcome from '../views/log/Welcome.vue'
+import Welcome from '../views/Welcome.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'Welcome',
-    component: Welcome
+    name: 'Home',
+    component: Home
   },
   // {
   //   path: '/',
-  //   name: 'Home',
-  //   component: Home
+  //   name: 'Welcome',
+  //   component: Welcome
   // },
   {
     path: '/sign-up',
@@ -37,11 +37,11 @@ const routes = [
     name: 'HostMeeting',
     component: HostMeeting
   },
-  {
-    path: '/home',
-    name: 'Home',
-    component: Home
-  },
+  // {
+  //   path: '/home',
+  //   name: 'Home',
+  //   component: Home
+  // },
   {
     path: '/about',
     name: 'About',
