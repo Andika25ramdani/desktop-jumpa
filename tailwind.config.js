@@ -13,15 +13,22 @@ module.exports = {
       '2xl': '1536px',
     },
     colors: {
+      primary: '#790f19',
+      grey: {
+        dark: '#424242',
+        lighter: '#E9E9E9',
+        background: '#F2F3F5'
+      },
+      white: colors.white,
+      red: '#FF2727',
+      green: '#32BA7C',
       transparent: 'transparent',
+      
       current: 'currentColor',
 
       black: colors.black,
-      white: colors.white,
       gray: colors.coolGray,
-      red: colors.red,
       yellow: colors.amber,
-      green: colors.emerald,
       blue: colors.blue,
       indigo: colors.indigo,
       purple: colors.violet,
@@ -546,6 +553,7 @@ module.exports = {
       full: '100%',
       min: 'min-content',
       max: 'max-content',
+      screen: '100vw'
     },
     objectPosition: {
       bottom: 'bottom',

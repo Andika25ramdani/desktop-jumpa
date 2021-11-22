@@ -7,7 +7,7 @@
     <Gray v-show="isLogin == true"/>
     <Red v-show="isLogin == false"/>
   </div> -->
-  <Gray />
+  <Red />
 </template>
 <script>
 import Gray from '@/views/background/Gray.vue'

@@ -10,13 +10,13 @@ import Welcome from '../views/Welcome.vue'
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Welcome',
+    component: Welcome
   },
   // {
   //   path: '/',
-  //   name: 'Welcome',
-  //   component: Welcome
+  //   name: 'Home',
+  //   component: Home
   // },
   {
     path: '/sign-up',

@@ -1,7 +1,7 @@
 <template>
-  <div class="red-background">
+  <div class="min-w-screen min-h-screen absolute bg-primary items-center red-background bg-cover">
     <router-link to="/">
-      <div class="back-button">Back</div>
+      <div class="text-white before:content-['<']">Back</div>
     </router-link>
     <div class="content">
       <router-view/>
