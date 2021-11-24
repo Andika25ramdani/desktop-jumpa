@@ -1,11 +1,12 @@
 <template>
-  <red-background />
+  <white-background />
 </template>
 <script>
 import RedBackground from './components/RedBackground.vue'
+import WhiteBackground from './components/WhiteBackground.vue'
 export default {
   components: {
-    RedBackground
+    RedBackground, WhiteBackground
   },
   // setup(){
   //   return{

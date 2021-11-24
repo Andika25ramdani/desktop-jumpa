@@ -1,9 +1,7 @@
 <template>
   <div class="w-screen h-screen fixed bg-primary items-center red-background bg-cover" style="background: url('img/particle-bg.png') #790F19 right bottom no-repeat">
-    <!-- <Particles id="tsparticles" lineLinked="true"/> -->
     <transition name="slide-left" appear>
       <button type="button" @click="$router.go(-1)" class="back-button sticky top-px25 left-px25 z-50 text-white text-xs">&lt; Back</button>
-      <!-- <button type="button" @click="router.back()" class="back-button text-white absolute top-px25 left-px45 text-xs">Back</button> -->
     </transition>
     <div class="mx-auto min-w-min relative h-screen flex flex-nowrap flex-col items-center justify-center">
       <transition name="slide-up" appear>
@@ -19,16 +17,15 @@
 </template>
 
 <script>
-import Particles from 'particles.vue3';
 export default {
   name: 'RedBackground',
-  components: {
-    Particles
-  },
-  methods: {
-    back(){
-      router.go(-1)
+  data(){
+    return{
+      buttonVisible: true
     }
+  },
+  mounted(){
+    console.log(this.$router.history)
   }
 }
 </script>

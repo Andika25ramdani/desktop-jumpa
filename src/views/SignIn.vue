@@ -33,7 +33,7 @@ export default {
 	},
 	mounted () {
     axios
-      .get('https://api.ipvideotalk.com/api/v1.0.0/account/login')
+      .get('https://dinda.jumpa.id/api/v1.0.0/account/login')
       .then(response => (this.info = response))
 			.catch(error => {
         console.log(error)

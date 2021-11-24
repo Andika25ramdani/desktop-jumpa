@@ -1,5 +1,5 @@
 <template>
-	<div class="sign-uo">
+	<div class="sign-up">
 		<div class="bg-white rounded-px5 p-px25 shadow-custom">
 			<h2 class="font-bold text-grey-dark text-2xl text-center mb-5">Sign Up</h2>
 			<form @submit.prevent="onSubmit" class="flex flex-col gap-2.5">
