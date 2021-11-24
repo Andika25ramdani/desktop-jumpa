@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+  <script>
+    // public parameters (accessToken, appID, appSecret, timeStamp)
+    let SERVER_DOMAIN = 'https://fajarenter.jumpa.id';
+    let API_URI = SERVER_DOMAIN + '/api/v1.0.0';
+    let appID = 10002;
+    let appSecret = '062C1FF7EAAD4CB3B5974C122068B9C3';
+    let accessToken = '';
+    let account = 'admin';
+    let passwd = 'n3tph0n1c';
+  </script>
+</html>
