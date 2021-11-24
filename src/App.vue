@@ -30,7 +30,7 @@ export default {
 .slide-left-leave-active,
 .slide-right-enter-active,
 .slide-right-leave-active {
-  transition: all 2.5s ease 1s }
+  transition: all 2.5s ease 2s }
 .slide-up-enter-from,
 .slide-up-leave-to {
   opacity: 0;
