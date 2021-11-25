@@ -18,7 +18,7 @@
 </template>
 <script>
 import API  from '../js/api_interface'
-import {  } from "";
+import md5 from 'crypto-js/md5'
 export default {
 	name: 'SignIn',
 	data() {
@@ -36,7 +36,7 @@ export default {
   },
   methods: {
 	  onSubmit: async function () {
-		let res = await API.account_login(this.signInForm.account, this.signInForm.password)
+		let res = await API.account_login(this.signInForm.account, md5(this.signInForm.password))
 		console.log(res)
 	  }
   }
