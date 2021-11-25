@@ -1,5 +1,5 @@
 <template>
-  <red-background/>
+  <white-background/>
 </template>
 <script>
 import RedBackground from './components/RedBackground.vue'
@@ -17,7 +17,7 @@ export default {
 .slide-left-leave-active,
 .slide-right-enter-active,
 .slide-right-leave-active {
-  transition: all 2.5s ease 2s }
+  transition: all .625s ease .5s }
 .slide-up-enter-from,
 .slide-up-leave-to {
   opacity: 0;

@@ -1,7 +1,7 @@
 <template>
-  <div class="fixed mx-5 p-5 bg-white border border-grey-lighter rounded-tl-px10 rounded-tr-px10">
+  <div class="fixed mx-5 p-5 bg-white border border-grey-lighter rounded-tl-px10 rounded-tr-px10 w-full">
 		<h2 class="font-bold text-2xl text-grey-dark">Meeting History</h2>
-		<div class="grid gap-pc25 pt-0 pr-5 pb-2.5 pl-2.5">
+		<div class="flex gap-pc25 pt-0 pr-5 pb-2.5 pl-2.5">
 			<h6 class="text-px10 font-bold text-grey-sb">Date/Time</h6>
 			<h6 class="text-px10 font-bold text-grey-sb">Subject</h6>
 			<h6 class="text-px10 font-bold text-grey-sb">Meeting ID</h6>
@@ -21,82 +21,21 @@
 </template>
 
 <script>
+import API from '../js/api_interface'
 export default {
 	data(){
 		return{
-			meetingHistories: [
-				{
-					id: 2805184,
-					date: '28/09/2021',
-					time: '11:55',
-					subject: 'Pengukuhan Pengurus Ikal dan Rapat Ke-IV.....',
-					status: 'cancelled'
-				},
-				{
-					id: 2805185,
-					date: '28/09/2021',
-					time: '11:55',
-					subject: 'Pengukuhan Pengurus Ikal dan Rapat Ke-IV.....',
-					status: 'ended'
-				},
-				{
-					id: 2805186,
-					date: '28/09/2021',
-					time: '11:55',
-					subject: 'Pengukuhan Pengurus Ikal dan Rapat Ke-IV.....',
-					status: 'cancelled'
-				},
-				{
-					id: 2805187,
-					date: '28/09/2021',
-					time: '11:55',
-					subject: 'Pengukuhan Pengurus Ikal dan Rapat Ke-IV.....',
-					status: 'ended'
-				},
-				{
-					id: 2805188,
-					date: '28/09/2021',
-					time: '11:55',
-					subject: 'Pengukuhan Pengurus Ikal dan Rapat Ke-IV.....',
-					status: 'cancelled'
-				},
-				{
-					id: 2805189,
-					date: '28/09/2021',
-					time: '11:55',
-					subject: 'Pengukuhan Pengurus Ikal dan Rapat Ke-IV.....',
-					status: 'ended'
-				},
-				{
-					id: 2805190,
-					date: '28/09/2021',
-					time: '11:55',
-					subject: 'Pengukuhan Pengurus Ikal dan Rapat Ke-IV.....',
-					status: 'cancelled'
-				},
-				{
-					id: 2805191,
-					date: '28/09/2021',
-					time: '11:55',
-					subject: 'Pengukuhan Pengurus Ikal dan Rapat Ke-IV.....',
-					status: 'ended'
-				},
-				{
-					id: 2805192,
-					date: '28/09/2021',
-					time: '11:55',
-					subject: 'Pengukuhan Pengurus Ikal dan Rapat Ke-IV.....',
-					status: 'cancelled'
-				},
-				{
-					id: 2805193,
-					date: '28/09/2021',
-					time: '11:55',
-					subject: 'Pengukuhan Pengurus Ikal dan Rapat Ke-IV.....',
-					status: 'ended'
-				},
-			]
+			pageSize: 20,
+			pageIndex: 1,
+			meetingHistories: []
 		}
+	},
+	async mounted() {
+		let res = await API.meeting_list(this.pageSize, this.pageIndex)
+		let data = res.data
+		console.log(res)
+		console.log(data)
+		this.meetingHistories = res
 	}
 }
 </script>

@@ -38,6 +38,7 @@ export default {
 	  onSubmit: async function () {
 		let res = await API.account_login(this.signInForm.account, md5(this.signInForm.password))
 		console.log(res)
+		this.$router.push('/home')
 	  }
   }
 }

@@ -33,76 +33,28 @@
 </template>
 
 <script>
+import API from '../js/api_interface';
 export default {
   name: 'Home',
   data(){
     return{
-      upcomingMeetings: [
-        {
-          id: 1,
-          title: 'Pengukuhan Pengurus Ikal dan Kerja Ke-IV Guru SD Cibaduyut',
-          date: '1 Oktober 2021',
-          start: '08:00',
-          end: '10:00',
-          timezone: 'WIB',
-          hostName: 'Kepala Sekolah SDN Cibaduyut'
-        },
-        {
-          id: 2,
-          title: 'Pengukuhan Pengurus Ikal dan Kerja Ke-IV Guru SD Cibaduyut',
-          date: '1 Oktober 2021',
-          start: '10:00',
-          end: '11:00',
-          timezone: 'WIB',
-          hostName: 'Kepala Sekolah SDN Cibaduyut'
-        },
-        {
-          id: 3,
-          title: 'Pengukuhan Pengurus Ikal dan Kerja Ke-IV Guru SD Cibaduyut',
-          date: '1 Oktober 2021',
-          start: '11:00',
-          end: '12:00',
-          timezone: 'WIB',
-          hostName: 'Kepala Sekolah SDN Cibaduyut'
-        },
-        {
-          id: 4,
-          title: 'Pengukuhan Pengurus Ikal dan Kerja Ke-IV Guru SD Cibaduyut',
-          date: '1 Oktober 2021',
-          start: '12:00',
-          end: '13:00',
-          timezone: 'WIB',
-          hostName: 'Kepala Sekolah SDN Cibaduyut'
-        },
-        // {
-        //   id: 5,
-        //   title: 'Pengukuhan Pengurus Ikal dan Kerja Ke-IV Guru SD Cibaduyut',
-        //   date: '1 Oktober 2021',
-        //   start: '13:00',
-        //   end: '14:00',
-        //   timezone: 'WIB',
-        //   hostName: 'Kepala Sekolah SDN Cibaduyut'
-        // },
-        // {
-        //   id: 6,
-        //   title: 'Pengukuhan Pengurus Ikal dan Kerja Ke-IV Guru SD Cibaduyut',
-        //   date: '1 Oktober 2021',
-        //   start: '14:00',
-        //   end: '15:00',
-        //   timezone: 'WIB',
-        //   hostName: 'Kepala Sekolah SDN Cibaduyut'
-        // },
-        // {
-        //   id: 7,
-        //   title: 'Pengukuhan Pengurus Ikal dan Kerja Ke-IV Guru SD Cibaduyut',
-        //   date: '1 Oktober 2021',
-        //   start: '15:00',
-        //   end: '16:00',
-        //   timezone: 'WIB',
-        //   hostName: 'Kepala Sekolah SDN Cibaduyut'
-        // },
-      ]
+      pageSize: 15,
+      upcomingMeetings: []
     }
+  },
+  // created: {
+  //   async function () {
+  //     let res = await API.meeting_list(this.pageSize)
+  //     this.upcomingMeetings = res
+  //     console.log(res)
+	//   }
+  // },
+  async mounted() {
+    let res = await API.meeting_list(this.pageSize)
+    let data = res.data
+    console.log(res)
+    console.log(data)
+    this.upcomingMeetings = res
   }
 }
 </script>
