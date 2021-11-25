@@ -22,6 +22,14 @@
 <script>
 export default {
   name: 'NavigationBar',
+  methods: {
+    signOut: () => {
+      this.$store.dispatch('signOut')
+        .then(() => {
+          this.$router.push('/sign-in')
+        })
+    }
+  }
 }
 </script>
 

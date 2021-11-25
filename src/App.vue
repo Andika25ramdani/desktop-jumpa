@@ -1,5 +1,5 @@
 <template>
-  <white-background />
+  <white-background/>
 </template>
 <script>
 import RedBackground from './components/RedBackground.vue'
@@ -8,20 +8,6 @@ export default {
   components: {
     RedBackground, WhiteBackground
   },
-  // setup(){
-  //   return{
-  //     serverDomain: 'https://fajarenter.jumpa.id',
-  //     apiUri: serverDomain + '/api/v.1.0.0',
-  //     appId: 10002,
-  //     appSecret: '062C1FF7EAAD4CB3B5974C122068B9C3',
-  //     accessToken: '',
-  //     account: 'admin',
-  //     password: 'n3tph0n1c',
-  //   }
-  // },
-  // mounted() {
-  //   console.log(this.account)
-  // }
 }
 </script>
 <style>
