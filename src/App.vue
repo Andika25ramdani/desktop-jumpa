@@ -1,5 +1,5 @@
 <template>
-  <white-background/>
+  <red-background/>
 </template>
 <script>
 import RedBackground from './components/RedBackground.vue'

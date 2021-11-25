@@ -9,7 +9,6 @@ export default {
     /** ACCOUNT */ 
     // ACCOUNT LOGIN
     account_login: async function (account, password) {
-        console.log(account, password)
         //DEFINE API ENDPOINT
         let endpoint = '/account/login';
         let method = 'get';
@@ -89,7 +88,7 @@ export default {
         let timeStamp = (new Date).getTime();
 
         //GENERATE SIGNATURE
-        let obj_param = {pageSize, pageIndex};
+        let obj_param = {pageSize};
         let source_signature = applySign(obj_param, timeStamp);
         
 
