@@ -18,6 +18,7 @@
 </template>
 <script>
 import API  from '../js/api_interface'
+import {  } from "";
 export default {
 	name: 'SignIn',
 	data() {
@@ -35,7 +36,6 @@ export default {
   },
   methods: {
 	  onSubmit: async function () {
-		console.log(this.signInForm.account, this.signInForm.password)
 		let res = await API.account_login(this.signInForm.account, this.signInForm.password)
 		console.log(res)
 	  }
