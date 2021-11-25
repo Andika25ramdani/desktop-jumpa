@@ -1,5 +1,6 @@
 import router from '../../router'
 import API from '../../js/api_interface'
+
 const intialState = () => {
     return {
         isAuth: false,

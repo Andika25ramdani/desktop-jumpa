@@ -81,7 +81,7 @@ export default {
     },
 
     /** MEETING */
-    meeting_list: async function (pageSize, pageIndex) {
+    meeting_list: async function (pageSize) {
         //DEFINE API ENDPOINT
         let endpoint = '/room/list';
         let method = 'get';
@@ -94,7 +94,7 @@ export default {
 
         //ASIGN PARAM URL
         let public_param = publicParam(timeStamp);
-        let params = '&pageIndex='+pageIndex+'&pageSize='+pageSize;
+        let params = '&pageSize='+pageSize;
         let signature = '&signature='+source_signature;
 
         //SEND API
