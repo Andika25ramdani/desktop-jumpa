@@ -6,11 +6,11 @@
 					<input type="email" name="email" id="email" v-model="email" placeholder="Email" class="border border-grey-ce rounded-px5 py-2 px-4 min-w-252 outline-none text-xs">
 					<input type="text" name="displayName" id="displayName" v-model="displayName" placeholder="Display Name" class="border border-grey-ce rounded-px5 py-2 px-4 min-w-252 outline-none text-xs">
 					<input type="text" name="nickname" id="nickname" v-model="nickname" placeholder="Nickname" class="border border-grey-ce rounded-px5 py-2 px-4 min-w-252 outline-none text-xs">
-					<select name="country" id="country" v-model="country" class="border border-grey-ce rounded-px5 py-2 px-4 min-w-252 outline-none text-xs">
+					<!-- <select name="country" id="country" v-model="country" class="border border-grey-ce rounded-px5 py-2 px-4 min-w-252 outline-none text-xs">
 						<option value="idn">IDN</option>
 						<option value="eng">ENG</option>
 						<option value="usa">USA</option>
-					</select>
+					</select> -->
 				<button type="submit" class="mt-5 bg-primary text-xs font-bold uppercase py-2 px-px94 text-white rounded-px5 hover:shadow-custom">SIGN UP</button>
 			</form>
 			<p class="text-xs text-grey-dark mt-2.5">Already have an account? 
@@ -31,7 +31,7 @@ export default {
 			email: '',
 			displayName: '',
 			nickame: '',
-			country: '',
+			// country: '',
 		}
 	},
 	mounted () {
@@ -50,7 +50,7 @@ export default {
 				email: this.email,
 				displayName: this.displayName,
 				nickame: this.nickame,
-				country: this.country,
+				// country: this.country,
 			}
 			this.$store.dispatch('signUp', newUser)
 				.then(() => this.$router.push('/home'))
