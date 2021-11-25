@@ -87,11 +87,10 @@ export default {
     methods: {
         onSubmit: async function () {
             if (this.signInForm.account && this.signInForm.password) {
-                let res = await this.$store.dispatch('auth/signIn', {
+                await this.$store.dispatch('auth/signIn', {
                     account: this.signInForm.account,
                     password: md5(this.signInForm.password),
                 });
-                console.log(res);
             }
         },
     },
