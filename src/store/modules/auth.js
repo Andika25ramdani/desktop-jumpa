@@ -32,6 +32,9 @@ export default {
             const { accessToken, account, email } = data.data
             if (data.retCode == 0) {
                 localStorage.setItem('accessToken', accessToken)
+                localStorage.setItem('account', account)
+                localStorage.setItem('email', email)
+
                 commit('SET', ['isAuth', true])
                 commit('SET', ['accessToken', accessToken])
                 commit('SET', ['account', account])
