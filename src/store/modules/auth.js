@@ -1,4 +1,4 @@
-import { createStore } from 'vuex'
+import router from '../../router'
 import API from '../../js/api_interface'
 const intialState = () => {
     return {
@@ -18,7 +18,7 @@ export default {
         RESET: (state) => Object.assign(state, intialState())
     },
     getters: {
-        isAuth: (state) => () => state.isAuth,
+        isAuth: (state) => state.isAuth,
         getToken: (state) => () => state.accessToken,
         getAccount: (state) => () => state.account,
         getEmail: (state) => () => state.email,
@@ -31,11 +31,13 @@ export default {
             const { accessToken, account, email } = data.data
             if (data.retCode == 0) {
                 localStorage.setItem('accessToken', accessToken)
+                commit('SET', ['isAuth', true])
                 commit('SET', ['accessToken', accessToken])
                 commit('SET', ['account', account])
                 commit('SET', ['email', email])
-            }
 
+                router.push('/home')
+            }
             return data
         }
     }

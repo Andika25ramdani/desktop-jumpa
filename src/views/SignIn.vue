@@ -68,40 +68,32 @@
     </div>
 </template>
 <script>
-import API from '../js/api_interface'
 import md5 from 'crypto-js/md5';
 
 export default {
-	name: 'SignIn',
-	data() {
-		return{
-			info: null,
-			loading: true,
-			errored: false,
-			signInForm: {
-				account: '',
-				password: ''
-			}
-		}
-	},
-	mounted () {
-  },
-  methods: {
-	  // onSubmit: async function () {
-		// 	let res = await API.account_login(this.signInForm.account, md5(this.signInForm.password))
-		// 	console.log(res)
-		// 	this.$router.push('/home')
-	  // }
-		onSubmit: async function () {
-				// let res = await API.account_login(this.signInForm.account, md5(this.signInForm.password))
-				if (this.signInForm.account && this.signInForm.password) {
-						let res = await this.$store.dispatch('auth/signIn', {
-								account: this.signInForm.account,
-								password: md5(this.signInForm.password),
-						});
-						console.log(res);
-				}
-		},
-  }
+    name: 'SignIn',
+    data() {
+        return {
+            info: null,
+            loading: true,
+            errored: false,
+            signInForm: {
+                account: '',
+                password: '',
+            },
+        };
+    },
+    mounted() {},
+    methods: {
+        onSubmit: async function () {
+            if (this.signInForm.account && this.signInForm.password) {
+                let res = await this.$store.dispatch('auth/signIn', {
+                    account: this.signInForm.account,
+                    password: md5(this.signInForm.password),
+                });
+                console.log(res);
+            }
+        },
+    },
 };
 </script>
