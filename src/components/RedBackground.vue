@@ -84,10 +84,11 @@
         <router-view/>
       </transition>
     </div>
-		<footer class="absolute mx-auto py-4 w-full bottom-0 text-white text-center text-xs">
-      <transition name="slide-up" appear>
-        <a href="/">PT. Jumpa Daring Indonesia</a>
-      </transition>
+		<footer class="absolute mx-auto py-4 w-full bottom-0 text-white text-center text-sm">
+      <transition-group name="slide-up" appear>
+        <a href="/">PT. Jumpa Daring Indonesia</a><br>
+        <span>V1.0.0</span>
+      </transition-group>
 		</footer>
   </div>
 </template>

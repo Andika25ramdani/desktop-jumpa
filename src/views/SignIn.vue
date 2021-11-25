@@ -37,7 +37,7 @@
                         text-xs
                     "
                 />
-                <p class="text-xs underline text-grey-dark">
+                <p class="text-xs underline text-grey-dark no-underline">
                     <router-link to="/">Forgot your password?</router-link>
                 </p>
                 <button
@@ -60,7 +60,7 @@
             </form>
             <p class="text-xs text-grey-dark mt-2.5">
                 Need an account?
-                <router-link to="/sign-up" class="font-bold underline"
+                <router-link to="/sign-up" class="font-bold underline no-underline"
                     >Sign Up</router-link
                 >
             </p>
