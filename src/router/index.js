@@ -68,6 +68,7 @@ router.beforeEach((to, from, next) => {
     if (localStorage.getItem('accessToken')) {
         store.commit('auth/SET', ['isAuth', true]);
     }
+
     if (localStorage.getItem('username') && localStorage.getItem('email')) {
         const username = localStorage.getItem('username');
         const email = localStorage.getItem('email');
@@ -76,14 +77,24 @@ router.beforeEach((to, from, next) => {
         store.commit('auth/SET', ['email', email]);
     }
 
-    if ((to.name !== 'Welcome' && to.name !== 'SignIn' && to.name !== 'SignUp') && !store.getters['auth/isAuth']) {
-		next({
-			path: '/sign-in',
-			replace: true
-		})
-    } else {
-		next()
-    }
+	if (!store.getters['auth/isAuth']) {
+		if (to.name !== 'Welcome' && to.name !== 'SignIn' && to.name !== 'SignUp') {
+			next({
+				path: '/',
+				replace: true
+			})
+		} else next()
+	} else {
+		if ((to.name === 'Welcome' || to.name === 'SignIn' || to.name === 'SignUp')) {
+			console.error('masuk if')
+			next({
+				path: '/home',
+				replace: true
+			})
+		} else {
+			next()
+		}
+	}
 });
 
 export default router;

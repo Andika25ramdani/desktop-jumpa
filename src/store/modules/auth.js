@@ -42,7 +42,17 @@ export default {
 
                 router.push('/home')
             }
-            return data
+        },
+        
+        signOut: async function({commit}) {
+            const res = await API.account_logout();
+            let data = res.data
+
+            if (data.retCode == 0) {
+                localStorage.clear()
+                commit('RESET')
+                router.push('/')
+            }
         }
     }
 }

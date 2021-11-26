@@ -97,7 +97,6 @@ export default {
                     account: this.account,
                     password: md5(this.password),
                 });
-                console.log(res);
             }
         },
     }
