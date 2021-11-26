@@ -93,7 +93,7 @@ export default {
         onSubmit: async function() {
             this.v$.$validate()
             if (!this.v$.$error) {
-                let res = await this.$store.dispatch('auth/signIn', {
+                await this.$store.dispatch('auth/signIn', {
                     account: this.account,
                     password: md5(this.password),
                 });

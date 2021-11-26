@@ -1,5 +1,5 @@
 <template>
-    <red-background v-if="!isAuth" />
+    <red-background v-if="!isAuth || ($router.currentRoute.value.name === 'JoinMeeting' || $router.currentRoute.value.name === 'HostMeeting')" />
     <white-background v-else />
 </template>
 <script>
@@ -16,9 +16,9 @@ export default {
     computed: {
         ...mapGetters({
           isAuth: 'auth/isAuth'
-        }),
-    },
-};
+        })
+    }
+}
 </script>
 <style scoped>
 * {

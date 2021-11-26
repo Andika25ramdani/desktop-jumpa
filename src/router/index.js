@@ -5,57 +5,66 @@ const routes = [
     {
         path: '/',
         name: 'Welcome',
-        component: () =>
-            import(/* webpackChunkName: "welcome" */ '../views/Welcome.vue'),
+        component: () => import('../views/Welcome.vue'),
+        meta: {
+            requireAuth: false,
+        }
     },
     {
         path: '/sign-in',
         name: 'SignIn',
-        component: () =>
-            import(/* webpackChunkName: "signIn" */ '../views/SignIn.vue'),
+        component: () => import('../views/SignIn.vue'),
+        meta: {
+            requireAuth: false,
+        }
     },
     {
         path: '/sign-up',
         name: 'SignUp',
-        component: () =>
-            import(/* webpackChunkName: "signUp" */ '../views/SignUp.vue'),
+        component: () => import('../views/SignUp.vue'),
+        meta: {
+            requireAuth: false,
+        }
     },
     {
         path: '/join-meeting',
         name: 'JoinMeeting',
-        component: () =>
-            import(
-                /* webpackChunkName: "joinMeeting" */ '../views/JoinMeeting.vue'
-            ),
+        component: () => import('../views/JoinMeeting.vue'),
+        meta: {
+            requireAuth: false,
+        }
     },
     {
         path: '/host-meeting',
         name: 'HostMeeting',
-        component: () =>
-            import(
-                /* webpackChunkName: "joinMeeting" */ '../views/HostMeeting.vue'
-            ),
+        component: () => import('../views/HostMeeting.vue'),
+        meta: {
+            requireAuth: false,
+        }
     },
     {
         path: '/home',
         name: 'Home',
-        component: () =>
-            import(/* webpackChunkName: "joinMeeting" */ '../views/Home.vue'),
+        component: () => import('../views/Home.vue'),
+        meta: {
+            requireAuth: true,
+        }
     },
     {
         path: '/history',
         name: 'History',
-        component: () =>
-            import(/* webpackChunkName: "history" */ '../views/History.vue'),
+        component: () => import('../views/History.vue'),
+        meta: {
+            requireAuth: true,
+        }
     },
     {
         path: '/about',
         name: 'About',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () =>
-            import(/* webpackChunkName: "about" */ '../views/About.vue'),
+        component: () => import('../views/About.vue'),
+        meta: {
+            requireAuth: true,
+        }
     },
 ];
 
@@ -77,24 +86,39 @@ router.beforeEach((to, from, next) => {
         store.commit('auth/SET', ['email', email]);
     }
 
-	if (!store.getters['auth/isAuth']) {
-		if (to.name !== 'Welcome' && to.name !== 'SignIn' && to.name !== 'SignUp' && to.name !== 'JoinMeeting' && to.name !== 'HostMeeting') {
-			next({
-				path: '/',
-				replace: true
-			})
-		} else next()
-	} else {
-		if ((to.name === 'Welcome' || to.name === 'SignIn' || to.name === 'SignUp')) {
-			console.error('masuk if')
-			next({
-				path: '/home',
-				replace: true
-			})
-		} else {
-			next()
-		}
-	}
+    // if (!store.getters['auth/isAuth']) {
+    // 	if (to.name !== 'Welcome' && to.name !== 'SignIn' && to.name !== 'SignUp' && to.name !== 'JoinMeeting' && to.name !== 'HostMeeting') {
+    // 		next({
+    // 			path: '/',
+    // 			replace: true
+    // 		})
+    // 	} else next()
+    // } else {
+    // 	if ((to.name === 'Welcome' || to.name === 'SignIn' || to.name === 'SignUp')) {
+    // 		console.error('masuk if')
+    // 		next({
+    // 			path: '/home',
+    // 			replace: true
+    // 		})
+    // 	} else {
+    // 		next()
+    // 	}
+    // }
+    let auth = store.getters['auth/isAuth'];
+    if ((to.name === 'SignIn' || to.name === 'SignUp' || to.name === 'Welcome') && auth) {
+        next({ name: 'Home' });
+    } else if (to.matched.some((record) => record.meta.requireAuth)) {
+        if (!auth) {
+            next({
+                path: '/sign-in',
+                query: { redirect: to.fullPath },
+            });
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
 });
 
 export default router;

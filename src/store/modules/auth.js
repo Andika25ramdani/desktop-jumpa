@@ -29,8 +29,8 @@ export default {
         signIn: async function({commit}, payload) {
             const res = await API.account_login(payload.account, payload.password);
             let data = res.data
-            const { accessToken, account, email } = data.data
             if (data.retCode == 0) {
+                const { accessToken, account, email } = data.data
                 localStorage.setItem('accessToken', accessToken)
                 localStorage.setItem('account', account)
                 localStorage.setItem('email', email)
@@ -40,7 +40,7 @@ export default {
                 commit('SET', ['account', account])
                 commit('SET', ['email', email])
 
-                router.push('/home')
+                router.push(router.currentRoute.value.query.redirect || '/home')
             }
         },
         
@@ -51,7 +51,7 @@ export default {
             if (data.retCode == 0) {
                 localStorage.clear()
                 commit('RESET')
-                router.push('/')
+                router.push('/sign-in')
             }
         }
     }
