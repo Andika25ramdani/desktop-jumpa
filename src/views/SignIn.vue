@@ -4,7 +4,7 @@
             <h2 class="font-bold text-grey-dark text-2xl text-center mb-5">
                 Sign In
             </h2>
-            <div class="flex flex-col gap-2.5">
+            <form @submit.prevent="onSubmit" class="flex flex-col gap-2.5">
                 <div class="flex flex-col gap">
                     <input
                         v-model="account"
@@ -43,7 +43,7 @@
                     <router-link to="/">Forgot your password?</router-link>
                 </p>
                 <button
-                    @click="onSubmit"
+                    type="submit"
                     class="
                         submit-form
                         mt-5
@@ -59,7 +59,7 @@
                 >
                     SIGN IN
                 </button>
-            </div>
+            </form>
             <p class="text-xs text-grey-dark mt-2.5">
                 Need an account?
                 <router-link to="/sign-up" class="font-bold hover:underline"
@@ -83,6 +83,11 @@ export default {
             password: '',
         };
     },
+    // mounted(){
+    //     console.log(this.$router.currentRoute.value)
+    //     console.log(this.$router.currentRoute.value.query)
+    //     console.log(this.$router.currentRoute.value.path)
+    // },
     validations() {
         return {
             account: { required },

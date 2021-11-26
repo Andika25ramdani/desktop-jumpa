@@ -89,8 +89,8 @@
     </div>
 		<footer class="absolute mx-auto py-4 w-full bottom-0 text-white text-center text-sm">
       <transition-group name="slide-up" appear>
-        <a href="/">PT. Jumpa Daring Indonesia</a><br>
-        <span>V1.0.0</span>
+        <a href="/" key="0">PT. Jumpa Daring Indonesia</a><br>
+        <span key="1">V1.0.0</span>
       </transition-group>
 		</footer>
   </div>
@@ -98,15 +98,7 @@
 
 <script>
 export default {
-  name: 'RedBackground',
-  data(){
-    return{
-      buttonVisible: true
-    }
-  },
-  mounted(){
-    console.log(this.$router.currentRoute.value.path)
-  }
+  name: 'RedBackground'
 }
 </script>
 <style scoped>

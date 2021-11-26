@@ -20,7 +20,7 @@ export default {
     }
 }
 </script>
-<style scoped>
+<style>
 * {
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -34,16 +34,23 @@ export default {
 
 .slide-up-enter-active,
 .slide-up-leave-active,
+.slide-down-enter-active,
+.slide-down-leave-active,
 .slide-left-enter-active,
 .slide-left-leave-active,
 .slide-right-enter-active,
 .slide-right-leave-active {
-    transition: all 0.625s ease 0.5s;
+    transition: all .625s ease .5s;
 }
 .slide-up-enter-from,
 .slide-up-leave-to {
     opacity: 0;
     transform: translateY(10%);
+}
+.slide-down-enter-from,
+.slide-down-leave-to {
+    opacity: 0;
+    transform: translateY(-10%);
 }
 .slide-left-enter-from,
 .slide-left-leave-to {
