@@ -78,7 +78,7 @@ router.beforeEach((to, from, next) => {
     }
 
 	if (!store.getters['auth/isAuth']) {
-		if (to.name !== 'Welcome' && to.name !== 'SignIn' && to.name !== 'SignUp') {
+		if (to.name !== 'Welcome' && to.name !== 'SignIn' && to.name !== 'SignUp' && to.name !== 'JoinMeeting' && to.name !== 'HostMeeting') {
 			next({
 				path: '/',
 				replace: true

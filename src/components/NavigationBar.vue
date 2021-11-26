@@ -7,13 +7,13 @@
       </form>
     </div>
     <ul class="flex gap-10">
-      <router-link to="/" class="text-px10 hover:font-bold active:font-bold">Home</router-link>
-      <router-link to="/history" class="text-px10 hover:font-bold active:font-bold">History</router-link>
-      <router-link to="/home" class="text-px10 hover:font-bold active:font-bold">Recording</router-link>
-      <router-link to="/home" class="text-px10 hover:font-bold active:font-bold">Contacts</router-link>
+      <router-link to="/home" class="text-px10 hover:font-bold">Home</router-link>
+      <router-link to="/history" class="text-px10 hover:font-bold">History</router-link>
+      <router-link to="/home" class="text-px10 hover:font-bold">Recording</router-link>
+      <router-link to="/home" class="text-px10 hover:font-bold">Contacts</router-link>
     </ul>
     <div class="flex">
-      <button @click="signOut">Logout</button>
+      <button @click="signOut" type="button">Logout</button>
       <img src="img/icons/jumpa-logo.png" alt="" class="rounded-full w-px22 h-px22 bg-white object-cover ml-2.5">
     </div>
   </nav>
@@ -23,16 +23,12 @@
 export default {
   name: 'NavigationBar',
   methods: {
-    signOut: () => {
-      this.$store.dispatch('signOut')
-        .then(() => {
-          this.$router.push('/sign-in')
-        })
+    test: () => {
+      alert('clicked')
+    },
+    signOut() {
+      this.$store.dispatch('auth/signOut')
     }
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="sass">
-</style>
