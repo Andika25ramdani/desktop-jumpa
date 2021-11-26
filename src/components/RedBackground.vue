@@ -77,7 +77,10 @@
       }"
     />
     <transition name="slide-left" appear>
-      <button type="button" @click="$router.go(-1)" class="back-button sticky top-px25 left-px25 z-50 text-white text-xs">&lt; Back</button>
+      <router-link to='/' class="back-button sticky top-px25 left-px25 z-50 text-white text-xs">
+        <!-- <button type="button" class="back-button sticky top-px25 left-px25 z-50 text-white text-xs">&lt; Back to Welcome</button> -->
+        <span class="text-lg font-medium">&lt;</span> Back to Welcome
+      </router-link>
     </transition>
     <div class="mx-auto min-w-min relative h-screen flex flex-nowrap flex-col items-center justify-center">
       <transition name="slide-up" appear>
@@ -106,12 +109,15 @@ export default {
   }
 }
 </script>
-<style>
-/* .back-button::before {
-  content: '<';
-  position: absolute;
-  top: -1.25px;
-  font-size: 1.25rem;
-  margin-left: -20px;
-} */
+<style scoped>
+.back-button {
+  transition: ease 1.5 all;
+}
+.back-button:hover {
+  background-color: white;
+  color: #790F19;
+  border-radius: 1rem;
+  font-weight: 700;
+  padding: .125rem .5rem;
+}
 </style>

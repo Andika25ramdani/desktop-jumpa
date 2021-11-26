@@ -7,15 +7,15 @@
     <div class="flex w-max flex-col mx-auto gap-2.5">
       <router-link to="/join-meeting">
         <transition name="slide-up">
-          <button class="text-primary text-xs font-bold bg-white rounded-full py-px9 px-px94 hover:shadow-red hover:scale-105">JOIN MEETING</button>
+          <button class="join-btn text-primary text-xs font-bold bg-white rounded-full py-px9 px-px94">JOIN MEETING</button>
         </transition>
       </router-link>
       <div class="flex justify-between gap-5">
         <router-link to="/sign-up">
-          <button class="border border-white text-xs font-bold text-white py-px9 rounded-full min-w-127 hover:bg-white hover:text-primary hover:shadow-custom">SIGN UP</button>
+          <button class="sign-btn border border-white text-xs font-bold text-white py-px9 rounded-full min-w-127">SIGN UP</button>
         </router-link>
         <router-link to="/sign-in">
-          <button class="border border-white text-xs font-bold text-white py-px9 rounded-full min-w-127 hover:bg-white hover:text-primary hover:shadow-customs">SIGN IN</button>
+          <button class="sign-btn border border-white text-xs font-bold text-white py-px9 rounded-full min-w-127">SIGN IN</button>
         </router-link>
       </div>
     </div>
@@ -26,3 +26,16 @@ export default {
   name: 'Welcome',
 }
 </script>
+<style scoped>
+.join-btn, .sign-btn {
+  transition: ease .15s all;
+}
+.join-btn:hover {
+  transform: translateY(-10%);
+}
+.sign-btn:hover {
+  background-color: white;
+  color: #790F19;
+  box-shadow: -10px 10px 15px 0 rgba(121, 15, 25, 1);
+}
+</style>
