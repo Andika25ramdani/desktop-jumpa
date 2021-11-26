@@ -13,7 +13,7 @@
       <router-link to="/home" class="text-px10 hover:font-bold active:font-bold">Contacts</router-link>
     </ul>
     <div class="flex">
-      <button>A</button>
+      <button @click="signOut">Logout</button>
       <img src="img/icons/jumpa-logo.png" alt="" class="rounded-full w-px22 h-px22 bg-white object-cover ml-2.5">
     </div>
   </nav>

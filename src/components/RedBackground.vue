@@ -77,7 +77,7 @@
       }"
     />
     <transition name="slide-left" appear>
-      <router-link to='/' class="back-button sticky top-px25 left-px25 z-50 text-white text-xs">
+      <router-link to='/' v-if="$router.currentRoute.value.path != '/'" class="back-button sticky top-px25 left-px25 z-50 text-white text-xs">
         <!-- <button type="button" class="back-button sticky top-px25 left-px25 z-50 text-white text-xs">&lt; Back to Welcome</button> -->
         <span class="text-lg font-medium">&lt;</span> Back to Welcome
       </router-link>
@@ -105,7 +105,7 @@ export default {
     }
   },
   mounted(){
-    console.log(this.$router.history)
+    console.log(this.$router.currentRoute.value.path)
   }
 }
 </script>
