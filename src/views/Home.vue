@@ -1,11 +1,12 @@
 <template>
+  <NewMeetingPopup v-if="meetingPopup" @close="meetingPopup = false" />
   <div class="fixed flex justify-between w-full">
     <div class="home-ls">
       <transition-group name="slide-left" appear>
         <h3 key="0" class="kanit font-bold text-xl text-grey-dark mt-4 mb-px5 px-16">Hi, Dinda Jumpa</h3>
         <p key="1" class="text-px10 text-grey-sb mb-5 px-16">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni assumenda iste reprehenderit ab maiores enim placeat, cum excepturi sit labore veritatis odit adipisci perferendis animi facere qui ut facilis numquam.</p>
         <div key="2" class="mx-auto bg-white w-max py-px15 px-5 border-grey-lighter border rounded-px10 flex items-center justify-evenly gap-5">
-          <div class="flex flex-col items-center gap-2.5 w-max">
+          <div @click="newMeeting" class="flex flex-col items-center gap-2.5 w-max">
             <div class="bg-primary rounded-px10 w-px62 h-px62 p-px13">A</div>
             <p class="text-px8 text-center">New Meeting</p>
           </div>
@@ -40,10 +41,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import NewMeetingPopup from '../components/NewMeetingPopup.vue'
 export default {
+  components: { NewMeetingPopup },
   name: 'Home',
   data(){
     return{
+      meetingPopup: false,
       pageIndex: 1,
       pageSize: 15,
     }
@@ -58,9 +62,12 @@ export default {
 			pageSize: this.pageSize,
       meetingState: 0
 		})
-
-		console.log(this.upcomingMeetings)
-	}
+	},
+  methods: {
+    newMeeting() {
+      this.meetingPopup = true
+    }
+  }
 }
 </script>
 <style>

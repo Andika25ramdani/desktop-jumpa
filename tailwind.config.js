@@ -18,6 +18,7 @@ module.exports = {
         dark: '#424242',
         ed: '#6D6D6D',
         sb: '#9B9999',
+        ao: '#A0A0A0',
         lightjumpa: '#ADADAD',
         ce: '#CECECE',
         lighter: '#E9E9E9',

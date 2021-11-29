@@ -29,7 +29,6 @@ export default {
     actions: {
         getLists: async function({commit}, payload) {
             const res = await API.meeting_list(payload.pageSize, payload.meetingState);
-            console.log(res)
             let response = res.data
             if (response.retCode == 0) {
                 const { data, pageIndex, pageSize, totalCount, totalPageCount } = response.data

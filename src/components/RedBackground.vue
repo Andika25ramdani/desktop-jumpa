@@ -3,8 +3,6 @@
   <!-- <div class="w-screen h-screen fixed bg-primary items-center red-background bg-cover" style="background: url('img/particle-bg.png') #790F19 right bottom no-repeat"> -->
     <Particles
       id="tsparticles"
-      :particlesInit="particlesInit"
-      :particlesLoaded="particlesLoaded"
       :options="{
         background: {
           color: {
@@ -53,7 +51,7 @@
           },
           move: {
             direction: 'none',
-            enable: true,
+            enable: isEnable,
             random: false,
             speed: 0.5,
             straight: false,
@@ -98,7 +96,24 @@
 
 <script>
 export default {
-  name: 'RedBackground'
+  name: 'RedBackground',
+  data() {
+    return {
+      isEnable: true,
+    }
+  },
+  mounted: function (){
+    this.change()
+  },
+  methods: {
+    change() {
+      setInterval(() => {
+        // console.error('5s')
+        // console.warn(this.isEnable)
+        this.isEnable = !this.isEnable
+      }, 5000);
+    }
+  }
 }
 </script>
 <style scoped>

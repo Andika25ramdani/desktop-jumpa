@@ -15,12 +15,12 @@
 				<p class="text-grey-ed text-px10">{{ history.meetingNum }}</p>
 				<p class="text-grey-ed text-px10" :class="{'text-red': history.state === -1, 'text-green': history.state === 3}">{{ history.state === 3 ? 'Ended' : '' }}{{ history.state === -1 ? 'Canceled' : '' }}</p>
         <div class="">
-          <button class="bg-gradient-to-b w-20 from-white to-grey-f4 border border-grey-lighter text-grey-ed text-px10">Action</button>
-          <!-- <div class="flex flex-col rounded-px5 shadow-sm bg-white py-2.5 px-px15 absolute gap-px5">
+          <button @click="openToggle" class="bg-gradient-to-b w-20 from-white to-grey-f4 border border-grey-lighter text-grey-ed text-px10">Action</button>
+          <div v-if="toggleOpened" :key=history.meetingNum class="flex flex-col rounded-px5 shadow-sm bg-white py-2.5 px-px15 absolute gap-px5">
             <p class="text-px10 text-grey-sb hover:text-grey-ed hover:font-bold">Restart meeting</p>
             <p class="text-px10 text-grey-sb hover:text-grey-ed hover:font-bold">Reschedule</p>
             <p class="text-px10 text-grey-sb hover:text-grey-ed hover:font-bold">Delete</p>
-          </div> -->
+          </div>
         </div>
 			</div>
 		</div>
@@ -32,7 +32,7 @@ import { mapGetters } from 'vuex'
 export default {
 	data(){
 		return{
-      toggleOpened: true,
+			toggleOpened: true,
 		}
 	},
 	computed: {
@@ -46,6 +46,14 @@ export default {
       meetingState: 1
 		})
 	},
+  methods: {
+    openToggle() {
+      this.toggleOpened = !this.toggleOpened
+    },
+    toDetail(serialNum) {
+      alert(serialNum)
+    }
+  }
 }
 </script>
 
