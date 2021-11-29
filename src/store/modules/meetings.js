@@ -3,7 +3,7 @@ import API from '../../js/api_interface'
 
 const intialState = () => {
     return {
-        upcoming: '',
+        lists: '',
         pageIndex: 0,
         pageSize: 0,
         totalCount: 0,
@@ -20,20 +20,21 @@ export default {
         RESET: (state) => Object.assign(state, intialState())
     },
     getters: {
-        getUpcoming: (state) => state.upcoming,
+        getLists: (state) => state.lists,
         getPageIndex: (state) => state.pageIndex,
         getPageSize: (state) => state.pageSize,
         getTotalCount: (state) => state.totalCount,
         getTotalPageCount: (state) => state.totalPageCount,
     },
     actions: {
-        getUpcoming: async function({commit}, payload) {
-            const res = await API.meeting_upcoming(payload.pageSize);
+        getLists: async function({commit}, payload) {
+            const res = await API.meeting_list(payload.pageSize, payload.meetingState);
+            console.log(res)
             let response = res.data
             if (response.retCode == 0) {
                 const { data, pageIndex, pageSize, totalCount, totalPageCount } = response.data
 
-                commit('SET', ['upcoming', data])
+                commit('SET', ['lists', data])
                 commit('SET', ['pageIndex', pageIndex])
                 commit('SET', ['pageSize', pageSize])
                 commit('SET', ['totalCount', totalCount])

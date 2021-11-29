@@ -1,20 +1,27 @@
 <template>
-  <div class="fixed mx-5 p-5 bg-white border border-grey-lighter rounded-tl-px10 rounded-tr-px10 w-full">
-		<h2 class="font-bold text-2xl text-grey-dark">Meeting History</h2>
-		<div class="flex gap-pc25 history-list pt-0 pr-5 pb-2.5 pl-2.5">
+  <div class="fixed flex flex-col h-full mx-5 p-5 bg-white border border-grey-lighter rounded-tl-px10 rounded-tr-px10 w-full">
+		<h2 class="font-bold text-2xl text-grey-dark mb-5">Meeting History</h2>
+		<div class="grid gap-pc25 history-list pt-0 pr-5 pb-2.5 pl-2.5">
 			<h6 class="text-px10 font-bold text-grey-sb">Date/Time</h6>
 			<h6 class="text-px10 font-bold text-grey-sb">Subject</h6>
 			<h6 class="text-px10 font-bold text-grey-sb">Meeting ID</h6>
 			<h6 class="text-px10 font-bold text-grey-sb">Status</h6>
 			<h6 class="text-px10 font-bold text-grey-sb"></h6>
 		</div>
-		<div class="flex flex-col gap-px5 sticky flex-wrap overflow-hidden overflow-y-auto pr-2.5 h-full">
-			<div class="grid gap-pc25 history-list items-center rounded-tr-px5 px-2.5 py-px11 border-grey-lighter border hover:bg-grey-background focus:bg-grey-background" v-for="history in list" :key=history.meetingNum>
-				<p class="text-grey-ed text-px10">{{ history.endDateTime }} {{ history.endDateTime }}</p>
+		<div class="flex flex-col gap-px5 sticky flex-nowrap overflow-hidden overflow-y-auto pr-2.5 h-full">
+			<div class="grid history-list gap-pc25 items-center rounded-tr-px5 px-2.5 py-px11 border-grey-lighter border hover:bg-grey-background focus:bg-grey-background" v-for="history in lists" :key=history.meetingNum>
+				<p class="text-grey-ed text-px10">{{ history.endDateVal }} {{ history.endTimeVal }}</p>
 				<p class="text-grey-ed text-px10">{{ history.subject }}</p>
 				<p class="text-grey-ed text-px10">{{ history.meetingNum }}</p>
-				<!-- <p class="text-grey-ed text-px10" :class="{'text-red': history.status == 'cancelled', 'text-green': history.status == 'ended'}">{{ history.status }}</p> -->
-				<button class="bg-gradient-to-b from-white to-grey-f4 border border-grey-lighter text-grey-ed text-px10">Action</button>
+				<p class="text-grey-ed text-px10" :class="{'text-red': history.state === -1, 'text-green': history.state === 3}">{{ history.state === 3 ? 'Ended' : '' }}{{ history.state === -1 ? 'Canceled' : '' }}</p>
+        <div class="">
+          <button class="bg-gradient-to-b w-20 from-white to-grey-f4 border border-grey-lighter text-grey-ed text-px10">Action</button>
+          <!-- <div class="flex flex-col rounded-px5 shadow-sm bg-white py-2.5 px-px15 absolute gap-px5">
+            <p class="text-px10 text-grey-sb hover:text-grey-ed hover:font-bold">Restart meeting</p>
+            <p class="text-px10 text-grey-sb hover:text-grey-ed hover:font-bold">Reschedule</p>
+            <p class="text-px10 text-grey-sb hover:text-grey-ed hover:font-bold">Delete</p>
+          </div> -->
+        </div>
 			</div>
 		</div>
   </div>
@@ -22,25 +29,23 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import API from '../js/api_interface'
 export default {
 	data(){
 		return{
-			pageSize: 20,
+      toggleOpened: true,
 		}
 	},
 	computed: {
 		...mapGetters({
-			list: 'meetings/getList'
+			lists: 'meetings/getLists'
 		})
 	},
 	async created() {
-		await this.$store.dispatch('meetings/getUpcoming', {
-			pageSize: this.pageSize
+		await this.$store.dispatch('meetings/getLists', {
+			pageSize: 20,
+      meetingState: 1
 		})
-
-		console.log(this.list)
-	}
+	},
 }
 </script>
 

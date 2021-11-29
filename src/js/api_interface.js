@@ -81,20 +81,20 @@ export default {
     },
 
     /** MEETING */
-    meeting_list: async function (pageSize) {
+    meeting_list: async function (pageSize, meetingState) {
         //DEFINE API ENDPOINT
         let endpoint = '/room/list';
         let method = 'get';
         let timeStamp = (new Date).getTime();
 
         //GENERATE SIGNATURE
-        let obj_param = {pageSize};
+        let obj_param = {meetingState, pageSize};
         let source_signature = applySign(obj_param, timeStamp);
         
 
         //ASIGN PARAM URL
         let public_param = publicParam(timeStamp);
-        let params = '&pageSize='+pageSize;
+        let params = '&meetingState='+meetingState+'&pageSize='+pageSize;
         let signature = '&signature='+source_signature;
 
         //SEND API
