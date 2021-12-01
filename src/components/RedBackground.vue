@@ -3,7 +3,35 @@
   <!-- <div class="w-screen h-screen fixed bg-primary items-center red-background bg-cover" style="background: url('img/particle-bg.png') #790F19 right bottom no-repeat"> -->
     <Particles
       id="tsparticles"
-      :options="{
+      :options="tsOption"
+    />
+    <transition name="slide-left" appear>
+      <router-link to='/' v-if="$router.currentRoute.value.path != '/'" class="back-button sticky top-px25 left-px25 z-50 text-white text-xs">
+        <!-- <button type="button" class="back-button sticky top-px25 left-px25 z-50 text-white text-xs">&lt; Back to Welcome</button> -->
+        <span class="text-lg font-medium">&lt;</span> Back to Welcome
+      </router-link>
+    </transition>
+    <div class="mx-auto min-w-min relative h-screen flex flex-nowrap flex-col items-center justify-center">
+      <transition name="slide-up" appear>
+        <router-view/>
+      </transition>
+    </div>
+		<footer class="absolute mx-auto py-4 w-full bottom-0 text-white text-center text-sm">
+      <transition-group name="slide-up" appear>
+        <a href="/" key="0">PT. Jumpa Daring Indonesia</a><br>
+        <span key="1">V1.0.0</span>
+      </transition-group>
+		</footer>
+  </div>
+</template>
+
+<script>
+import { nextTick } from '@vue/runtime-core';
+export default {
+  name: 'RedBackground',
+  data() {
+    return {
+      tsOption: {
         background: {
           color: {
             value: '#790F19',
@@ -51,7 +79,7 @@
           },
           move: {
             direction: 'none',
-            enable: isEnable,
+            enable: true,
             random: false,
             speed: 0.5,
             straight: false,
@@ -72,47 +100,40 @@
           },
         },
         detectRetina: true,
-      }"
-    />
-    <transition name="slide-left" appear>
-      <router-link to='/' v-if="$router.currentRoute.value.path != '/'" class="back-button sticky top-px25 left-px25 z-50 text-white text-xs">
-        <!-- <button type="button" class="back-button sticky top-px25 left-px25 z-50 text-white text-xs">&lt; Back to Welcome</button> -->
-        <span class="text-lg font-medium">&lt;</span> Back to Welcome
-      </router-link>
-    </transition>
-    <div class="mx-auto min-w-min relative h-screen flex flex-nowrap flex-col items-center justify-center">
-      <transition name="slide-up" appear>
-        <router-view/>
-      </transition>
-    </div>
-		<footer class="absolute mx-auto py-4 w-full bottom-0 text-white text-center text-sm">
-      <transition-group name="slide-up" appear>
-        <a href="/" key="0">PT. Jumpa Daring Indonesia</a><br>
-        <span key="1">V1.0.0</span>
-      </transition-group>
-		</footer>
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'RedBackground',
-  data() {
-    return {
-      isEnable: true,
+      }
     }
   },
-  mounted: function (){
-    this.change()
+  // watch: {
+  //   'tsOption.particles.move.speed'() {
+  //     console.log('taiii')
+  //     let self = this;
+  //     this.$nextTick(() => self.tsOption)
+  //   },
+  //   'tsOption.particles.move.enable'() {
+  //     console.log('taiii')
+  //     let self = this;
+  //     this.$nextTick(() => self.tsOption)
+  //   }
+  // },
+  // computed: {
+  //   updateEuy: function() {
+  //     return this.tsOption;
+  //   }
+  // },
+  mounted() {
+    console.log(this.tsOption.particles.move.speed);
+    setTimeout(() => {
+      this.tsOption.particles.move.speed = 0
+      this.tsOption.particles.move.enable = false
+      console.log(this.tsOption.particles.move.speed);
+    }, 5000)
   },
   methods: {
-    change() {
-      setInterval(() => {
-        // console.error('5s')
-        // console.warn(this.isEnable)
-        this.isEnable = !this.isEnable
-      }, 5000);
-    }
+    // change() {
+    //   // this.isEnable = false
+    //   // clearTimeout(this.timer)
+    //   console.log()
+    // }
   }
 }
 </script>

@@ -549,6 +549,7 @@ module.exports = {
     }),
     maxHeight: (theme) => ({
       ...theme('spacing'),
+      90: '90%',
       full: '100%',
       screen: '100vh',
     }),
@@ -574,6 +575,7 @@ module.exports = {
     }),
     minHeight: {
       0: '0px',
+      90: '90%',
       full: '100%',
       screen: '100vh',
     },
