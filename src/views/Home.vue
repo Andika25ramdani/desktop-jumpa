@@ -6,19 +6,19 @@
         <h3 key="0" class="kanit font-bold text-xl text-grey-dark mt-4 mb-px5 px-16">Hi, Dinda Jumpa</h3>
         <p key="1" class="text-px10 text-grey-sb mb-5 px-16">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni assumenda iste reprehenderit ab maiores enim placeat, cum excepturi sit labore veritatis odit adipisci perferendis animi facere qui ut facilis numquam.</p>
         <div key="2" class="mx-auto bg-white w-max py-px15 px-5 border-grey-lighter border rounded-px10 flex items-center justify-evenly gap-5">
-          <div @click="newMeeting" class="flex flex-col items-center gap-2.5 w-max">
+          <div @click="newMeeting" class="flex flex-col items-center gap-2.5 w-max cursor-pointer">
             <div class="bg-primary rounded-px10 w-px62 h-px62 p-px13 flex items-center">
               <i class="fas fa-video text-white text-3xl mx-auto"></i>
             </div>
             <p class="text-px8 text-center">New Meeting</p>
           </div>
-          <div class="flex flex-col items-center gap-2.5 w-max">
+          <div class="flex flex-col items-center gap-2.5 w-max cursor-pointer">
             <div class="bg-primary rounded-px10 w-px62 h-px62 p-px13 flex items-center">
               <i class="fas fa-sign-in-alt text-white text-3xl mx-auto"></i>
             </div>
             <p class="text-px8 text-center">Join Meeting</p>
           </div>
-          <div class="flex flex-col items-center gap-2.5 w-max">
+          <div class="flex flex-col items-center gap-2.5 w-max cursor-pointer">
             <div class="bg-primary rounded-px10 w-px62 h-px62 p-px13 flex items-center">
               <i class="fas fa-calendar-alt text-white text-3xl mx-auto"></i>
             </div>

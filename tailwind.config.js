@@ -23,7 +23,8 @@ module.exports = {
         ce: '#CECECE',
         lighter: '#E9E9E9',
         f4: '#F4F4F4',
-        background: '#F2F3F5'
+        background: '#F2F3F5',
+        f8: '#F8F8F8'
       },
       white: colors.white,
       red: '#FF2727',
@@ -567,6 +568,7 @@ module.exports = {
       '5xl': '64rem',
       '6xl': '72rem',
       '7xl': '80rem',
+      65: '65%',
       full: '100%',
       min: 'min-content',
       max: 'max-content',

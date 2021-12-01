@@ -1,7 +1,7 @@
 <template>
 	<div id="newMeetingPopup" class="overlay-bg fixed top-0 left-0 h-screen w-screen z-50 flex flex-col items-center justify-center">
 		<transition name="slide-down" appear>
-			<div class="bg-white fixed max-h-90 rounded-px5 shadow-custom p-5 flex flex-col gap-2.5">
+			<div class="bg-white fixed max-h-90 max-w-65 w-2/3 rounded-px5 shadow-custom p-5 flex flex-col gap-2.5">
 				<div class="">
 					<h2 class="text-grey-dark font-bold text-2xl">{{ moreOption === true ? 'Instant Meeting Template' : 'New Meeting' }}</h2>
 				</div>
@@ -82,7 +82,14 @@
 								<label class="text-px8 text-grey-dark">Invitees</label>
 								<button class="text-primary text-px10 font-bold">Add from Contacts</button>
 							</div>
-							<textarea v-model="invitees" class="border border-grey-ce py-px5 px-2.5 text-px10 outline-none rounded" placeholder="Separate invitees emails with enter or semicolon key"></textarea>
+							<div class="border border-grey-ce py-px5 px-2.5 outline-none rounded flex flex-wrap gap-px5 text-px8 text-grey-dark">
+								<div class="border border-grey-lighter py-0.5 px-1 w-max rounded flex items-center gap-2.5 bg-grey-f8" v-for="(invitee, index) in invitees" :key=index>
+									{{ invitee }}
+									<button @click="deleteInvitee(index)"><i class="fas fa-times text-grey-dark text-px8"></i></button>
+								</div>
+								<input type="text" @keyup.enter="addInvitees" @keydown.delete="deleteInvitee(invitees.length - 1)" id="newInvitee" value="tests" class="outline-none flex-1">
+							</div>
+							<textarea v-model="invitees" @keyup.enter="addInvitees" class="border border-grey-ce py-px5 px-2.5 text-px10 outline-none rounded" placeholder="Separate invitees emails with enter or semicolon key"></textarea>
 							<p v-if="v$.invitees.$error" class="text-px8 text-red">{{ v$.invitees.$errors[0].$message }}</p>
 							<p v-else class="text-px8 text-grey-ao">Invitees are included in the  person limit</p>
 						</div>
@@ -104,7 +111,7 @@
 							</div>
 						</div>
 						<div class="flex flex-col gap-px5">
-							<label for="" class="text-px8 text-grey-dark">Time Zone</label>
+							<label class="text-px8 text-grey-dark">Time Zone</label>
 							<div class="custom-select flex items-center justify-between text-px10 text-grey-dark">
 								<select v-model="timeZone">
 									<option value="" selected disabled>(GMT+07:00) Jakarta</option>
@@ -115,7 +122,7 @@
 							</div>
 						</div>
 						<div class="flex flex-col gap-px5">
-							<label for="" class="text-px8 text-grey-dark">Duration</label>
+							<label class="text-px8 text-grey-dark">Duration</label>
 							<div class="flex gap-2.5">
 								<div class="flex flex-1 flex-col gap-1">
 									<div class="custom-select flex items-center gap-1">
@@ -208,7 +215,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="flex gap-20 mt-2.5">
+					<div class="flex gap-20 mt-2.5 justify-between">
 						<button @click="moreOption = true" :class="moreOption ? 'invisible' : 'visible'" class="font-bold text-grey-dark text-px10">MORE OPTIONS</button>
 						<div v-if="!moreOption" class="flex gap-2.5">
 							<button @click="$emit('close')" class="rounded-px5 border border-grey-lightjumpa bg-grey-background text-grey-dark font-bold py-2.5 px-12 text-px10">CANCEL</button>
@@ -235,31 +242,42 @@ export default {
         return {
 			moreOption: false,
 			showPassword: false,
+
             v$: useValidate(),
-			inputs: {
-				durHr: 0,
-				durMn: 0,
-				invitees: [],
-				meetingPlan: '',
-				organizer: '',
-				orgEmail: '',
-				password: '',
-				subject: '',
-				timeZone: '',
-			}
+			attendList: false,
+			beep: false,
+			chat: false,
+			durHr: 0,
+			durMn: 0,
+			invitees: [],
+			locked: false,
+			meetingPlan: '',
+			meetingLayouts: '',
+			muted: false,
+			organizer: '',
+			orgEmail: '',
+			password: '',
+			presentation: false,
+			record: false,
+			subject: '',
+			timeZone: '',
         };
     },
     validations() {
         return {
+            attendList: {  },
+            beep: {  },
+            chat: {  },
             durHr: { required },
             durMn: { required },
             invitees: {
 				required, 
-				maxLength: maxLength(3000),
+				maxLength: maxLength(250),
 				values: [
 					email
 				]
 			},
+			locked: {  },
             meetingPlan: { required },
             organizer: { required },
             orgEmail: {
@@ -269,12 +287,14 @@ export default {
             password: {
 				maxLength: maxLength(8)
 			},
+			presentation: {  },
+			record: {  },
             subject: { 
 				required,
 				minLength: minLength(1),
 				maxLength: maxLength(80)
 			},
-			timeZone: { required }
+			timeZone: {  }
         }
     },
     methods: {
@@ -282,15 +302,23 @@ export default {
             this.v$.$validate()
             if (!this.v$.$error) {
                 await this.$store.dispatch('meetings/newMeeting', {
-                    meetingPlan: this.meetingPlan,
-                    subject: this.subject,
-                    password: md5(this.password),
-                    invitees: this.invitees,
+                    // meetingPlan: this.meetingPlan,
+                    // subject: this.subject,
+                    // password: md5(this.password),
+                    // invitees: this.invitees,
                 });
             }
         },
 		visiblePassword() {
 			this.showPassword = !this.showPassword
+		},
+		addInvitees() {
+			this.invitees.push(document.getElementById("newInvitee").value)
+			document.getElementById("newInvitee").value = ''
+		},
+		deleteInvitee(index) {
+			console.log(index)
+			this.invitees.splice(index, 1)
 		}
     }
 }
