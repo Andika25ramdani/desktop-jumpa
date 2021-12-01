@@ -83,11 +83,6 @@ export default {
             password: '',
         };
     },
-    // mounted(){
-    //     console.log(this.$router.currentRoute.value)
-    //     console.log(this.$router.currentRoute.value.query)
-    //     console.log(this.$router.currentRoute.value.path)
-    // },
     validations() {
         return {
             account: { required },

@@ -55,40 +55,41 @@
 							</div>
 						</div>
 						<div class="flex flex-col gap-px5">
-							<label for="" class="text-px8 text-grey-dark">Subject</label>
-							<div class="flex items-center justify-between">
-								<div class="flex gap-2.5 items-center">
-									<input type="text" v-model="subject" class="border border-grey-ce py-px5 px-2.5 text-px10 outline-none rounded" placeholder="Enter your meeting subject">
-									<p class="text-px8 text-grey-ao">1-80 characters</p>
-								</div>
-								<p v-if="v$.subject.$error" class="text-px8 text-red">{{ v$.subject.$errors[0].$message }}</p>
+							<label class="text-px8 text-grey-dark">Subject</label>
+							<div class="flex items-center justify-between gap-2.5">
+								<input type="text" v-model="subject" class="border border-grey-ce py-px5 px-2.5 text-px10 outline-none rounded w-full" placeholder="Enter your meeting subject">
+								<p v-if="v$.subject.$error" class="text-px8 text-red min-w-max">{{ v$.subject.$errors[0].$message }}</p>
+								<p v-else class="text-px8 text-grey-ao min-w-max">1-80 characters</p>
 							</div>
 						</div>
 						<div class="flex flex-col gap-px5">
-							<label for="" class="text-px8 text-grey-dark">Password</label>
-							<div class="flex w-full justify-between items-center">
-								<div class="flex gap-2.5 items-center">
-									<input type="password" v-model="password" class="border border-grey-ce py-px5 px-2.5 text-px10 outline-none rounded" placeholder="Enter meeting password">
-									<p class="text-px8 text-grey-ao">0-8 digits</p>
+							<label class="text-px8 text-grey-dark">Password</label>
+							<div class="flex w-full justify-between items-center gap-2.5">
+								<div class="flex gap-0 border border-grey-ce rounded w-full">
+									<input v-if="showPassword" type="text" v-model="password" class="py-px5 pl-2.5 text-px10 outline-none w-full" placeholder="Enter meeting password">
+									<input v-else type="password" v-model="password" class="py-px5 pl-2.5 text-px10 outline-none w-full" placeholder="Enter meeting password">
+									<button @click="visiblePassword" class="pr-2.5">
+										<i v-if="showPassword" class="fas fa-eye text-grey-dark text-xs"></i>
+										<i v-else class="fas fa-eye-slash text-grey-dark text-xs"></i>
+									</button>
 								</div>
-								<p v-if="v$.password.$error" class="text-px8 text-red">{{ v$.password.$errors[0].$message }}</p>
+								<p v-if="v$.password.$error" class="text-px8 text-red min-w-max">{{ v$.password.$errors[0].$message }}</p>
+								<p v-else class="text-px8 text-grey-ao min-w-max">0-8 digits</p>
 							</div>
 						</div>
 						<div class="flex flex-col gap-px5">
 							<div class="flex w-full justify-between items-center">
-								<label for="" class="text-px8 text-grey-dark">Invitees</label>
+								<label class="text-px8 text-grey-dark">Invitees</label>
 								<button class="text-primary text-px10 font-bold">Add from Contacts</button>
 							</div>
-							<textarea name="" id="" v-model="invitees" class="border border-grey-ce py-px5 px-2.5 text-px10 outline-none rounded" placeholder="Separate invitees emails with enter or semicolon key"></textarea>
-							<div class="flex w-full justify-between">
-								<p class="text-px8 text-grey-ao">Invitees are included in the  person limit</p>
-								<p v-if="v$.invitees.$error" class="text-px8 text-red">{{ v$.invitees.$errors[0].$message }}</p>
-							</div>
+							<textarea v-model="invitees" class="border border-grey-ce py-px5 px-2.5 text-px10 outline-none rounded" placeholder="Separate invitees emails with enter or semicolon key"></textarea>
+							<p v-if="v$.invitees.$error" class="text-px8 text-red">{{ v$.invitees.$errors[0].$message }}</p>
+							<p v-else class="text-px8 text-grey-ao">Invitees are included in the  person limit</p>
 						</div>
 					</div>
 					<div v-if="moreOption == true" class="flex flex-col gap-2.5">
 						<div class="flex flex-col gap-px5 w-full">
-							<label for="" class="text-px8 text-grey-dark">Organizer</label>
+							<label class="text-px8 text-grey-dark">Organizer</label>
 							<div class="flex gap-2.5">
 								<div class="flex flex-1 flex-col gap-1">
 									<input type="text" v-model="organizer" class="border border-grey-ce py-px5 px-2.5 text-px10 outline-none rounded" placeholder="Enter name">
@@ -104,9 +105,10 @@
 						</div>
 						<div class="flex flex-col gap-px5">
 							<label for="" class="text-px8 text-grey-dark">Time Zone</label>
-							<div class="flex items-center justify-between">
-								<select name="" id="" v-model="timeZone" class="border border-grey-ce py-px5 px-2.5 text-px10 outline-none rounded w-full" placehoder="Enter Timezone">
-									<option value="Asia/Jakarta" selected>(GMT+07:00) Jakarta</option>
+							<div class="custom-select flex items-center justify-between text-px10 text-grey-dark">
+								<select v-model="timeZone">
+									<option value="" selected disabled>(GMT+07:00) Jakarta</option>
+									<option value="Asia/Jakarta">(GMT+07:00) Jakarta</option>
 									<option value="Asia">(GMT+07:00) Jakarta</option>
 								</select>
 								<!-- <p v-if="v$.timeZone.$error" class="text-px8 text-red">{{ v$.timeZone.$errors[0].$message }}</p> -->
@@ -116,8 +118,8 @@
 							<label for="" class="text-px8 text-grey-dark">Duration</label>
 							<div class="flex gap-2.5">
 								<div class="flex flex-1 flex-col gap-1">
-									<div class="flex items-center gap-1">
-										<select name="" id="" v-model="durHr" class="border border-grey-ce py-px5 px-2.5 text-px10 outline-none rounded w-full" placehoder="Enter Timezone">
+									<div class="custom-select flex items-center gap-1">
+										<select v-model="durHr">
 											<option value="1" selected>1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -130,8 +132,8 @@
 									<p v-if="v$.durHr.$error" class="text-px8 text-red">{{ v$.durHr.$errors[0].$message }}</p>
 								</div>
 								<div class="flex flex-1 flex-col gap-1">
-									<div class="flex items-center gap-1">
-										<select name="" id="" v-model="durMn" class="border border-grey-ce py-px5 px-2.5 text-px10 outline-none rounded w-full" placehoder="Enter Timezone">
+									<div class="custom-select flex items-center gap-1">
+										<select v-model="durMn" placehoder="Enter Timezone">
 											<option value="0" selected>0</option>
 											<option value="10">10</option>
 											<option value="20">20</option>
@@ -232,16 +234,19 @@ export default {
     data() {
         return {
 			moreOption: false,
+			showPassword: false,
             v$: useValidate(),
-            durHr: 0,
-            durMn: 0,
-            invitees: [],
-            meetingPlan: '',
-            organizer: '',
-            orgEmail: '',
-            password: '',
-            subject: '',
-            timeZone: '',
+			inputs: {
+				durHr: 0,
+				durMn: 0,
+				invitees: [],
+				meetingPlan: '',
+				organizer: '',
+				orgEmail: '',
+				password: '',
+				subject: '',
+				timeZone: '',
+			}
         };
     },
     validations() {
@@ -284,6 +289,9 @@ export default {
                 });
             }
         },
+		visiblePassword() {
+			this.showPassword = !this.showPassword
+		}
     }
 }
 </script>

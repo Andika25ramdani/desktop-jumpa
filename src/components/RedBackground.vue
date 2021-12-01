@@ -8,7 +8,7 @@
     <transition name="slide-left" appear>
       <router-link to='/' v-if="$router.currentRoute.value.path != '/'" class="back-button sticky top-px25 left-px25 z-50 text-white text-xs">
         <!-- <button type="button" class="back-button sticky top-px25 left-px25 z-50 text-white text-xs">&lt; Back to Welcome</button> -->
-        <span class="text-lg font-medium">&lt;</span> Back to Welcome
+        <i class="fas fa-chevron-left pr-1"></i> Back to Welcome
       </router-link>
     </transition>
     <div class="mx-auto min-w-min relative h-screen flex flex-nowrap flex-col items-center justify-center">

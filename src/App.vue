@@ -38,7 +38,6 @@ export default {
 	input[type=radio] {
 		--active: #32BA7C;
 		--active-inner: #fff;
-		--border: #E9E9E9;
 		--background: #fff;
 		--disabled: #F6F8FF;
 		--disabled-inner: #E1E6F9;
@@ -51,8 +50,13 @@ export default {
 		position: relative;
 		margin: 0;
 		cursor: pointer;
-		border: 1px solid var(--bc, var(--border));
 		background: var(--b, var(--background));
+	}
+	input[type=checkbox] {
+		border: 1px solid #E9E9E9;
+	}
+	input[type=radio] {
+		border: 1px solid #9B9999;
 	}
 	input[type=checkbox]:after,
 	input[type=radio]:after {
@@ -138,6 +142,30 @@ export default {
 		--s: .5;
 	}
 }
+select {
+	outline: none;
+	appearance: none;
+	border: none;
+	margin: 0;
+	width: 100%;
+}
+.custom-select {
+	width: 100%;
+	border-radius: 5px;
+	border: 1px solid #CECECE;
+	padding: 5px 10px;
+	cursor: pointer;
+	font-size: 10px;
+	line-height: 15px;
+}
+.custom-select::after {
+  content: "";
+  width: 0.8em;
+  height: 0.5em;
+  background-color: #CECECE;
+  clip-path: polygon(50% 100%, 0 0%, 100% 0);
+}
+
 .slide-up-enter-active,
 .slide-up-leave-active,
 .slide-down-enter-active,
