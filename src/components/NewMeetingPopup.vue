@@ -10,43 +10,43 @@
 						<div class="flex flex-col gap-2.5">
 							<label class="text-px8">Choose your meeting plan</label>
 							<div class="grid grid-cols-3 gap-2.5">
-								<label for="platinum" class="meet-plan flex items-center gap-2.5 pl-2.5 py-4 border border-grey-lightjumpa rounded">
-									<input type="radio" name="meetingPlan" id="platinum" v-model="meetingPlan">
+								<label for="platinum" @click="updatePlans('platinum', 3000)" class="meet-plan flex items-center gap-2.5 pl-2.5 py-4 border border-grey-lightjumpa rounded">
+									<input type="radio" name="meetingPlan" id="platinum">
 									<div class="">
 										<h6 class="text-px10 font-bold">Platinum</h6>
 										<p class="text-px8">Up to 3000 Participants</p>
 									</div>
 								</label>
-								<label for="gold" class="meet-plan flex items-center gap-2.5 pl-2.5 py-4 border border-grey-lightjumpa rounded">
-									<input type="radio" name="meetingPlan" id="gold" v-model="meetingPlan" class="bg-red">
+								<label for="gold" @click="updatePlans('gold', 2000)" class="meet-plan flex items-center gap-2.5 pl-2.5 py-4 border border-grey-lightjumpa rounded">
+									<input type="radio" name="meetingPlan" id="gold" class="bg-red">
 									<div class="">
 										<h6 class="text-px10 font-bold">Gold</h6>
 										<p class="text-px8">Up to 2000 Participants</p>
 									</div>
 								</label>
-								<label for="silver" class="meet-plan flex items-center gap-2.5 pl-2.5 py-4 border border-grey-lightjumpa rounded">
-									<input type="radio" name="meetingPlan" id="silver" v-model="meetingPlan" class="bg-red">
+								<label for="silver" @click="updatePlans('silver', 1500)" class="meet-plan flex items-center gap-2.5 pl-2.5 py-4 border border-grey-lightjumpa rounded">
+									<input type="radio" name="meetingPlan" id="silver" class="bg-red">
 									<div class="">
 										<h6 class="text-px10 font-bold">Silver</h6>
 										<p class="text-px8">Up to 1500 Participants</p>
 									</div>
 								</label>
-								<label for="business" class="meet-plan flex items-center gap-2.5 pl-2.5 py-4 border border-grey-lightjumpa rounded">
-									<input type="radio" name="meetingPlan" id="business" v-model="meetingPlan" class="bg-red">
+								<label for="business" @click="updatePlans('business', 750)" class="meet-plan flex items-center gap-2.5 pl-2.5 py-4 border border-grey-lightjumpa rounded">
+									<input type="radio" name="meetingPlan" id="business" class="bg-red">
 									<div class="">
 										<h6 class="text-px10 font-bold">Business</h6>
 										<p class="text-px8">Up to 750 Participants</p>
 									</div>
 								</label>
-								<label for="pro" class="meet-plan flex items-center gap-2.5 pl-2.5 py-4 border border-grey-lightjumpa rounded">
-									<input type="radio" name="meetingPlan" id="pro" v-model="meetingPlan" class="bg-red">
+								<label for="pro" @click="updatePlans('pro', 500)" class="meet-plan flex items-center gap-2.5 pl-2.5 py-4 border border-grey-lightjumpa rounded">
+									<input type="radio" name="meetingPlan" id="pro" class="bg-red">
 									<div class="">
 										<h6 class="text-px10 font-bold">Pro</h6>
 										<p class="text-px8">Up to 500 Participants</p>
 									</div>
 								</label>
-								<label for="basic" class="meet-plan flex items-center gap-2.5 pl-2.5 py-4 border border-grey-lightjumpa rounded">
-									<input type="radio" name="meetingPlan" id="basic" v-model="meetingPlan" class="bg-red">
+								<label for="basic" @click="updatePlans('basic', 300)" class="meet-plan flex items-center gap-2.5 pl-2.5 py-4 border border-grey-lightjumpa rounded">
+									<input type="radio" name="meetingPlan" id="basic" class="bg-red">
 									<div class="">
 										<h6 class="text-px10 font-bold">Basic</h6>
 										<p class="text-px8">Up to 300 Participants</p>
@@ -87,14 +87,32 @@
 									{{ invitee }}
 									<button @click="deleteInvitee(index)"><i class="fas fa-times text-grey-dark text-px8"></i></button>
 								</div>
-								<input type="text" @keyup.enter="addInvitees" @keydown.delete="deleteInvitee(invitees.length - 1)" id="newInvitee" value="tests" class="outline-none flex-1">
+								<input type="email" @keyup.enter="addInvitees" @keydown.delete="deleteInvitee(invitees.length - 1)" id="newInvitee" class="outline-none flex-1">
 							</div>
-							<textarea v-model="invitees" @keyup.enter="addInvitees" class="border border-grey-ce py-px5 px-2.5 text-px10 outline-none rounded" placeholder="Separate invitees emails with enter or semicolon key"></textarea>
+							<textarea v-model="invitees" @keyup.enter="addInvitees" class="hidden" placeholder="Separate invitees emails with enter or semicolon key"></textarea>
 							<p v-if="v$.invitees.$error" class="text-px8 text-red">{{ v$.invitees.$errors[0].$message }}</p>
-							<p v-else class="text-px8 text-grey-ao">Invitees are included in the  person limit</p>
+							<p v-else-if="meetingPlan.participants > 1" class="text-px8 text-grey-ao">Invitees are included in the {{ meetingPlan.participants - 1 }} person limit</p>
 						</div>
 					</div>
 					<div v-if="moreOption == true" class="flex flex-col gap-2.5">
+						<div class="flex flex-col gap-px5 w-full">
+							<p class="text-px8 text-grey-dark">Meeting plan</p>
+							<div v-if="meetingPlan.name !== ''" class="bg-primary rounded py-px5 px-px15 w-max flex items-center gap-px5 text-white">
+								<p class="font-bold text-px10 capitalize">{{ meetingPlan.name }}</p>
+								<span class="font-normal text-px8">(Up to {{ meetingPlan.participants }} Participants)</span>
+							</div>
+							<div v-else @click="moreOption = false" class="bg-primary rounded py-px5 px-px15 w-max flex items-center gap-px5 text-white cursor-pointer">
+								<span class="font-normal text-px8">Pick your plans now!</span>
+							</div>
+						</div>
+						<div class="flex flex-col gap-px5 w-full">
+							<label class="text-px8 text-grey-dark">Subject</label>
+							<div class="flex items-center justify-between gap-2.5">
+								<input type="text" v-model="subject" class="border border-grey-ce py-px5 px-2.5 text-px10 outline-none rounded w-full" placeholder="Enter your meeting subject">
+								<p v-if="v$.subject.$error" class="text-px8 text-red min-w-max">{{ v$.subject.$errors[0].$message }}</p>
+								<p v-else class="text-px8 text-grey-ao min-w-max">1-80 characters</p>
+							</div>
+						</div>
 						<div class="flex flex-col gap-px5 w-full">
 							<label class="text-px8 text-grey-dark">Organizer</label>
 							<div class="flex gap-2.5">
@@ -152,6 +170,21 @@
 									</div>
 									<p v-if="v$.durMn.$error" class="text-px8 text-red">{{ v$.durMn.$errors[0].$message }}</p>
 								</div>
+							</div>
+						</div>
+						<div class="flex flex-col gap-px5">
+							<label class="text-px8 text-grey-dark">Password</label>
+							<div class="flex w-full justify-between items-center gap-2.5">
+								<div class="flex gap-0 border border-grey-ce rounded w-full">
+									<input v-if="showPassword" type="text" v-model="password" class="py-px5 pl-2.5 text-px10 outline-none w-full" placeholder="Enter meeting password">
+									<input v-else type="password" v-model="password" class="py-px5 pl-2.5 text-px10 outline-none w-full" placeholder="Enter meeting password">
+									<button @click="visiblePassword" class="pr-2.5">
+										<i v-if="showPassword" class="fas fa-eye text-grey-dark text-xs"></i>
+										<i v-else class="fas fa-eye-slash text-grey-dark text-xs"></i>
+									</button>
+								</div>
+								<p v-if="v$.password.$error" class="text-px8 text-red min-w-max">{{ v$.password.$errors[0].$message }}</p>
+								<p v-else class="text-px8 text-grey-ao min-w-max">0-8 digits</p>
 							</div>
 						</div>
 						<div class="flex flex-col gap-px5">
@@ -251,7 +284,10 @@ export default {
 			durMn: 0,
 			invitees: [],
 			locked: false,
-			meetingPlan: '',
+			meetingPlan: {
+				participants: 0,
+				name: ''
+			},
 			meetingLayouts: '',
 			muted: false,
 			organizer: '',
@@ -272,13 +308,9 @@ export default {
             durMn: { required },
             invitees: {
 				required, 
-				maxLength: maxLength(250),
-				values: [
-					email
-				]
+				maxLength: maxLength(this.meetingPlan.participants),
 			},
 			locked: {  },
-            meetingPlan: { required },
             organizer: { required },
             orgEmail: {
 				required, 
@@ -313,12 +345,20 @@ export default {
 			this.showPassword = !this.showPassword
 		},
 		addInvitees() {
-			this.invitees.push(document.getElementById("newInvitee").value)
+			if (document.getElementById("newInvitee").value != '') {
+				this.invitees.push(document.getElementById("newInvitee").value)
+			}
 			document.getElementById("newInvitee").value = ''
 		},
 		deleteInvitee(index) {
-			console.log(index)
-			this.invitees.splice(index, 1)
+			if (document.getElementById("newInvitee").value == '') {
+				this.invitees.splice(index, 1)
+			}
+		},
+		updatePlans(name, participants) {
+			this.meetingPlan.name = name
+			this.meetingPlan.participants = participants
+			console.log(this.meetingPlan);
 		}
     }
 }

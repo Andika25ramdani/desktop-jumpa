@@ -120,14 +120,14 @@ export default {
   //     return this.tsOption;
   //   }
   // },
-  mounted() {
-    console.log(this.tsOption.particles.move.speed);
-    setTimeout(() => {
-      this.tsOption.particles.move.speed = 0
-      this.tsOption.particles.move.enable = false
-      console.log(this.tsOption.particles.move.speed);
-    }, 5000)
-  },
+  // mounted() {
+  //   console.log(this.tsOption.particles.move.speed);
+  //   setTimeout(() => {
+  //     this.tsOption.particles.move.speed = 0
+  //     this.tsOption.particles.move.enable = false
+  //     console.log(this.tsOption.particles.move.speed);
+  //   }, 5000)
+  // },
   methods: {
     // change() {
     //   // this.isEnable = false
