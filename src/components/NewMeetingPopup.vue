@@ -142,33 +142,29 @@
 						<div class="flex flex-col gap-px5">
 							<label class="text-px8 text-grey-dark">Duration</label>
 							<div class="flex gap-2.5">
-								<div class="flex flex-1 flex-col gap-1">
-									<div class="custom-select flex items-center gap-1">
-										<select v-model="durHr">
-											<option value="1" selected>1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-											<option value="5">5</option>
-											<option value="6">6</option>
-										</select>
-										<p class="text-px8 text-grey-ao">Hr</p>
+								<div class="rounded border border-grey-ce py-px5 px-2.5 w-max flex items-center gap-4">
+									<button @click="inputDecrease('durationHour')" class="rounded-full bg-grey-lighter h-px11 w-px11 relative">
+										<i class="fas fa-minus text-px8 text-grey-dark px-1 absolute top-0 " style="right: -1.75px;"></i>
+									</button>
+									<div class="flex gap-0.5 items-center">
+										<input type="number" v-model="durHr" min="0" max="6" id="durationHour" class="outline-none text-px10 w-2">
+										<p class="text-px8 text-grey-ao">hr</p>
 									</div>
-									<p v-if="v$.durHr.$error" class="text-px8 text-red">{{ v$.durHr.$errors[0].$message }}</p>
+									<button @click="inputIncrease('durationHour', 6)" class="rounded-full bg-grey-lighter h-px11 w-px11 relative">
+										<i class="fas fa-plus text-px8 text-grey-dark px-1 absolute top-0 " style="right: -1.75px;"></i>
+									</button>
 								</div>
-								<div class="flex flex-1 flex-col gap-1">
-									<div class="custom-select flex items-center gap-1">
-										<select v-model="durMn" placehoder="Enter Timezone">
-											<option value="0" selected>0</option>
-											<option value="10">10</option>
-											<option value="20">20</option>
-											<option value="30">30</option>
-											<option value="40">40</option>
-											<option value="50">50</option>
-										</select>
-										<p class="text-px8 text-grey-ao">Mn</p>
+								<div class="rounded border border-grey-ce py-px5 px-2.5 w-max flex items-center gap-4">
+									<button @click="inputDecrease('durationMinute')" class="rounded-full bg-grey-lighter h-px11 w-px11 relative">
+										<i class="fas fa-minus text-px8 text-grey-dark px-1 absolute top-0 " style="right: -1.75px;"></i>
+									</button>
+									<div class="flex gap-0.5 items-center">
+										<input type="number" v-model="durMn" min="0" max="60" id="durationMinute" class="outline-none text-px10 w-3">
+										<p class="text-px8 text-grey-ao">min</p>
 									</div>
-									<p v-if="v$.durMn.$error" class="text-px8 text-red">{{ v$.durMn.$errors[0].$message }}</p>
+									<button @click="inputIncrease('durationMinute', 60)" class="rounded-full bg-grey-lighter h-px11 w-px11 relative">
+										<i class="fas fa-plus text-px8 text-grey-dark px-1 absolute top-0 " style="right: -1.75px;"></i>
+									</button>
 								</div>
 							</div>
 						</div>
@@ -355,6 +351,22 @@ export default {
 				this.invitees.splice(index, 1)
 			}
 		},
+		inputIncrease(elId, maxValue) {
+			let incResult = parseInt(document.getElementById(elId).value, 10)
+			incResult = isNaN(incResult) ? 0 : incResult
+			if (incResult < maxValue) {
+				incResult++
+			}
+			document.getElementById(elId).value = incResult
+		},
+		inputDecrease(elId) {
+			let incResult = parseInt(document.getElementById(elId).value, 10)
+			incResult = isNaN(incResult) ? 0 : incResult
+			if (incResult > 0) {
+				incResult--
+			}
+			document.getElementById(elId).value = incResult
+		},
 		updatePlans(name, participants) {
 			this.meetingPlan.name = name
 			this.meetingPlan.participants = participants
@@ -366,5 +378,9 @@ export default {
 <style>
 .overlay-bg {
 	background-color: rgba(66, 66, 66, .8);
+}
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
 }
 </style>
