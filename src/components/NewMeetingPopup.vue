@@ -286,8 +286,8 @@ export default {
 			},
 			meetingLayouts: '',
 			muted: false,
-			organizer: '',
-			orgEmail: '',
+			organizer: localStorage.getItem('account'),
+			orgEmail: localStorage.getItem('email'),
 			password: '',
 			presentation: false,
 			record: false,
@@ -329,12 +329,27 @@ export default {
         newMeeting: async function() {
             this.v$.$validate()
             if (!this.v$.$error) {
-                await this.$store.dispatch('meetings/newMeeting', {
-                    // meetingPlan: this.meetingPlan,
-                    // subject: this.subject,
-                    // password: md5(this.password),
-                    // invitees: this.invitees,
-                });
+				console.log(this.subject);
+				console.log(this.password);
+				console.log(this.invitees);
+				console.log(this.timeZone);
+				console.log(this.durHr);
+				console.log(this.durMn);
+				console.log('record:'+this.record);
+				console.log('locked:'+this.locked);
+				console.log('chat:'+this.chat);
+				console.log('muted:'+this.muted);
+				console.log('attend:'+this.attendList);
+				console.log('presentation:'+this.presentation);
+				console.log('beep:'+ this.beep);
+				console.log(this.organizer);
+				console.log(this.orgEmail);
+                // await this.$store.dispatch('meetings/newMeeting', {
+                //     meetingPlan: this.meetingPlan,
+                //     subject: this.subject,
+                //     password: md5(this.password),
+                //     invitees: this.invitees,
+                // });
             }
         },
 		visiblePassword() {

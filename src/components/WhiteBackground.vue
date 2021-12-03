@@ -16,5 +16,17 @@ export default {
   }
 }
 </script>
-<style lang="sass">
+<style>
+.default-page {
+  margin: 0;
+  padding: 0 20px }
+.default-page > .card {
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #e9e9e9;
+  border-radius: 10px 10px 0 0;
+  height: calc(100vh - 62px);
+  width: calc(100vw - 40px);
+  position: fixed;
+}
 </style>

@@ -1,9 +1,9 @@
 <template>
-  <NewMeetingPopup v-if="meetingPopup" @close="meetingPopup = false" />
+  <NewMeetingPopup v-if="meetingPopup" @close="meetingPopup = false"/>
   <div class="fixed flex justify-between w-full">
     <div class="home-ls">
       <transition-group name="slide-left" appear>
-        <h3 key="0" class="kanit font-bold text-xl text-grey-dark mt-4 mb-px5 px-16">Hi, Dinda Jumpa</h3>
+        <h3 key="0" class="kanit font-bold text-xl text-grey-dark mt-4 mb-px5 px-16">Hi, {{ account }} Jumpa</h3>
         <p key="1" class="text-px10 text-grey-sb mb-5 px-16">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni assumenda iste reprehenderit ab maiores enim placeat, cum excepturi sit labore veritatis odit adipisci perferendis animi facere qui ut facilis numquam.</p>
         <div key="2" class="mx-auto bg-white w-max py-px15 px-5 border-grey-lighter border rounded-px10 flex items-center justify-evenly gap-5">
           <div @click="newMeeting" class="flex flex-col items-center gap-2.5 w-max cursor-pointer">
@@ -58,11 +58,12 @@ export default {
       meetingPopup: false,
       pageIndex: 1,
       pageSize: 15,
+      account: localStorage.getItem('account')
     }
   },
   computed: {
 		...mapGetters({
-			upcomingMeetings: 'meetings/getLists'
+			upcomingMeetings: 'meetings/getLists',
 		})
 	},
 	async created() {
