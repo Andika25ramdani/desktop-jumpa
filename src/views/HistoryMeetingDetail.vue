@@ -3,12 +3,12 @@
         <div class="card m-0">
 			<h2 class="font-bold text-2xl text-grey-dark p-5">Meeting Details</h2>
             <nav role="navigation" class="w-full flex gap-px25 border-b border-grey-lighter px-7 m-0">
-                <a href="#meetingInfo" class="tab-menu">Meeting Info</a>
-                <a href="#participants" class="tab-menu">Participants</a>
-                <a href="#invitees" class="tab-menu">Invitees</a>
-                <a href="#attachments" class="tab-menu">Attachments</a>
+                <a @click="changeTab('meetingInfo')" class="tab-menu cursor-pointer" :class="{ active: currentTab === 'meetingInfo'}">Meeting Info</a>
+                <a @click="changeTab('participants')" class="tab-menu cursor-pointer" :class="{ active: currentTab === 'participants'}">Participants</a>
+                <a @click="changeTab('invitees')" class="tab-menu cursor-pointer" :class="{ active: currentTab === 'invitees'}">Invitees</a>
+                <a @click="changeTab('attachments')" class="tab-menu cursor-pointer" :class="{ active: currentTab === 'attachments'}">Attachments</a>
             </nav>
-            <div id="meetingInfo" class="text-px10 text-grey-ed py-2.5 px-7 inactive">
+            <div v-if="currentTab === 'meetingInfo'" id="meetingInfo" class="text-px10 text-grey-ed py-2.5 px-7 overflow-hidden overflow-y-auto mr-1">
                 <table class="text-left table-auto">
                     <tr>
                         <th class="py-px5 pr-7">Subject</th>
@@ -78,7 +78,7 @@
                     </tr>
                 </table>
             </div>
-            <div id="participants" class="text-px10 text-grey-ed px-7 overflow-hidden overflow-y-auto mr-1 inactive">
+            <div v-if="currentTab === 'participants'" id="participants" class="text-px10 text-grey-ed px-7 overflow-hidden overflow-y-auto mr-1">
                 <table class="text-left table-auto w-full">
                     <thead>
                         <tr>
@@ -163,7 +163,7 @@
                     </tbody>
                 </table>
             </div>
-            <div id="invitees" class="text-px10 text-grey-ed px-7 overflow-hidden overflow-y-auto mr-1 inactive">
+            <div v-if="currentTab === 'invitees'" id="invitees" class="text-px10 text-grey-ed px-7 overflow-hidden overflow-y-auto mr-1">
                 <table class="text-left table-auto w-full">
                     <thead>
                         <tr>
@@ -248,7 +248,7 @@
                     </tbody>
                 </table>
             </div>
-            <div id="attachments" class="text-px10 text-grey-ed pl-7 pr-6 py-5 overflow-hidden overflow-y-auto mr-1">
+            <div v-if="currentTab === 'attachments'" id="attachments" class="text-px10 text-grey-ed pl-7 pr-6 py-5 overflow-hidden overflow-y-auto mr-1">
                 <div class="grid gap-px13 grid-flow-row grid-cols-4">
                     <div class="bg-white w-40 h-36 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2">
                         <i class="fas fa-file text-primary text-5xl"></i>
@@ -366,11 +366,17 @@ export default {
     name: 'HistoryMeetingDetail',
     data() {
         return {
+            currentTab: 'meetingInfo',
             serialNum: this.$route.params.serial
         }
     },
     mounted() {
         console.log(this.$route.params.serial)
+    },
+    methods: {
+        changeTab(newTab) {
+            this.currentTab = newTab
+        }
     }
 }
 </script>
@@ -383,12 +389,12 @@ export default {
     padding: 5px 0;
     border-bottom: 2px solid transparent;
 }
-.tab-menu:active, .tab-menu:hover {
+.tab-menu:active, .tab-menu:hover, .tab-menu.active {
     font-weight: 700;
     color: #424242;
     border-bottom: 2px solid #790F19;
 }
-#participants, #invitees, #attachments{
+#meetingInfo, #participants, #invitees, #attachments{
     max-height: calc(100vh - 178px);
 }
 #participants > table, #invitees > table {
