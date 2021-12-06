@@ -1,6 +1,14 @@
 <template>
+	<confirm-popup
+		v-if="popupDelete"
+		@close="popupDelete = false"
+		@function=deleteHistory(currentSerial)
+		buttonTitle="Delete"
+		popupMessage="Are you sure you want to delete this history? You cannot restore it once deleted."
+		popupTitle="Delete History">
+	</confirm-popup>
 	<div class="default-page">
-		<div class="card">
+		<div class="card p-5">
 			<h2 class="font-bold text-2xl text-grey-dark mb-5">Meeting History</h2>
 			<div class="grid gap-pc25 history-list pt-0 pr-5 pb-2.5 pl-2.5">
 				<h6 class="text-px10 font-bold text-grey-sb">Date/Time</h6>
@@ -10,20 +18,24 @@
 				<h6 class="text-px10 font-bold text-grey-sb"></h6>
 			</div>
 			<div id="listHistory" class="flex flex-col gap-px5 sticky flex-nowrap overflow-hidden overflow-y-auto pr-2.5 h-full hasInactive">
-				<div class="grid history-list gap-pc25 items-center rounded-tr-px5 px-2.5 py-px11 border-grey-lighter border hover:bg-grey-background focus:bg-grey-background" v-for="history in lists" :key=history.meetingNum>
-					<p class="text-grey-ed text-px10">{{ history.endDateVal }} {{ history.endTimeVal }}</p>
-					<p class="text-grey-ed text-px10">{{ history.subject }}</p>
-					<p class="text-grey-ed text-px10">{{ history.meetingNum }}</p>
-					<p class="text-grey-ed text-px10" :class="{'text-red': history.state === -1, 'text-green': history.state === 3}">{{ history.state === 3 ? 'Ended' : '' }}{{ history.state === -1 ? 'Canceled' : '' }}</p>
-					<div class="">
-						<button @click="openToggle(history.meetingNum)" class="bg-gradient-to-b w-20 from-white to-grey-f4 border border-grey-lighter text-grey-ed text-px10">Action</button>
-						<div :key=history.meetingNum :id=history.meetingNum class="flex flex-col rounded-px5 shadow-sm bg-white py-2.5 px-px15 absolute gap-px5 inactive">
-							<p class="text-px10 text-grey-sb hover:text-grey-ed hover:font-bold">Restart meeting</p>
-							<p class="text-px10 text-grey-sb hover:text-grey-ed hover:font-bold">Reschedule</p>
-							<p class="text-px10 text-grey-sb hover:text-grey-ed hover:font-bold">Delete</p>
+				<transition-group name="slide-up" appear>
+					<div class="grid history-list gap-pc25 items-center rounded-tr-px5 px-2.5 py-px11 border-grey-lighter border hover:bg-grey-background focus:bg-grey-background cursor-pointer" v-for="history in lists" :key=history.meetingNum @dblclick="toDetail(history.meetingSerialNum)">
+						<p class="text-grey-ed text-px10">{{ history.endDateVal }} {{ history.endTimeVal }}</p>
+						<p class="text-grey-ed text-px10">{{ history.subject }}</p>
+						<p class="text-grey-ed text-px10">{{ history.meetingNum }}</p>
+						<p class="text-grey-ed text-px10" :class="{'text-red': history.state === -1, 'text-green': history.state === 3}">{{ history.state === 3 ? 'Ended' : '' }}{{ history.state === -1 ? 'Canceled' : '' }}</p>
+						<div class="">
+							<button @click="openToggle(history.meetingSerialNum)" class="bg-gradient-to-b w-20 from-white to-grey-f4 border border-grey-lighter text-grey-ed text-px10 rounded-px5 flex gap-px15 items-center justify-center px-2">
+								Action <i class="fas fa-sort text-grey-dark text-px8"></i>
+							</button>
+							<div :key=history.meetingSerialNum :id=history.meetingSerialNum class="flex flex-col rounded-px5 shadow-sm bg-white py-2.5 px-px15 absolute gap-px5 inactive">
+								<p @click="restartMeeting(history.meetingSerialNum)" class="text-px10 text-grey-sb cursor-pointer hover:text-grey-ed hover:font-bold">Restart meeting</p>
+								<p @click="reschedule(history.meetingSerialNum)" class="text-px10 text-grey-sb cursor-pointer hover:text-grey-ed hover:font-bold">Reschedule</p>
+								<p @click="popupDelete = true" class="text-px10 text-grey-sb cursor-pointer hover:text-grey-ed hover:font-bold">Delete</p>
+							</div>
 						</div>
 					</div>
-				</div>
+				</transition-group>
 			</div>
 		</div>
   </div>
@@ -31,7 +43,15 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import ConfirmPopup from '../components/ConfirmPopup.vue'
 export default {
+  components: { ConfirmPopup },
+	data() {
+		return {
+			popupDelete: false,
+			currentSerial: ''
+		}
+	},
 	computed: {
 		...mapGetters({
 			lists: 'meetings/getLists'
@@ -47,6 +67,7 @@ export default {
     openToggle(elId) {
 		if (document.getElementById(elId).classList.contains('inactive')) {
 			if (document.getElementById("listHistory").classList.contains('hasInactive')) {
+				this.currentSerial = elId
 				document.getElementById(elId).classList.remove('inactive')
 				document.getElementById(elId).classList.add('active')
 				document.getElementById("listHistory").classList.remove('hasInactive')
@@ -60,8 +81,17 @@ export default {
 		}
     },
     toDetail(serialNum) {
-      alert(serialNum)
-    }
+		this.$router.push({path: `/history-meeting-detail/${serialNum}`})
+    },
+	restartMeeting(serialNumber) {
+		console.warn('Restart Meeting No. '+serialNumber);
+	},
+	reschedule(serialNumber) {
+		console.log('Reschedule Meeting No. '+serialNumber);
+	},
+	deleteHistory(serialNumber) {
+		console.error('Delete History Meeting No. '+serialNumber);
+	}
   }
 }
 </script>

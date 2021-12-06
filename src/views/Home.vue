@@ -98,6 +98,4 @@ export default {
   position: absolute;
   bottom: 3.125%;
   right: 20%; }
-.kanit {
-  font-family: 'Kanit', sans-serif }
 </style>

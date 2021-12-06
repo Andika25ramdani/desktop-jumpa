@@ -196,4 +196,10 @@ select {
     opacity: 0;
     transform: translateX(10%);
 }
+
+.kanit {
+  font-family: 'Kanit', sans-serif }
+.overlay-bg {
+	background-color: rgba(66, 66, 66, .8);
+}
 </style>

@@ -59,6 +59,14 @@ const routes = [
         }
     },
     {
+        path: '/history-meeting-detail/:serial',
+        name: 'HistoryMeetingDetail',
+        component: () => import('../views/HistoryMeetingDetail.vue'),
+        meta: {
+            requireAuth: true,
+        }
+    },
+    {
         path: '/about',
         name: 'About',
         component: () => import('../views/About.vue'),

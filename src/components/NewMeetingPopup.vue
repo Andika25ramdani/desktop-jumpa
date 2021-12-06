@@ -391,9 +391,6 @@ export default {
 }
 </script>
 <style>
-.overlay-bg {
-	background-color: rgba(66, 66, 66, .8);
-}
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
