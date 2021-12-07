@@ -67,6 +67,14 @@ const routes = [
         }
     },
     {
+        path: '/recordings',
+        name: 'Recordings',
+        component: () => import('../views/Recordings.vue'),
+        meta: {
+            requireAuth: true,
+        }
+    },
+    {
         path: '/about',
         name: 'About',
         component: () => import('../views/About.vue'),

@@ -91,7 +91,8 @@ module.exports = {
       72: '18rem',
       80: '20rem',
       96: '24rem',
-      pc25: '2.5%'
+      pc25: '2.5%',
+      pc375: '3.75%'
     },
     animation: {
       none: 'none',

@@ -9,10 +9,10 @@
         </form>
       </div>
       <ul class="flex gap-10 font-normal text-px10">
-        <router-link to="/home" class="menu-list">Home</router-link>
-        <router-link to="/history" class="menu-list">History</router-link>
-        <router-link to="/home" class="menu-list">Recording</router-link>
-        <router-link to="/home" class="menu-list">Contacts</router-link>
+        <router-link to="/home" class="menu-list" @click="changeMenu('home')" :class="{ activeMenu: currentMenu === 'home'}">Home</router-link>
+        <router-link to="/history" class="menu-list" @click="changeMenu('history')" :class="{ activeMenu: currentMenu === 'history'}">History</router-link>
+        <router-link to="/recordings" class="menu-list" @click="changeMenu('recordings')" :class="{ activeMenu: currentMenu === 'recordings'}">Recording</router-link>
+        <router-link to="/home" class="menu-list" @click="changeMenu('contacts')" :class="{ activeMenu: currentMenu === 'contacts'}">Contacts</router-link>
       </ul>
       <div class="flex">
         <button @click="signOut" type="button">
@@ -27,18 +27,23 @@
 <script>
 export default {
   name: 'NavigationBar',
+  data() {
+    return {
+      currentMenu: 'home',
+    }
+  },
   methods: {
-    test: () => {
-      alert('clicked')
-    },
     signOut() {
       this.$store.dispatch('auth/signOut')
+    },
+    changeMenu(newMenu) {
+        this.currentMenu = newMenu
     }
   }
 }
 </script>
 <style>
-.menu-list:hover, .menu-list:active {
+.menu-list:hover, .menu-list:active, .menu-list.activeMenu {
   font-weight: 700;
 }
 </style>
