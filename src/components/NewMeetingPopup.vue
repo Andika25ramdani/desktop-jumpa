@@ -14,48 +14,60 @@
 						<div class="flex flex-col gap-2.5">
 							<label class="text-px8">Choose your meeting plan</label>
 							<div class="grid grid-cols-3 gap-2.5">
-								<label for="platinum" @click="updatePlans('platinum', 3000)" class="meet-plan flex items-center gap-2.5 pl-2.5 py-4 border border-grey-lightjumpa rounded">
-									<input type="radio" name="meetingPlan" id="platinum">
-									<div class="">
-										<h6 class="text-px10 font-bold">Platinum</h6>
-										<p class="text-px8">Up to 3000 Participants</p>
-									</div>
-								</label>
-								<label for="gold" @click="updatePlans('gold', 2000)" class="meet-plan flex items-center gap-2.5 pl-2.5 py-4 border border-grey-lightjumpa rounded">
-									<input type="radio" name="meetingPlan" id="gold" class="bg-red">
-									<div class="">
-										<h6 class="text-px10 font-bold">Gold</h6>
-										<p class="text-px8">Up to 2000 Participants</p>
-									</div>
-								</label>
-								<label for="silver" @click="updatePlans('silver', 1500)" class="meet-plan flex items-center gap-2.5 pl-2.5 py-4 border border-grey-lightjumpa rounded">
-									<input type="radio" name="meetingPlan" id="silver" class="bg-red">
-									<div class="">
-										<h6 class="text-px10 font-bold">Silver</h6>
-										<p class="text-px8">Up to 1500 Participants</p>
-									</div>
-								</label>
-								<label for="business" @click="updatePlans('business', 750)" class="meet-plan flex items-center gap-2.5 pl-2.5 py-4 border border-grey-lightjumpa rounded">
-									<input type="radio" name="meetingPlan" id="business" class="bg-red">
-									<div class="">
-										<h6 class="text-px10 font-bold">Business</h6>
-										<p class="text-px8">Up to 750 Participants</p>
-									</div>
-								</label>
-								<label for="pro" @click="updatePlans('pro', 500)" class="meet-plan flex items-center gap-2.5 pl-2.5 py-4 border border-grey-lightjumpa rounded">
-									<input type="radio" name="meetingPlan" id="pro" class="bg-red">
-									<div class="">
-										<h6 class="text-px10 font-bold">Pro</h6>
-										<p class="text-px8">Up to 500 Participants</p>
-									</div>
-								</label>
-								<label for="basic" @click="updatePlans('basic', 300)" class="meet-plan flex items-center gap-2.5 pl-2.5 py-4 border border-grey-lightjumpa rounded">
-									<input type="radio" name="meetingPlan" id="basic" class="bg-red">
-									<div class="">
-										<h6 class="text-px10 font-bold">Basic</h6>
-										<p class="text-px8">Up to 300 Participants</p>
-									</div>
-								</label>
+								<div class="flex items-center -ml-2">
+									<input type="radio" name="meetingPlan" id="platinum" class="absolute left-5">
+									<label for="platinum" @click="updatePlans('platinum', 3000)" class="meet-plan flex items-center gap-2.5 pl-8 py-4 border border-grey-lightjumpa rounded w-full">
+										<div class="">
+											<h6 class="text-px10 font-bold">Platinum</h6>
+											<p class="text-px8">Up to 3000 Participants</p>
+										</div>
+									</label>
+								</div>
+								<div class="flex items-center -ml-2">
+									<input type="radio" name="meetingPlan" id="gold" class="absolute left-5">
+									<label for="gold" @click="updatePlans('gold', 2000)" class="meet-plan flex items-center gap-2.5 pl-8 py-4 border border-grey-lightjumpa rounded w-full">
+										<div class="">
+											<h6 class="text-px10 font-bold">Gold</h6>
+											<p class="text-px8">Up to 2000 Participants</p>
+										</div>
+									</label>
+								</div>
+								<div class="flex items-center -ml-2">
+									<input type="radio" name="meetingPlan" id="silver" class="absolute left-5">
+									<label for="silver" @click="updatePlans('silver', 1500)" class="meet-plan flex items-center gap-2.5 pl-8 py-4 border border-grey-lightjumpa rounded w-full">
+										<div class="">
+											<h6 class="text-px10 font-bold">Silver</h6>
+											<p class="text-px8">Up to 1500 Participants</p>
+										</div>
+									</label>
+								</div>
+								<div class="flex items-center -ml-2">
+									<input type="radio" name="meetingPlan" id="business" class="absolute left-5">
+									<label for="business" @click="updatePlans('business', 750)" class="meet-plan flex items-center gap-2.5 pl-8 py-4 border border-grey-lightjumpa rounded w-full">
+										<div class="">
+											<h6 class="text-px10 font-bold">Business</h6>
+											<p class="text-px8">Up to 750 Participants</p>
+										</div>
+									</label>
+								</div>
+								<div class="flex items-center -ml-2">
+									<input type="radio" name="meetingPlan" id="pro" class="absolute left-5">
+									<label for="pro" @click="updatePlans('pro', 500)" class="meet-plan flex items-center gap-2.5 pl-8 py-4 border border-grey-lightjumpa rounded w-full">
+										<div class="">
+											<h6 class="text-px10 font-bold">Pro</h6>
+											<p class="text-px8">Up to 500 Participants</p>
+										</div>
+									</label>
+								</div>
+								<div class="flex items-center -ml-2">
+									<input type="radio" name="meetingPlan" id="basic" class="absolute left-5">
+									<label for="basic" @click="updatePlans('basic', 300)" class="meet-plan flex items-center gap-2.5 pl-8 py-4 border border-grey-lightjumpa rounded w-full">
+										<div class="">
+											<h6 class="text-px10 font-bold">Basic</h6>
+											<p class="text-px8">Up to 300 Participants</p>
+										</div>
+									</label>
+								</div>
 							</div>
 						</div>
 						<div class="flex flex-col gap-px5">
@@ -224,49 +236,65 @@
 						<div class="flex flex-col gap-px5">
 							<label for="" class="text-px8 text-grey-dark">Meeting Layouts</label>
 							<div class="grid grid-cols-3 gap-2.5">
-								<label for="tile" class="flex items-center gap-px5 px-2.5 py-px9 border border-grey-lighter rounded">
-									<input type="radio" name="meetingLayouts" id="tile" v-model="meetingLayouts">
-									<div class="flex gap-px5 items-center">
-										<span class="">Icons</span>
-										<p class="text-px8 text-grey-dark">Tile (Auto)</p>
-									</div>
-								</label>
-								<label for="focus" class="flex items-center gap-px5 px-2.5 py-px9 border border-grey-lighter rounded">
-									<input type="radio" name="meetingLayouts" id="focus" v-model="meetingLayouts">
-									<div class="flex gap-px5 items-center">
-										<span class="">Icons</span>
-										<p class="text-px8 text-grey-dark">Focus (1+7)</p>
-									</div>
-								</label>
-								<label for="speaker" class="flex items-center gap-px5 px-2.5 py-px9 border border-grey-lighter rounded">
-									<input type="radio" name="meetingLayouts" id="speaker" v-model="meetingLayouts">
-									<div class="flex gap-px5 items-center">
-										<span class="">Icons</span>
-										<p class="text-px8 text-grey-dark">Speaker</p>
-									</div>
-								</label>
+								<div class="flex items-center w-full -ml-2">
+									<input type="radio" name="meetingLayouts" id="tile" v-model="meetingLayouts" class="absolute left-5">
+									<label for="tile" class="flex items-center gap-px5 pr-2.5 pl-7 py-px9 border border-grey-lighter rounded w-full">
+										<div class="flex gap-px5 items-center">
+											<span class="">Icons</span>
+											<p class="text-px8">Tile (Auto)</p>
+										</div>
+									</label>
+								</div>
+								<div class="flex items-center w-full -ml-2">
+									<input type="radio" name="meetingLayouts" id="focus" v-model="meetingLayouts" class="absolute left-5">
+									<label for="focus" class="flex items-center gap-px5 pr-2.5 pl-7 py-px9 border border-grey-lighter rounded w-full">
+										<div class="flex gap-px5 items-center">
+											<span class="">Icons</span>
+											<p class="text-px8">Focus (1+7)</p>
+										</div>
+									</label>
+								</div>
+								<div class="flex items-center w-full -ml-2">
+									<input type="radio" name="meetingLayouts" id="speaker" v-model="meetingLayouts" class="absolute left-5">
+									<label for="speaker" class="flex items-center gap-px5 pr-2.5 pl-7 py-px9 border border-grey-lighter rounded w-full">
+										<div class="flex gap-px5 items-center">
+											<span class="">Icons</span>
+											<p class="text-px8">Speaker</p>
+										</div>
+									</label>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div v-if="invitePopup" class="flex w-full gap-6 justify-between overflow-hidden overflow-y-auto">
+					<div v-if="invitePopup" class="flex w-full gap-6 justify-between">
 						<div class="">
-							<h5 class="text-primary font-bold text-px10 pt-5">My Contacts</h5>
+							<h5 class="text-primary font-bold text-px10 pt-5 pb-px15">My Contacts</h5>
+							<div class="">
+								<div class="" v-for="group in contactGroups" :key=group.name>
+									<div class="text-px10 text-grey-dark" :class="{'font-bold': group.child}">{{ group.name }}</div>
+									<div class="text-px10 text-grey-dark" v-for="child in group.child" :key=child.name>
+										<div class="text-px10 text-grey-dark pl-4">{{ child.name }}</div>
+									</div>
+								</div>
+							</div>
 						</div>
 						<div class="flex flex-col gap-2 flex-1">
-							<div class="flex items-center gap-2.5 pl-2.5">
+							<div class="flex items-center gap-2.5 pl-5">
 								<input type="checkbox" name="participants" id="selectAll" @click="checkedAll">
-								<label for="selectAll" class="text-px10 text-grey-ed" id="selectButton">Select All</label>
+								<p class="text-px10 text-grey-ed" id="selectButton" @click="checkedAll">Select All</p>
 							</div>
 							<div class="contact-list mr-1 pr-1 flex flex-col flex-nowrap gap-px5">
 								<transition-group name="slide-down" appear>
-									<label :for=contact.id class="rounded px-2.5 py-2 border border-grey-lighter flex gap-2.5 flex-nowrap items-center min-w-252" v-for="contact in contacts" :key=contact.id>
-										<input type="checkbox" name="participants" :id=contact.id class="inputParticipant" :value=contact.email>
-										<img :src=contact.img class="w-6 h-6 object-cover rounded-full bg-primary">
-										<div class="text-grey-ed">
-											<h5 class="text-px10 font-bold">{{ contact.name }}</h5>
-											<p class="text-px8">{{ contact.email }}</p>
-										</div>
-									</label>
+									<div v-for="contact in contacts" :key=contact.id class="relative flex items-center">
+										<input type="checkbox" name="participants" :id=contact.id class="inputParticipant absolute left-5" :value=contact.email>
+										<label :for=contact.id class="rounded pl-7 pr-2.5 py-2 border border-grey-lighter flex gap-2.5 flex-nowrap items-center min-w-252 flex-1">
+											<img :src=contact.img class="w-6 h-6 object-cover rounded-full bg-primary">
+											<div class="text-grey-ed">
+												<h5 class="text-px10 font-bold">{{ contact.name }}</h5>
+												<p class="text-px8">{{ contact.email }}</p>
+											</div>
+										</label>
+									</div>
 								</transition-group>
 							</div>
 						</div>
@@ -327,7 +355,25 @@ export default {
 			record: false,
 			subject: '',
 			timeZone: '',
-
+			
+			contactGroups: [
+				{
+					name: 'Grup 1'
+				},
+				{
+					name: 'Group 2',
+					child: [
+						{
+							name: 'Subgroup 1',
+							child: []
+						},
+						{
+							name: 'Subgroup 2',
+							child: []
+						}
+					]
+				}
+			],
 			contacts: [
                 {
                     id: 1,
@@ -497,6 +543,7 @@ export default {
             for (let pi = 0; pi < allParticipants.length; pi++) {
 				if (allParticipants[pi].checked == true) {
 					this.invitees.push(allParticipants[pi].value)
+					this.invitees = this.invitees.filter((item, pos, self) => self.indexOf(item) == pos)
 					this.invitePopup = false
 				}
             }
@@ -520,5 +567,12 @@ export default {
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
+}
+input[type=checkbox]:checked + label {
+	background-color: #F2F3F5;
+}
+input[type=radio]:checked + label {
+	background-color: #790F19;
+	color: white;
 }
 </style>
