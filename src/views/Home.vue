@@ -31,7 +31,7 @@
       <div class="home-rs bg-white py-px15 px-px25 border border-grey-lighter rounded-t-px10 rounded-r-px10 min-w-380 w-half mr-5">
         <h4 class="kanit text-grey-dark font-bold text-sm mb-2.5">Upcoming Meeting</h4>
         <div class="grid grid-cols-1 gap-2.5 sticky flex-col flex-wrap overflow-hidden overflow-y-auto h-full pr-2.5">
-          <transition-group name="slide-right" appear>
+          <transition-group name="slide-right" v-if="upcomingMeetings.length > 1" appear>
             <div v-for="upcoming in upcomingMeetings" :key=upcoming.meetingNum class="rounded-px10 bg-primary text-white p-px15 relative">
               <h5 class="mr-px35 mb-px5 text-sm font-bold">{{ upcoming.subject }}</h5>
               <p class="mr-px35 mb-px5 text-px10">{{ upcoming.startDateVal }} • {{ upcoming.startTimeVal }} - {{ upcoming.endTimeVal }}</p>
@@ -41,6 +41,11 @@
               </button>
             </div>
           </transition-group>
+          <transition name="slide-right" appear v-else>
+            <div class="text-xs text-grey-dark text-center w-full">
+              No Upcoming Meetings Yet!
+            </div>
+          </transition>
         </div>
       </div>
     </transition>

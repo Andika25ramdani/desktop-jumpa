@@ -3,10 +3,14 @@
 		<transition name="slide-down" appear>
 			<div class="bg-white fixed max-h-90 max-w-65 w-2/3 rounded-px5 shadow-custom p-5 flex flex-col gap-2.5">
 				<div class="">
-					<h2 class="text-grey-dark font-bold text-2xl">{{ moreOption === true ? 'Instant Meeting Template' : 'New Meeting' }}</h2>
+					<h2 class="text-grey-dark font-bold text-2xl">
+						{{ !moreOption && !invitePopup ? 'New Meeting' : '' }}
+						{{ invitePopup ? 'Invite Participant' : '' }}
+						{{ moreOption ? 'Instant Meeting Template' : '' }}
+					</h2>
 				</div>
 				<form @submit.prevent="newMeeting" class=" overflow-hidden overflow-y-auto pr-2">
-					<div v-if="moreOption == false" class="flex flex-col gap-2.5">
+					<div v-if="!moreOption && !invitePopup" class="flex flex-col gap-2.5">
 						<div class="flex flex-col gap-2.5">
 							<label class="text-px8">Choose your meeting plan</label>
 							<div class="grid grid-cols-3 gap-2.5">
@@ -80,7 +84,7 @@
 						<div class="flex flex-col gap-px5">
 							<div class="flex w-full justify-between items-center">
 								<label class="text-px8 text-grey-dark">Invitees</label>
-								<button class="text-primary text-px10 font-bold">Add from Contacts</button>
+								<button @click="invitePopup = true" class="text-primary text-px10 font-bold">Add from Contacts</button>
 							</div>
 							<div class="border border-grey-ce py-px5 px-2.5 outline-none rounded flex flex-wrap gap-px5 text-px8 text-grey-dark">
 								<div class="border border-grey-lighter py-0.5 px-1 w-max rounded flex items-center gap-2.5 bg-grey-f8" v-for="(invitee, index) in invitees" :key=index>
@@ -94,7 +98,7 @@
 							<p v-else-if="meetingPlan.participants > 1" class="text-px8 text-grey-ao">Invitees are included in the {{ meetingPlan.participants - 1 }} person limit</p>
 						</div>
 					</div>
-					<div v-if="moreOption == true" class="flex flex-col gap-2.5">
+					<div v-if="moreOption" class="flex flex-col gap-2.5">
 						<div class="flex flex-col gap-px5 w-full">
 							<p class="text-px8 text-grey-dark">Meeting plan</p>
 							<div v-if="meetingPlan.name !== ''" class="bg-primary rounded py-px5 px-px15 w-max flex items-center gap-px5 text-white">
@@ -244,18 +248,45 @@
 							</div>
 						</div>
 					</div>
-					<div class="flex gap-20 mt-2.5 justify-between">
-						<button @click="moreOption = true" :class="moreOption ? 'invisible' : 'visible'" class="font-bold text-grey-dark text-px10">MORE OPTIONS</button>
-						<div v-if="!moreOption" class="flex gap-2.5">
-							<button @click="$emit('close')" class="rounded-px5 border border-grey-lightjumpa bg-grey-background text-grey-dark font-bold py-2.5 px-12 text-px10">CANCEL</button>
-							<button type="submit" @click="newMeeting" class="bg-primary rounded-px5 font-bold text-px10 text-white py-2.5 px-10">MEET NOW</button>
+					<div v-if="invitePopup" class="flex w-full gap-6 justify-between overflow-hidden overflow-y-auto">
+						<div class="">
+							<h5 class="text-primary font-bold text-px10 pt-5">My Contacts</h5>
 						</div>
-						<div v-if="moreOption" class="flex gap-2.5">
-							<button type="reset" class="rounded-px5 border border-grey-lightjumpa bg-grey-background text-grey-dark font-bold py-2.5 px-12 text-px10">CANCEL</button>
-							<button @click="moreOption = false" class="bg-primary rounded-px5 font-bold text-px10 text-white py-2.5 px-10">SAVE</button>
+						<div class="flex flex-col gap-2 flex-1">
+							<div class="flex items-center gap-2.5 pl-2.5">
+								<input type="checkbox" name="participants" id="selectAll" @click="checkedAll">
+								<label for="selectAll" class="text-px10 text-grey-ed" id="selectButton">Select All</label>
+							</div>
+							<div class="contact-list mr-1 pr-1 flex flex-col flex-nowrap gap-px5">
+								<transition-group name="slide-down" appear>
+									<label :for=contact.id class="rounded px-2.5 py-2 border border-grey-lighter flex gap-2.5 flex-nowrap items-center min-w-252" v-for="contact in contacts" :key=contact.id>
+										<input type="checkbox" name="participants" :id=contact.id class="inputParticipant" :value=contact.email>
+										<img :src=contact.img class="w-6 h-6 object-cover rounded-full bg-primary">
+										<div class="text-grey-ed">
+											<h5 class="text-px10 font-bold">{{ contact.name }}</h5>
+											<p class="text-px8">{{ contact.email }}</p>
+										</div>
+									</label>
+								</transition-group>
+							</div>
 						</div>
 					</div>
 				</form>
+				<div class="flex gap-20 mt-2.5 justify-between">
+					<button @click="moreOption = true" :class="moreOption || invitePopup ? 'invisible' : 'visible'" class="font-bold text-grey-dark text-px10">MORE OPTIONS</button>
+					<div v-if="!moreOption && !invitePopup" class="flex gap-2.5">
+						<button @click="$emit('close')" class="rounded-px5 border border-grey-lightjumpa bg-grey-background text-grey-dark font-bold py-2.5 px-12 text-px10">CANCEL</button>
+						<button type="submit" @click="newMeeting" class="bg-primary rounded-px5 font-bold text-px10 text-white py-2.5 px-10">MEET NOW</button>
+					</div>
+					<div v-if="moreOption" class="flex gap-2.5">
+						<button @click="clearInstantSetting" class="rounded-px5 border border-grey-lightjumpa bg-grey-background text-grey-dark font-bold py-2.5 px-12 text-px10">CANCEL</button>
+						<button @click="moreOption = false" class="bg-primary rounded-px5 font-bold text-px10 text-white py-2.5 px-10">SAVE</button>
+					</div>
+					<div v-if="invitePopup" class="flex gap-2.5">
+						<button @click="invitePopup = false" type="reset" class="rounded-px5 border border-grey-lightjumpa bg-grey-background text-grey-dark font-bold py-2.5 px-12 text-px10">CANCEL</button>
+						<button @click="addFromContacts" class="bg-primary rounded-px5 font-bold text-px10 text-white py-2.5 px-10">ADD PARTICIPANT</button>
+					</div>
+				</div>
 			</div>
 		</transition>
 	</div>
@@ -271,6 +302,7 @@ export default {
         return {
 			moreOption: false,
 			showPassword: false,
+			invitePopup: false,
 
             v$: useValidate(),
 			attendList: false,
@@ -286,13 +318,81 @@ export default {
 			},
 			meetingLayouts: '',
 			muted: false,
-			organizer: localStorage.getItem('account'),
-			orgEmail: localStorage.getItem('email'),
+			// organizer: localStorage.getItem('account'),
+			// orgEmail: localStorage.getItem('email'),
+			organizer: 'andikar',
+			orgEmail: 'andika@mail.test',
 			password: '',
 			presentation: false,
 			record: false,
 			subject: '',
 			timeZone: '',
+
+			contacts: [
+                {
+                    id: 1,
+                    contactGroup: [],
+                    img: 'img/icons/jumpa-logo.png',
+                    name: 'Abdul',
+                    email: 'abdul@gmail.com'
+                },
+                {
+                    id: 2,
+                    contactGroup: [],
+                    img: '',
+                    name: 'Ghafur',
+                    email: 'ghfur@gmail.com'
+                },
+                {
+                    id: 3,
+                    contactGroup: [],
+                    img: '',
+                    name: 'Abdul Ghafur',
+                    email: 'abdulghfur@gmail.com'
+                },
+                {
+                    id: 1,
+                    contactGroup: [],
+                    img: 'img/icons/jumpa-logo.png',
+                    name: 'Abdul',
+                    email: 'abdul@gmail.com'
+                },
+                {
+                    id: 2,
+                    contactGroup: [],
+                    img: '',
+                    name: 'Ghafur',
+                    email: 'ghfur@gmail.com'
+                },
+                {
+                    id: 3,
+                    contactGroup: [],
+                    img: '',
+                    name: 'Abdul Ghafur',
+                    email: 'abdulghfur@gmail.com'
+                },
+                {
+                    id: 1,
+                    contactGroup: [],
+                    img: 'img/icons/jumpa-logo.png',
+                    name: 'Abdul',
+                    email: 'abdul@gmail.com'
+                },
+                {
+                    id: 2,
+                    contactGroup: [],
+                    img: '',
+                    name: 'Ghafur',
+                    email: 'ghfur@gmail.com'
+                },
+                {
+                    id: 3,
+                    contactGroup: [],
+                    img: '',
+                    name: 'Abdul Ghafur',
+                    email: 'abdulghfur@gmail.com'
+                },
+            ],
         };
     },
     validations() {
@@ -352,6 +452,10 @@ export default {
                 // });
             }
         },
+
+		clearInstantSetting(){
+			console.log('cleared');
+		},
 		visiblePassword() {
 			this.showPassword = !this.showPassword
 		},
@@ -386,7 +490,29 @@ export default {
 			this.meetingPlan.name = name
 			this.meetingPlan.participants = participants
 			console.log(this.meetingPlan);
-		}
+		},
+
+		addFromContacts() {
+            let allParticipants = document.querySelectorAll('.inputParticipant')
+            for (let pi = 0; pi < allParticipants.length; pi++) {
+				if (allParticipants[pi].checked == true) {
+					this.invitees.push(allParticipants[pi].value)
+					this.invitePopup = false
+				}
+            }
+		},
+        checkedAll() {
+            let allParticipants = document.querySelectorAll('.inputParticipant')
+            for (let pi = 0; pi < allParticipants.length; pi++) {
+				if (allParticipants[pi].checked == true) {
+					allParticipants[pi].checked = false
+					document.getElementById('selectButton').textContent = 'Select All'
+				} else {
+					allParticipants[pi].checked = true
+					document.getElementById('selectButton').textContent = 'Deselect All'
+				}
+            }
+        },
     }
 }
 </script>
