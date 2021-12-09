@@ -26,7 +26,7 @@
 						</button>
 					</div>
 					<div class="flex flex-col gap-px5 overflow-hidden overflow-y-auto pr-1">
-						<div v-for="contact in contacts" :key=contact.id class="relative flex items-center -ml-2.5">
+						<div v-for="contact in contacts" :key=contact.id @dblclick="toDetail(contact.id)" class="relative flex items-center -ml-2.5">
 							<input type="checkbox" name="participants" :id=contact.id class="inputParticipant absolute left-5" :value=contact.email>
 							<label :for=contact.id class="rounded pl-7 pr-2.5 py-2 border border-grey-lighter flex justify-between items-center min-w-252 flex-1">
 								<div class="flex gap-2.5 flex-nowrap">
@@ -49,26 +49,41 @@
 		</div>
 	</div>
 	<contact-add-new v-if="newContactPopup" />
+	<contact-details
+		v-if="viewDetail"
+		@delete="confirmDelete(currentContact)"
+		:profileBio=currentContactBio
+		:profileEmail=currentContactEmail
+		:profileId=currentContact
+		:profileImage=currentContactImage
+		:profileName=currentContactName
+		:profilePhone=currentContactPhone />
 	<confirm-popup
 		v-if="popupDelete"
 		@close="popupDelete = false"
 		@function=deleteContact(currentContact)
 		buttonTitle="Delete"
 		popupTitle="Delete contact"
-		:popupMessage="'Are you sure you want to delete '+currentNameToDelete+'?'" />
+		:popupMessage="'Are you sure you want to delete '+currentContactName+'?'" />
 </template>
 
 <script>
 import ConfirmPopup from '../components/ConfirmPopup.vue';
 import ContactAddNew from '../components/ContactAddNew.vue'
+import ContactDetails from '../components/ContactDetails.vue';
 export default {
-  components: { ContactAddNew, ConfirmPopup },
+  components: { ContactAddNew, ConfirmPopup, ContactDetails },
 	data() {
 		return {
 			newContactPopup: false,
 			popupDelete: false,
+			viewDetail: false,
 			currentContact: 0,
-			currentNameToDelete: '',
+			currentContactImage: '',
+			currentContactName: '',
+			currentContactEmail: '',
+			currentContactBio: '',
+			currentContactPhone: '',
 
 			contacts: [
                 {
@@ -160,16 +175,29 @@ export default {
 	},
 	methods: {
 		confirmDelete(id) {
-			console.log(id);
 			this.currentContact = id
-			console.log(this.currentContact);
 			this.contacts.forEach(element => {
 				if (element.id == id) {
-					this.currentNameToDelete = element.name
+					this.currentContactName = element.name
 				}
 			});
-			console.log(this.currentNameToDelete);
+			if (this.viewDetail) {
+				this.viewDetail = false
+			}
 			this.popupDelete = true
+		},
+		toDetail(id) {
+			this.currentContact = id
+			this.contacts.forEach(element => {
+				if (element.id == id) {
+					this.currentContactImage = element.img
+					this.currentContactName = element.name
+					this.currentContactEmail = element.email
+					this.currentContactBio = 'IT Analyst, Novelist, Photographer, and also a Cat lover'
+					this.currentContactPhone = element.phone
+				}
+			});
+			this.viewDetail = true
 		},
 		deleteContact(id) {
 			console.log('contact '+id+' deleted');
