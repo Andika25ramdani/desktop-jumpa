@@ -250,110 +250,15 @@
             </div>
             <div v-if="currentTab === 'attachments'" id="attachments" class="text-px10 text-grey-ed pl-7 pr-6 py-5 overflow-hidden overflow-y-auto mr-1">
                 <div class="grid gap-px13 grid-flow-row grid-cols-4">
-                    <div class="bg-white w-40 h-36 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2">
+                    <div v-for="id in 10" :key=id class="bg-white w-40 h-36 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2 relative">
                         <i class="fas fa-file text-primary text-5xl"></i>
                         <p class="font-bold text-px10 text-center">
                             Meeting details.pdf<br>
                             <span class="font-normal">784KB</span>
                         </p>
-                    </div>
-                    <div class="bg-white w-40 h-36 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2">
-                        <i class="fas fa-file text-primary text-5xl"></i>
-                        <p class="font-bold text-px10 text-center">
-                            Meeting details.pdf<br>
-                            <span class="font-normal">784KB</span>
-                        </p>
-                    </div>
-                    <div class="bg-white w-40 h-36 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2">
-                        <i class="fas fa-file text-primary text-5xl"></i>
-                        <p class="font-bold text-px10 text-center">
-                            Meeting details.pdf<br>
-                            <span class="font-normal">784KB</span>
-                        </p>
-                    </div>
-                    <div class="bg-white w-40 h-36 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2">
-                        <i class="fas fa-file text-primary text-5xl"></i>
-                        <p class="font-bold text-px10 text-center">
-                            Meeting details.pdf<br>
-                            <span class="font-normal">784KB</span>
-                        </p>
-                    </div>
-                    <div class="bg-white w-40 h-36 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2">
-                        <i class="fas fa-file text-primary text-5xl"></i>
-                        <p class="font-bold text-px10 text-center">
-                            Meeting details.pdf<br>
-                            <span class="font-normal">784KB</span>
-                        </p>
-                    </div>
-                    <div class="bg-white w-40 h-36 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2">
-                        <i class="fas fa-file text-primary text-5xl"></i>
-                        <p class="font-bold text-px10 text-center">
-                            Meeting details.pdf<br>
-                            <span class="font-normal">784KB</span>
-                        </p>
-                    </div>
-                    <div class="bg-white w-40 h-36 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2">
-                        <i class="fas fa-file text-primary text-5xl"></i>
-                        <p class="font-bold text-px10 text-center">
-                            Meeting details.pdf<br>
-                            <span class="font-normal">784KB</span>
-                        </p>
-                    </div>
-                    <div class="bg-white w-40 h-36 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2">
-                        <i class="fas fa-file text-primary text-5xl"></i>
-                        <p class="font-bold text-px10 text-center">
-                            Meeting details.pdf<br>
-                            <span class="font-normal">784KB</span>
-                        </p>
-                    </div>
-                    <div class="bg-white w-40 h-36 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2">
-                        <i class="fas fa-file text-primary text-5xl"></i>
-                        <p class="font-bold text-px10 text-center">
-                            Meeting details.pdf<br>
-                            <span class="font-normal">784KB</span>
-                        </p>
-                    </div>
-                    <div class="bg-white w-40 h-36 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2">
-                        <i class="fas fa-file text-primary text-5xl"></i>
-                        <p class="font-bold text-px10 text-center">
-                            Meeting details.pdf<br>
-                            <span class="font-normal">784KB</span>
-                        </p>
-                    </div>
-                    <div class="bg-white w-40 h-36 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2">
-                        <i class="fas fa-file text-primary text-5xl"></i>
-                        <p class="font-bold text-px10 text-center">
-                            Meeting details.pdf<br>
-                            <span class="font-normal">784KB</span>
-                        </p>
-                    </div>
-                    <div class="bg-white w-40 h-36 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2">
-                        <i class="fas fa-file text-primary text-5xl"></i>
-                        <p class="font-bold text-px10 text-center">
-                            Meeting details.pdf<br>
-                            <span class="font-normal">784KB</span>
-                        </p>
-                    </div>
-                    <div class="bg-white w-40 h-36 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2">
-                        <i class="fas fa-file text-primary text-5xl"></i>
-                        <p class="font-bold text-px10 text-center">
-                            Meeting details.pdf<br>
-                            <span class="font-normal">784KB</span>
-                        </p>
-                    </div>
-                    <div class="bg-white w-40 h-36 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2">
-                        <i class="fas fa-file text-primary text-5xl"></i>
-                        <p class="font-bold text-px10 text-center">
-                            Meeting details.pdf<br>
-                            <span class="font-normal">784KB</span>
-                        </p>
-                    </div>
-                    <div class="bg-white w-40 h-36 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2">
-                        <i class="fas fa-file text-primary text-5xl"></i>
-                        <p class="font-bold text-px10 text-center">
-                            Meeting details.pdf<br>
-                            <span class="font-normal">784KB</span>
-                        </p>
+                        <div class="absolute bg-grey-dark rounded-full px-1 top-2.5 right-2.5 cursor-pointer">
+                            <i class="fas fa-download text-white text-px8"></i>
+                        </div>
                     </div>
                 </div>
             </div>

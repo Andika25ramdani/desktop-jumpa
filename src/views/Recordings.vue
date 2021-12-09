@@ -92,7 +92,7 @@ export default {
 <style>
 .recording-list {
     width: 100%;
-	grid-template-columns: 12% 35% 8% 7% 13%
+	grid-template-columns: 13% 35% 9% 9% 13%
 }
 .active {
 	display: flex;

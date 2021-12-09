@@ -75,6 +75,14 @@ const routes = [
         }
     },
     {
+        path: '/contact',
+        name: 'Contact',
+        component: () => import('../views/Contact.vue'),
+        meta: {
+            requireAuth: true,
+        }
+    },
+    {
         path: '/about',
         name: 'About',
         component: () => import('../views/About.vue'),

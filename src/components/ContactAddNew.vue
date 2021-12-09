@@ -1,0 +1,73 @@
+<template>
+	<div id="contactAddNew" class="overlay-bg fixed top-0 left-0 h-screen w-screen z-50 flex flex-col items-center justify-center">
+		<transition name="slide-down" appear>
+            <div class="bg-white rounded-px5 mx-auto border border-grey-lighter flex flex-col items-center">
+                <h3 class="kanit text-xl font-bold text-grey-dark text-center pt-px25">Add new contact</h3>
+                <form @submit.prevent="newContact" class="mt-4 flex-1 flex flex-col items-center">
+                    <div class="flex flex-col gap-px5">
+                        <div class="flex flex-col flex-1 gap-0.5 min-w-252 px-8">
+                            <label class="text-px10 text-grey-sb">Contact Name</label>
+                            <input type="text" v-model="newContactData.contactName" class="rounded-px5 border border-grey-ce py-px5 px-2.5 text-px10 outline-none text-grey-dark">
+                            <p v-if="v$.newContactData.contactName.$error" class="text-px8 text-red min-w-max">{{ v$.newContactData.contactName.$errors[0].$message }}</p>
+                        </div>
+                        <div class="flex flex-col flex-1 gap-0.5 min-w-252 px-8">
+                            <label class="text-px10 text-grey-sb">Email *</label>
+                            <input type="email" v-model="newContactData.email" class="rounded-px5 border border-grey-ce py-px5 px-2.5 text-px10 outline-none text-grey-dark">
+                            <p v-if="v$.newContactData.email.$error" class="text-px8 text-red min-w-max">{{ v$.newContactData.email.$errors[0].$message }}</p>
+                        </div>
+                        <div class="flex flex-col flex-1 gap-0.5 min-w-252 px-8">
+                            <label class="text-px10 text-grey-sb">Phone Number</label>
+                            <input type="tel" v-model="newContactData.phoneNumber" class="rounded-px5 border border-grey-ce py-px5 px-2.5 text-px10 outline-none text-grey-dark">
+                            <p v-if="v$.newContactData.phoneNumber.$error" class="text-px8 text-red min-w-max">{{ v$.newContactData.phoneNumber.$errors[0].$message }}</p>
+                        </div>
+                    </div>
+                    <div class="border-t border-grey-lighter py-2.5 w-full mt-4 flex items-center">
+                        <button type="submit" @click="newContact" class="bg-green rounded-px5 px-4 py-px5 text-px10 text-white mx-auto">Add Contact</button>
+                    </div>
+                </form>
+            </div>
+		</transition>
+	</div>
+</template>
+
+<script>
+import useValidate from '@vuelidate/core'
+import { required, email, numeric } from '@vuelidate/validators'
+export default {
+	name: 'ContactAddNew',
+    data() {
+        return {
+            v$: useValidate(),
+            newContactData: {
+                contactName: '',
+                email: '',
+                phoneNumber: ''
+            }
+        };
+    },
+    validations() {
+        return {
+            newContactData: {
+                contactName: {  },
+                email: {
+                    required, 
+                    email
+                },
+                phoneNumber: { numeric }
+            }
+        }
+    },
+    methods: {
+        newContact: async function() {
+            this.v$.$validate()
+            if (!this.v$.$error) {
+				console.log('Contact Name:'+this.newContactData.contactName);
+				console.log('Email *:'+this.newContactData.contactName);
+				console.log('Phone Number:'+this.newContactData.contactName);
+            }
+        },
+    }
+}
+</script>
+<style>
+</style>
