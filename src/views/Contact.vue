@@ -38,7 +38,7 @@
 								</div>
 								<p class="text-px10 text-grey-ed">{{ contact.phone }}</p>
 								<div class="flex gap-px5">
-									<button @click="popupDelete = true" class="bg-gradient-to-b from-white to-grey-f4 border border-grey-lighter text-grey-ed text-px10 rounded-px5 px-4 py-1 w-max">Edit</button>
+									<button @click="toEdit(contact.id)" class="bg-gradient-to-b from-white to-grey-f4 border border-grey-lighter text-grey-ed text-px10 rounded-px5 px-4 py-1 w-max">Edit</button>
 									<button @click="confirmDelete(contact.id)" class="bg-red text-white text-px10 rounded-px5 px-2.5 py-1 w-max">Delete</button>
 								</div>
 							</label>
@@ -49,6 +49,14 @@
 		</div>
 	</div>
 	<contact-add-new v-if="newContactPopup" />
+	<contact-edit
+		v-if="contactEditPopup"
+		:profileBio=currentContactBio
+		:profileEmail=currentContactEmail
+		:profileId=currentContact
+		:profileImage=currentContactImage
+		:profileName=currentContactName
+		:profilePhone=currentContactPhone />
 	<contact-details
 		v-if="viewDetail"
 		@delete="confirmDelete(currentContact)"
@@ -71,11 +79,13 @@
 import ConfirmPopup from '../components/ConfirmPopup.vue';
 import ContactAddNew from '../components/ContactAddNew.vue'
 import ContactDetails from '../components/ContactDetails.vue';
+import ContactEdit from '../components/ContactEdit.vue';
 export default {
-  components: { ContactAddNew, ConfirmPopup, ContactDetails },
+  components: { ContactAddNew, ConfirmPopup, ContactDetails, ContactEdit },
 	data() {
 		return {
 			newContactPopup: false,
+			contactEditPopup: false,
 			popupDelete: false,
 			viewDetail: false,
 			currentContact: 0,
@@ -198,6 +208,19 @@ export default {
 				}
 			});
 			this.viewDetail = true
+		},
+		toEdit(id) {
+			this.currentContact = id
+			this.contacts.forEach(element => {
+				if (element.id == id) {
+					this.currentContactImage = element.img
+					this.currentContactName = element.name
+					this.currentContactEmail = element.email
+					this.currentContactBio = 'IT Analyst, Novelist, Photographer, and also a Cat lover'
+					this.currentContactPhone = element.phone
+				}
+			});
+			this.contactEditPopup = true
 		},
 		deleteContact(id) {
 			console.log('contact '+id+' deleted');
