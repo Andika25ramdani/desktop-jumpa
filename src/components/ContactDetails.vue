@@ -11,7 +11,7 @@
                     <h4 class="text-xs font-bold text-grey-ed pb-7">{{ profilePhone }}</h4>
                 </div>
                 <div class="flex justify-center gap-2.5 items-center border-t border-grey-lighter pt-2.5 w-full">
-                    <button @click="$emit('close')" class="bg-grey-background border border-grey-lighter text-px10 text-grey-ed rounded-px5 px-4 py-px5">Edit Contact</button>
+                    <button @click="$emit('edit')" class="bg-grey-background border border-grey-lighter text-px10 text-grey-ed rounded-px5 px-4 py-px5">Edit Contact</button>
                     <button @click="$emit('delete')" class="bg-red text-white text-px10 rounded-px5 px-4 py-px5">Delete</button>
                 </div>
             </div>

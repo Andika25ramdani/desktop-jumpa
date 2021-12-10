@@ -18,7 +18,9 @@
         <button @click="signOut" type="button">
           <i class="fas fa-cog text-grey-dark text-xs"></i>
         </button>
-        <img src="img/icons/jumpa-logo.png" alt="" class="rounded-full w-px22 h-px22 bg-white object-cover ml-2.5">
+        <router-link to="/profile">
+          <img src="img/icons/jumpa-logo.png" alt="" class="rounded-full w-px22 h-px22 bg-white object-cover ml-2.5">
+        </router-link>
       </div>
     </nav>
   </transition>
@@ -29,7 +31,7 @@ export default {
   name: 'NavigationBar',
   data() {
     return {
-      currentMenu: 'home',
+      currentMenu: '',
     }
   },
   methods: {

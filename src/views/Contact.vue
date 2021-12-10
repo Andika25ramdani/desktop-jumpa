@@ -16,16 +16,19 @@
 				</div>
 				<div class="contact-rs flex flex-col flex-1">
 					<div class="flex items-center w-full justify-between ml-2.5 pr-2.5 pb-px5">
-						<div class="flex items-center gap-px15">
-							<input type="checkbox" name="" id="">
-							<label for="" class="text-px10 text-grey-sb font-bold">Contact Name & Email</label>
+						<div class="flex items-center gap-px15 cursor-pointer">
+							<input type="checkbox" name="participants" id="selectAll" @click="checkedAll">
+							<p class="text-px10 text-grey-sb font-bold" id="selectButton" @click="checkedAll">Contact Name &amp; Email</p>
 						</div>
 						<h4 class="text-px10 text-grey-sb font-bold">Phone Number</h4>
-						<button @click="newContactPopup = true" class="bg-gradient-to-b from-white to-grey-f4 border border-grey-lighter text-grey-ed text-px10 rounded-px5 flex gap-px5 items-center justify-center px-2.5 py-1 w-max">
+						<button v-if="deleteAllButton" @click="newContactPopup = true" class="bg-red text-white text-px10 rounded-px5 flex gap-px5 items-center justify-center px-2.5 py-1 w-max">
+							<i class="fas fa-trash text-px10"></i> Delete Contacts
+						</button>
+						<button v-else @click="newContactPopup = true" class="bg-gradient-to-b from-white to-grey-f4 border border-grey-lighter text-grey-ed text-px10 rounded-px5 flex gap-px5 items-center justify-center px-2.5 py-1 w-max">
 							<i class="fas fa-user-plus text-grey-dark text-px8"></i> Add Contact
 						</button>
 					</div>
-					<div class="flex flex-col gap-px5 overflow-hidden overflow-y-auto pr-1">
+					<div class="flex flex-col gap-px5 overflow-hidden overflow-y-auto pr-1" id="contactLists">
 						<div v-for="contact in contacts" :key=contact.id @dblclick="toDetail(contact.id)" class="relative flex items-center -ml-2.5">
 							<input type="checkbox" name="participants" :id=contact.id class="inputParticipant absolute left-5" :value=contact.email>
 							<label :for=contact.id class="rounded pl-7 pr-2.5 py-2 border border-grey-lighter flex justify-between items-center min-w-252 flex-1">
@@ -60,6 +63,7 @@
 	<contact-details
 		v-if="viewDetail"
 		@delete="confirmDelete(currentContact)"
+		@edit="toEdit(currentContact)"
 		:profileBio=currentContactBio
 		:profileEmail=currentContactEmail
 		:profileId=currentContact
@@ -88,6 +92,9 @@ export default {
 			contactEditPopup: false,
 			popupDelete: false,
 			viewDetail: false,
+			deleteAllButton: false,
+			message: 'Hola?',
+
 			currentContact: 0,
 			currentContactImage: '',
 			currentContactName: '',
@@ -184,6 +191,23 @@ export default {
 		}
 	},
 	methods: {
+        checkedAll() {
+            let allParticipants = document.querySelectorAll('.inputParticipant')
+            for (let pi = 0; pi < allParticipants.length; pi++) {
+				if (allParticipants[pi].checked == true) {
+					allParticipants[pi].checked = false
+				} else {
+					allParticipants[pi].checked = true
+				}
+            }
+			if (document.getElementById('selectAll').checked == true) {
+				document.getElementById('selectAll').checked = false
+				this.deleteAllButton = false
+			} else {
+				document.getElementById('selectAll').checked = true
+				this.deleteAllButton = true
+			}
+        },
 		confirmDelete(id) {
 			this.currentContact = id
 			this.contacts.forEach(element => {
@@ -220,6 +244,9 @@ export default {
 					this.currentContactPhone = element.phone
 				}
 			});
+			if (this.viewDetail) {
+				this.viewDetail = false
+			}
 			this.contactEditPopup = true
 		},
 		deleteContact(id) {
@@ -232,5 +259,12 @@ export default {
 <style>
 .contact-rs {
 	height: calc(100vh - 138px);
+}
+input[type=checkbox]:checked + label {
+	background-color: #F2F3F5;
+}
+input[type=radio]:checked + label {
+	background-color: #790F19;
+	color: white;
 }
 </style>
