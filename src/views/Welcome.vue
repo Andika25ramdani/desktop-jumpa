@@ -1,21 +1,60 @@
 <template>
   <div class="welcome">
-    <figure class="rounded-full bg-white w-px114 h-px114 mx-auto py-5">
-      <img src="img/icons/jumpa-logo.png" alt="Logo Jumpa" class="mx-auto">
+    <figure class="
+      rounded-full bg-white mx-auto px-8 py-6 w-max
+      lg:px-9 lg:py-7
+      xl:px-11 xl:py-8
+      2xl:px-12 2xl:py-9
+    ">
+      <img src="img/icons/jumpa-logo.png" alt="Logo Jumpa" class="
+        mx-auto
+        lg:h-20
+        xl:h-24
+        2xl:h-28
+      ">
     </figure>
-    <h1 class="brand-text font-bold text-center text-2xl text-white mt-4 mb-10">jumpa.id</h1>
-    <div class="flex w-max flex-col mx-auto gap-2.5">
+    <h1 class="
+      font-bold text-center text-2xl text-white mt-4 mb-10
+      lg:text-1-6 lg:mt-5 lg:mb-11
+      xl:text-1-8 xl:mt-6 xl:mb-12
+      2xl:text-5xl 2xl:mt-7
+    ">jumpa.id</h1>
+    <div class="
+      flex w-max flex-col mx-auto gap-2.5
+      lg:gap-3
+      xl:gap-4
+    ">
       <router-link to="/join-meeting">
         <transition name="slide-up">
-          <button class="join-btn text-primary text-xs font-bold bg-white rounded-full py-px9 px-px94">JOIN MEETING</button>
+          <button class="
+            join-btn text-primary text-xs font-bold bg-white rounded-full py-px9
+            lg:text-sm
+            xl:text-base
+            2xl:text-lg
+          ">JOIN MEETING</button>
         </transition>
       </router-link>
-      <div class="flex justify-between gap-5">
-        <router-link to="/sign-up">
-          <button class="sign-btn border border-white text-xs font-bold text-white py-px9 rounded-full min-w-127">SIGN UP</button>
+      <div class="
+        flex justify-between gap-5
+        lg:gap-6
+        xl:gap-7
+        2xl:gap-8
+      ">
+        <router-link to="/sign-up" class="flex-1">
+          <button class="
+            sign-btn border border-white text-xs font-bold text-white py-px9 rounded-full w-full
+            lg:text-sm
+            xl:text-base
+            2xl:text-lg
+          ">SIGN UP</button>
         </router-link>
-        <router-link to="/sign-in">
-          <button class="sign-btn border border-white text-xs font-bold text-white py-px9 rounded-full min-w-127">SIGN IN</button>
+        <router-link to="/sign-in" class="flex-1">
+          <button class="
+            sign-btn border border-white text-xs font-bold text-white py-px9 rounded-full w-full
+            lg:text-sm
+            xl:text-base
+            2xl:text-lg
+          ">SIGN IN</button>
         </router-link>
       </div>
     </div>

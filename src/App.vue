@@ -202,4 +202,40 @@ select {
 .overlay-bg {
 	background-color: rgba(66, 66, 66, .8);
 }
+
+.red-input {
+  min-width: 252px;
+  padding: 8px 16px;
+}
+.join-btn {
+	width: 37vw;
+	min-width: 274px;
+}
+@media screen and (min-width: 1024px){
+	.red-input {
+		min-width: 315px;
+		padding: 9px 17px;
+	}
+	.join-btn {
+		width: 35vw;
+	}
+}
+@media screen and (min-width: 1280px){
+	.red-input {
+		min-width: 378px;
+		padding: 10px 18px;
+	}
+	.join-btn {
+		width: 30vw;
+	}
+}
+@media screen and (min-width: 1536px){
+	.red-input {
+		min-width: 441px;
+		padding: 11px 19px;
+	}
+	.join-btn {
+		width: 25vw;
+	}
+}
 </style>

@@ -1,13 +1,11 @@
 <template>
   <div class="w-screen h-screen fixed bg-primary items-center red-background bg-cover">
-  <!-- <div class="w-screen h-screen fixed bg-primary items-center red-background bg-cover" style="background: url('img/particle-bg.png') #790F19 right bottom no-repeat"> -->
     <Particles
       id="tsparticles"
       :options="tsOption"
     />
     <transition name="slide-left" appear>
-      <router-link to='/' v-if="$router.currentRoute.value.path != '/'" class="back-button sticky top-px25 left-px25 z-50 text-white text-xs">
-        <!-- <button type="button" class="back-button sticky top-px25 left-px25 z-50 text-white text-xs">&lt; Back to Welcome</button> -->
+      <router-link to='/' v-if="$router.currentRoute.value.path != '/'" class="back-button absolute top-px25 left-px25 z-50 text-white text-xs">
         <i class="fas fa-chevron-left pr-1"></i> Back to Welcome
       </router-link>
     </transition>
