@@ -7,10 +7,12 @@ const intialState = () => {
         pageIndex: 0,
         pageSize: 0,
         totalCount: 0,
-        totalPageCount: 0
+        totalPageCount: 0,
+
+        meetingDetails: {}
     }
 }
-
+    
 export default {
     namespaced: true,
     state: intialState(),
@@ -25,6 +27,8 @@ export default {
         getPageSize: (state) => state.pageSize,
         getTotalCount: (state) => state.totalCount,
         getTotalPageCount: (state) => state.totalPageCount,
+
+        getMeetingDetails: (state) => state.meetingDetails,
     },
     actions: {
         getLists: async function({commit}, payload) {
@@ -38,6 +42,16 @@ export default {
                 commit('SET', ['pageSize', pageSize])
                 commit('SET', ['totalCount', totalCount])
                 commit('SET', ['totalPageCount', totalPageCount])
+            }
+        },
+        meetingDetails: async function({commit}, payload) {
+            const res = await API.meeting_details(payload.meetingSerialNum)
+            let response = res.data
+            if (response.retCode == 0) {
+                const data = response.data
+                console.log(data);
+                localStorage.setItem('meetingDetails', data)
+                commit('SET', ['meetingDetails', data])
             }
         },
     }
