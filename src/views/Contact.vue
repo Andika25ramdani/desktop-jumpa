@@ -1,48 +1,48 @@
 <template>
 	<div class="default-page">
-		<div class="card p-5">
-			<h2 class="font-bold text-2xl text-grey-dark mb-5">Contacts</h2>
-			<div class="flex gap-7">
-				<div class="pt-8 flex flex-col gap-2.5 max-w-xs">
-					<h4 class="font-bold text-px10 text-primary">My Contacts</h4>
-					<h4 class="text-px10 text-grey-dark">Business Contact</h4>
-					<div class="text-px10 font-bold" v-for="contact in contacts" :key=contact.id>
+		<div class="card p-5 lg:p-6 xl:p-7 2xl:p-8">
+			<h2 class="font-bold text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl text-grey-dark mb-5 lg:mb-6 xl:mb-7 2xl:mb-8">Contacts</h2>
+			<div class="flex gap-7 lg:gap-8 xl:gap-9 2xl:gap-10">
+				<div class="pt-8 lg:pt-9 xl:pt-10 2xl:pt-11 flex flex-col gap-2.5 lg:gap-3 xl:gap-4 2xl:gap-5 max-w-xs">
+					<h4 class="font-bold text-px10 lg:text-xs xl:text-sm 2xl:text-base text-primary">My Contacts</h4>
+					<h4 class="text-px10 lg:text-xs xl:text-sm 2xl:text-base text-grey-dark">Business Contact</h4>
+					<div class="text-px10 lg:text-xs xl:text-sm 2xl:text-base font-bold" v-for="contact in contacts" :key=contact.id>
 						<p :class="`pl-${contact.contactGroup.prid*2}`">
-							<i v-if="!contact.contactGroup.prid" class="fas fa-caret-down font-bold text-grey-dark text-px10 pr-px5"></i>
-							<i v-else class="fas fa-caret-right font-bold text-grey-dark text-px10 pr-px5"></i>
+							<i v-if="!contact.contactGroup.prid" class="fas fa-caret-down font-bold text-grey-dark text-px10 lg:text-xs xl:text-sm 2xl:text-base pr-px5"></i>
+							<i v-else class="fas fa-caret-right font-bold text-grey-dark text-px10 lg:text-xs xl:text-sm 2xl:text-base pr-px5"></i>
 							{{ contact.contactGroup.gname }}
 						</p>
 					</div>
 				</div>
 				<div class="contact-rs flex flex-col flex-1">
-					<div class="flex items-center w-full justify-between ml-2.5 pr-2.5 pb-px5">
-						<div class="flex items-center gap-px15 cursor-pointer">
+					<div class="grid grid-cols-3 items-center w-full justify-between ml-2.5 lg:ml-3 xl:ml-4 2xl:ml-5 pr-2.5 pb-px5 lg:pb-2 xl:pb-3 2xl:pb-4">
+						<div class="flex items-center gap-px15 lg:gap-4 xl:gap-5 2xl:gap-6 cursor-pointer">
 							<input type="checkbox" name="participants" id="selectAll" @click="checkedAll">
-							<p class="text-px10 text-grey-sb font-bold" id="selectButton" @click="checkedAll">Contact Name &amp; Email</p>
+							<p class="text-px10 lg:text-xs xl:text-sm 2xl:text-base text-grey-sb font-bold" id="selectButton" @click="checkedAll">Contact Name &amp; Email</p>
 						</div>
-						<h4 class="text-px10 text-grey-sb font-bold">Phone Number</h4>
-						<button v-if="deleteAllButton" @click="newContactPopup = true" class="bg-red text-white text-px10 rounded-px5 flex gap-px5 items-center justify-center px-2.5 py-1 w-max">
-							<i class="fas fa-trash text-px10"></i> Delete Contacts
+						<h4 class="text-px10 lg:text-xs xl:text-sm 2xl:text-base text-grey-sb font-bold">Phone Number</h4>
+						<button v-if="deleteAllButton" @click="newContactPopup = true" class="bg-red text-white text-px10 lg:text-xs xl:text-sm 2xl:text-base rounded-px5 flex gap-px5 lg:gap-2 xl:gap-3 2xl:gap-4 items-center justify-center px-2.5 lg:px-3 xl:px-4 2xl:px-5 py-1 lg:py-2 xl:py-3 2xl:py-4 w-max">
+							<i class="fas fa-trash text-px10 lg:text-xs xl:text-sm 2xl:text-base"></i> Delete Contacts
 						</button>
-						<button v-else @click="newContactPopup = true" class="bg-gradient-to-b from-white to-grey-f4 border border-grey-lighter text-grey-ed text-px10 rounded-px5 flex gap-px5 items-center justify-center px-2.5 py-1 w-max">
-							<i class="fas fa-user-plus text-grey-dark text-px8"></i> Add Contact
+						<button v-else @click="newContactPopup = true" class="bg-gradient-to-b from-white to-grey-f4 border border-grey-lighter text-grey-ed text-px10 lg:text-xs xl:text-sm 2xl:text-base rounded-px5 flex gap-px5 lg:gap-2 xl:gap-3 2xl:gap-4 items-center justify-center px-2.5 lg:px-3 xl:px-4 2xl:px-5 py-1 lg:py-2 w-max">
+							<i class="fas fa-user-plus text-grey-dark text-px8 lg:text-px10 xl:text-xs 2xl:text-sm"></i> Add Contact
 						</button>
 					</div>
-					<div class="flex flex-col gap-px5 overflow-hidden overflow-y-auto pr-1" id="contactLists">
+					<div class="flex flex-col gap-px5 lg:gap-2 xl:gap-3 2xl:gap-4 overflow-hidden overflow-y-auto pr-1" id="contactLists">
 						<div v-for="contact in contacts" :key=contact.id @dblclick="toDetail(contact.id)" class="relative flex items-center -ml-2.5">
-							<input type="checkbox" name="participants" :id=contact.id class="inputParticipant absolute left-5" :value=contact.email>
-							<label :for=contact.id class="rounded pl-7 pr-2.5 py-2 border border-grey-lighter flex justify-between items-center min-w-252 flex-1">
-								<div class="flex gap-2.5 flex-nowrap">
-									<img :src=contact.img class="w-6 h-6 object-cover rounded-full bg-primary">
+							<input type="checkbox" name="participants" :id=contact.id class="inputParticipant absolute left-5 lg:left-6 xl:left-7 2xl:left-8" :value=contact.email>
+							<label :for=contact.id class="rounded pl-7 lg:pl-8 xl:pl-9 2xl:pl-10 pr-2.5 py-2 border border-grey-lighter grid grid-cols-3 justify-between items-center min-w-252 flex-1">
+								<div class="flex gap-2.5 lg:gap-3 xl:gap-4 2xl:gap-5 flex-nowrap">
+									<img :src=contact.img class="w-6 lg:w-7 xl:w-8 2xl:w-9 h-6 lg:h-7 xl:h-8 2xl:h-9 object-cover rounded-full bg-primary">
 									<div class="text-grey-ed">
-										<h5 class="text-px10 font-bold">{{ contact.name }}</h5>
-										<p class="text-px8">{{ contact.email }}</p>
+										<h5 class="text-px10 lg:text-xs xl:text-sm 2xl:text-base font-bold">{{ contact.name }}</h5>
+										<p class="text-px8 lg:text-px10 xl:text-xs 2xl:text-sm">{{ contact.email }}</p>
 									</div>
 								</div>
-								<p class="text-px10 text-grey-ed">{{ contact.phone }}</p>
-								<div class="flex gap-px5">
-									<button @click="toEdit(contact.id)" class="bg-gradient-to-b from-white to-grey-f4 border border-grey-lighter text-grey-ed text-px10 rounded-px5 px-4 py-1 w-max">Edit</button>
-									<button @click="confirmDelete(contact.id)" class="bg-red text-white text-px10 rounded-px5 px-2.5 py-1 w-max">Delete</button>
+								<p class="text-px10 lg:text-xs xl:text-sm 2xl:text-base text-grey-ed">{{ contact.phone }}</p>
+								<div class="flex gap-px5 lg:gap-2 xl:gap-3 2xl:gap-4">
+									<button @click="toEdit(contact.id)" class="bg-gradient-to-b from-white to-grey-f4 border border-grey-lighter text-grey-ed text-px10 lg:text-xs xl:text-sm 2xl:text-base rounded-px5 px-4 lg:px-5 xl:px-6 2xl:px-7 py-1 lg:py-2 w-max">Edit</button>
+									<button @click="confirmDelete(contact.id)" class="bg-red text-white text-px10 lg:text-xs xl:text-sm 2xl:text-base rounded-px5 px-2.5 lg:px-3 xl:px-4 2xl:px-5 py-1 lg:py-2 w-max">Delete</button>
 								</div>
 							</label>
 						</div>

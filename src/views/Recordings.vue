@@ -8,27 +8,27 @@
 		popupTitle="Delete files">
 	</confirm-popup>
 	<div class="default-page">
-		<div class="card p-5">
-			<h2 class="font-bold text-2xl text-grey-dark mb-5">Recording</h2>
-			<div class="grid gap-pc375 recording-list pt-0 pr-5 pb-2.5 pl-2.5">
-				<h6 class="text-px10 font-bold text-grey-sb">Start Time</h6>
-				<h6 class="text-px10 font-bold text-grey-sb">Subject</h6>
-				<h6 class="text-px10 font-bold text-grey-sb">Meeting ID</h6>
-				<h6 class="text-px10 font-bold text-grey-sb">Files</h6>
-				<h6 class="text-px10 font-bold text-grey-sb"></h6>
+		<div class="card p-5 lg:p-6 xl:p-7 2xl:p-8">
+			<h2 class="font-bold text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl text-grey-dark mb-5 lg:mb-6 xl:mb-7 2xl:mb-8">Recording</h2>
+			<div class="grid gap-pc375 recording-list pt-0 pr-5 pb-2.5 lg:pb-3 xl:pb-4 2xl:pb-5 pl-2.5">
+				<h6 class="text-px10 lg:text-xs xl:text-sm 2xl:text-base font-bold text-grey-sb">Start Time</h6>
+				<h6 class="text-px10 lg:text-xs xl:text-sm 2xl:text-base font-bold text-grey-sb">Subject</h6>
+				<h6 class="text-px10 lg:text-xs xl:text-sm 2xl:text-base font-bold text-grey-sb">Meeting ID</h6>
+				<h6 class="text-px10 lg:text-xs xl:text-sm 2xl:text-base font-bold text-grey-sb">Files</h6>
+				<h6 class="text-px10 lg:text-xs xl:text-sm 2xl:text-base font-bold text-grey-sb"></h6>
 			</div>
-			<div id="listRecording" class="flex flex-col gap-px5 sticky flex-nowrap overflow-hidden overflow-y-auto pr-2.5 h-full hasInactive">
+			<div id="listRecording" class="flex flex-col gap-px5 lg:gap-2 xl:gap-3 2xl:gap-4 sticky flex-nowrap overflow-hidden overflow-y-auto pr-2.5 h-full hasInactive">
 				<transition-group name="slide-up" appear>
-					<div class="grid recording-list gap-pc375 items-center rounded-tr-px5 px-2.5 py-px11 border-grey-lighter border hover:bg-grey-background focus:bg-grey-background cursor-pointer" v-for="recording in recordings" :key=recording.meetingNum>
-						<p class="text-grey-ed text-px10">{{ recording.endDateVal }} {{ recording.endTimeVal }}</p>
-						<p class="text-grey-ed text-px10">{{ recording.subject }}</p>
-						<p class="text-grey-ed text-px10">{{ recording.meetingNum }}</p>
-						<p class="text-grey-ed text-px10">{{ recording.files }}</p>
-						<div class="flex gap-px5 justify-end">
-							<button @click="console.log('download clicked')" class="bg-gradient-to-b from-white to-grey-f4 border border-grey-lighter text-grey-ed text-px10 rounded-px5 px-px9">
-								<i class="fas fa-download text-grey-dark text-xs"></i>
+					<div class="grid recording-list gap-pc375 items-center rounded-tr-px5 px-2.5 lg:px-3 xl:px-4 2xl:px-5 py-px11 lg:py-3 xl:py-4 2xl:py-5 border-grey-lighter border hover:bg-grey-background focus:bg-grey-background cursor-pointer" v-for="recording in recordings" :key=recording.meetingNum>
+						<p class="text-grey-ed text-px10 lg:text-xs xl:text-sm 2xl:text-base">{{ recording.endDateVal }} {{ recording.endTimeVal }}</p>
+						<p class="text-grey-ed text-px10 lg:text-xs xl:text-sm 2xl:text-base">{{ recording.subject }}</p>
+						<p class="text-grey-ed text-px10 lg:text-xs xl:text-sm 2xl:text-base">{{ recording.meetingNum }}</p>
+						<p class="text-grey-ed text-px10 lg:text-xs xl:text-sm 2xl:text-base">{{ recording.files }}</p>
+						<div class="flex gap-px5 lg:gap-2 xl:gap-3 2xl:gap-4 justify-end">
+							<button @click="console.log('download clicked')" class="bg-gradient-to-b from-white to-grey-f4 border border-grey-lighter text-grey-ed text-px10 lg:text-xs xl:text-sm 2xl:text-base rounded-px5 px-px9 lg:px-3 xl:px-4 2xl:px-5">
+								<i class="fas fa-download text-grey-dark text-xs lg:text-sm xl:text-base 2xl:text-lg"></i>
 							</button>
-							<button @click="deleteClicked(recording.meetingNum)" class="bg-red text-white text-px10 rounded-px5 px-px9 py-1">
+							<button @click="deleteClicked(recording.meetingNum)" class="bg-red text-white text-px10 lg:text-xs xl:text-sm 2xl:text-base rounded-px5 px-px9 lg:px-3 xl:px-4 2xl:px-5 py-1">
 								Delete
 							</button>
 						</div>

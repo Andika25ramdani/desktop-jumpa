@@ -211,6 +211,9 @@ select {
 	width: 37vw;
 	min-width: 274px;
 }
+.input-number-icon {
+	right: -1.75px;
+}
 @media screen and (min-width: 1024px){
 	.red-input {
 		min-width: 315px;
@@ -218,6 +221,14 @@ select {
 	}
 	.join-btn {
 		width: 35vw;
+	}
+	.custom-select {
+		font-size: 10px;
+		line-height: 18px;
+		padding: 7.5px 15px;
+	}
+	.input-number-icon {
+		right: -6px;
 	}
 }
 @media screen and (min-width: 1280px){
@@ -228,6 +239,14 @@ select {
 	.join-btn {
 		width: 30vw;
 	}
+	.custom-select {
+		font-size: 12px;
+		line-height: 21px;
+		padding: 10px 20px;
+	}
+	.input-number-icon {
+		right: -9.5px;
+	}
 }
 @media screen and (min-width: 1536px){
 	.red-input {
@@ -236,6 +255,14 @@ select {
 	}
 	.join-btn {
 		width: 25vw;
+	}
+	.custom-select {
+		font-size: 14px;
+		line-height: 24px;
+		padding: 12.5px 20px;
+	}
+	.input-number-icon {
+		right: -12.25px;
 	}
 }
 </style>
