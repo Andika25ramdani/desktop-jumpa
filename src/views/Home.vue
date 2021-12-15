@@ -8,7 +8,7 @@
           lg:text-2xl lg:mb-2
           xl:text-3xl xl:mb-3
           2xl:text-4xl 2xl:mb-4
-        ">Hi, {{ account }} Jumpa</h3>
+        ">Hi, {{ account }}</h3>
         <p key="1" class="text-px10 lg:text-xs xl:text-sm 2xl:text-base text-grey-sb mb-5 lg:mb-6 xl:mb-7 2xl:mb-8 px-16">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni assumenda iste reprehenderit ab maiores enim placeat, cum excepturi sit labore veritatis odit adipisci perferendis animi facere qui ut facilis numquam.</p>
         <div key="2" class="mx-auto bg-white w-max py-px15 lg:py-4 xl:py-5 2xl:py-6 px-5 lg:px-4 xl:px-5 2xl:px-6 border-grey-lighter border rounded-px10 flex items-center justify-evenly gap-5 lg:gap-6 xl:gap-7 2xl:gap-8">
           <div @click="newMeeting" class="flex flex-col items-center gap-2.5 w-max cursor-pointer">

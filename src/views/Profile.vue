@@ -22,7 +22,7 @@
                             <h2 class="kanit font-bold text-grey-dark text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl">Dinda Jumpa Indonesia</h2>
                             <div class="bg-red rounded py-1 lg:py-2 px-2.5 lg:px-3 xl:px-4 2xl:px-5 text-px8 lg:text-px10 xl:text-xs 2xl:text-sm text-white">PLATINUM</div>
                         </div>
-                        <p class="text-px10 lg:text-xs xl:text-sm 2xl:text-base text-grey-sb">@dindajumpakamu</p>
+                        <p class="text-px10 lg:text-xs xl:text-sm 2xl:text-base text-grey-sb">@{{ userInfo.account }}</p>
                         <p class="text-px10 lg:text-xs xl:text-sm 2xl:text-base text-grey-dark py-2.5 lg:py-3 xl:py-4 2xl:py-5">
                             IT Analyst, Novelist, Photographer, Aquarius girl, and also a Cat lover, “If cats could write history, their history would be mostly about cats.”
                             <br>–Eugen Weber
@@ -38,7 +38,7 @@
                         </tr>
                         <tr>
                             <td class="text-grey-sb pb-px5 lg:pb-2 xl:pb-3 2xl:pb-4 pr-12 lg:pr-14 xl:pr-16 2xl:pr-20">Email</td>
-                            <td class="text-grey-dark">dinda.jumpa@gmail.com</td>
+                            <td class="text-grey-dark">{{ userInfo.email }}</td>
                         </tr>
                         <tr>
                             <td class="text-grey-sb pb-px5 lg:pb-2 xl:pb-3 2xl:pb-4 pr-12 lg:pr-14 xl:pr-16 2xl:pr-20">Phone</td>
@@ -79,7 +79,11 @@ export default {
     data() {
         return {
             isImageClicked: false,
-            photoClicked: false
+            photoClicked: false,
+            userInfo: {
+                account: localStorage.getItem('account'),
+                email: localStorage.getItem('email')
+            }
         }
     },
     mounted() {

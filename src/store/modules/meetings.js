@@ -19,6 +19,7 @@ export default {
     mutations: {
         SET: (state, [key, value]) => state[key] = value,
         PUSH: (state, [key, value]) => state[key].push(value),
+        DELETE: (state, [key, value]) => state[key].filter(item => item.meetingSerialNum != value),
         RESET: (state) => Object.assign(state, intialState())
     },
     getters: {
@@ -52,6 +53,33 @@ export default {
                 console.log(data);
                 localStorage.setItem('meetingDetails', data)
                 commit('SET', ['meetingDetails', data])
+            }
+        },
+        meetingDelete: async function({commit}, payload) {
+            const res = await API.meeting_delete(payload)
+            let response = res.data
+            if (response.retCode == 0) {
+                const data = response.data
+
+                commit('DELETE', ['lists', payload])
+
+                return 1;
+
+                console.log(res);
+                console.log(response);
+                console.log(data);
+            }
+        },
+        meetingQuickStart: async function({commit}, payload) {
+            const res = await API.meeting_quick_start(payload.data)
+            let response = res.data
+            console.log(response);
+            if (response.retCode == 0) {
+                console.log(response);
+                // const data = response.data
+                // console.log(data);
+                // localStorage.setItem('meetingDetails', data)
+                // commit('SET', ['meetingDetails', data])
             }
         },
     }

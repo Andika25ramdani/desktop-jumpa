@@ -297,9 +297,9 @@ export default {
         let timeStamp = (new Date).getTime();
     
         //GENERATE SIGNATURE
-        data = JSON.stringify(data);
+        let dataStr = JSON.stringify(data);
         let obj_param = {};
-        let body_param = sha256(data);
+        let body_param = sha256(dataStr);
         let source_signature = applySign(obj_param, timeStamp, body_param);
         
     

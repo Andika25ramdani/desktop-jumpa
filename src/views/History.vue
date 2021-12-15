@@ -7,6 +7,10 @@
 		popupMessage="Are you sure you want to delete this history? You cannot restore it once deleted."
 		popupTitle="Delete History">
 	</confirm-popup>
+	<notification-toast
+		v-if=toast.active
+		:notifMessage=toast.notifMessage
+		:notifType=toast.notifType />
 	<div class="default-page">
 		<div class="card p-5 lg:p-6 xl:p-7 2xl:p-8">
 			<h2 class="font-bold text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl text-grey-dark mb-5 lg:mb-6 xl:mb-7 2xl:mb-8">Meeting History</h2>
@@ -17,9 +21,9 @@
 				<h6 class="text-px10 lg:text-xs xl:text-sm 2xl:text-base  font-bold text-grey-sb">Status</h6>
 				<h6 class="text-px10 lg:text-xs xl:text-sm 2xl:text-base  font-bold text-grey-sb"></h6>
 			</div>
-			<div id="listHistory" class="flex flex-col gap-px5 lg:gap-2 xl:gap-3 2xl:gap-4 lg:px-2 xl:px-3 2xl:px-4 sticky flex-nowrap overflow-hidden overflow-y-auto pr-2.5 h-full hasInactive">
+			<div id="listHistory" class="flex flex-col gap-px5 lg:gap-2 xl:gap-3 2xl:gap-4 lg:px-2 xl:px-3 2xl:px-4 sticky flex-nowrap overflow-hidden overflow-y-auto pr-2.5 h-full hasInactive pb-40">
 				<transition-group name="slide-up" appear>
-					<div class="grid history-list gap-pc25 items-center rounded-tr-px5 px-2.5 lg:px-3 xl:px-4 2xl:px-5 py-px11 lg:py-3 xl:py-4 2xl:py-5  border-grey-lighter border hover:bg-grey-background focus:bg-grey-background cursor-pointer" v-for="history in lists" :key=history.meetingNum @dblclick="toDetail(history.meetingSerialNum)">
+					<div class="grid history-list gap-pc25 items-center rounded-tr-px5 px-2.5 lg:px-3 xl:px-4 2xl:px-5 py-px11 lg:py-3 xl:py-4 2xl:py-5 border-grey-lighter border hover:bg-grey-background focus:bg-grey-background cursor-pointer" v-for="history in lists" :key=history.meetingNum @dblclick="toDetail(history.meetingSerialNum)">
 						<p class="text-grey-ed text-px10 lg:text-xs xl:text-sm 2xl:text-base ">{{ history.endDateVal }} {{ history.endTimeVal }}</p>
 						<p class="text-grey-ed text-px10 lg:text-xs xl:text-sm 2xl:text-base ">{{ history.subject }}</p>
 						<p class="text-grey-ed text-px10 lg:text-xs xl:text-sm 2xl:text-base ">{{ history.meetingNum }}</p>
@@ -44,12 +48,18 @@
 <script>
 import { mapGetters } from 'vuex'
 import ConfirmPopup from '../components/ConfirmPopup.vue'
+import NotificationToast from '../components/NotificationToast.vue'
 export default {
-  components: { ConfirmPopup },
+	components: { ConfirmPopup, NotificationToast },
 	data() {
 		return {
 			popupDelete: false,
-			currentSerial: ''
+			currentSerial: '',
+			toast: {
+				active: false,
+				notifMessage: '',
+				notifType: 0
+			}
 		}
 	},
 	computed: {
@@ -60,7 +70,7 @@ export default {
 	async created() {
 		await this.$store.dispatch('meetings/getLists', {
 			pageSize: 20,
-      meetingState: 1
+			meetingState: 1
 		})
 	},
   methods: {
@@ -89,8 +99,18 @@ export default {
 	reschedule(serialNumber) {
 		console.log('Reschedule Meeting No. '+serialNumber);
 	},
-	deleteHistory(serialNumber) {
-		console.error('Delete History Meeting No. '+serialNumber);
+	async deleteHistory(meetingSerialNum) {
+		const res = await this.$store.dispatch('meetings/meetingDelete', {meetingSerialNum})
+		if (res) {
+			this.popupDelete = false
+			this.toast.active = true
+			this.toast.notifMessage = 'Deleted Successfully!'
+			this.toast.notifType = 0
+			setTimeout(() => {
+				location.reload()
+				this.toast.active = false
+			}, 2975)
+		}
 	}
   }
 }
