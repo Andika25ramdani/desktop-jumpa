@@ -3,6 +3,8 @@
     <white-background v-else />
 </template>
 <script>
+import axios from "axios";
+import qs from "querystring";
 import RedBackground from './components/RedBackground.vue';
 import WhiteBackground from './components/WhiteBackground.vue';
 
@@ -17,7 +19,11 @@ export default {
         ...mapGetters({
           isAuth: 'auth/isAuth'
         })
-    }
+    },
+	// async mounted() {
+	// 	let res = await axios.get('https://sidinda.jumpa.id:8099/signup/')
+	// 	console.error('jfksjdfkshfh', res)
+	// }
 }
 </script>
 <style>
@@ -215,10 +221,6 @@ select {
 	right: -1.75px;
 }
 @media screen and (min-width: 1024px){
-	.red-input {
-		min-width: 315px;
-		padding: 9px 17px;
-	}
 	.join-btn {
 		width: 35vw;
 	}
@@ -233,8 +235,7 @@ select {
 }
 @media screen and (min-width: 1280px){
 	.red-input {
-		min-width: 378px;
-		padding: 10px 18px;
+		min-width: 360px;
 	}
 	.join-btn {
 		width: 30vw;
@@ -249,10 +250,6 @@ select {
 	}
 }
 @media screen and (min-width: 1536px){
-	.red-input {
-		min-width: 441px;
-		padding: 11px 19px;
-	}
 	.join-btn {
 		width: 25vw;
 	}

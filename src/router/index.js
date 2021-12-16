@@ -21,7 +21,15 @@ const routes = [
     {
         path: '/sign-up',
         name: 'SignUp',
-        component: () => import('../views/SignUp.vue'),
+        component: () => import('../views/signup/SignUp.vue'),
+        meta: {
+            requireAuth: false,
+        }
+    },
+    {
+        path: '/check-your-email',
+        name: 'CheckEmail',
+        component: () => import('../views/signup/CheckEmail.vue'),
         meta: {
             requireAuth: false,
         }

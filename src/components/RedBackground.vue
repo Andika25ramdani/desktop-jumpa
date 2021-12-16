@@ -5,7 +5,7 @@
       :options="tsOption"
     />
     <transition name="slide-left" appear>
-      <router-link to='/' v-if="$router.currentRoute.value.path != '/'" class="back-button absolute top-px25 left-px25 z-50 text-white text-xs">
+      <router-link to='/' v-if="$router.currentRoute.value.path != '/'" class="back-button absolute top-px25 left-px25 z-50 text-white text-xs xl:text-sm">
         <i class="fas fa-chevron-left pr-1"></i> Back to Welcome
       </router-link>
     </transition>
@@ -14,7 +14,7 @@
         <router-view/>
       </transition>
     </div>
-		<footer class="absolute mx-auto py-4 w-full bottom-0 text-white text-center text-sm">
+		<footer class="absolute mx-auto py-4 w-full bottom-0 text-white text-center text-xs xl:text-sm">
       <transition-group name="slide-up" appear>
         <a href="/" key="0">PT. Jumpa Daring Indonesia</a><br>
         <span key="1">V1.0.0</span>
@@ -101,38 +101,6 @@ export default {
       }
     }
   },
-  // watch: {
-  //   'tsOption.particles.move.speed'() {
-  //     console.log('taiii')
-  //     let self = this;
-  //     this.$nextTick(() => self.tsOption)
-  //   },
-  //   'tsOption.particles.move.enable'() {
-  //     console.log('taiii')
-  //     let self = this;
-  //     this.$nextTick(() => self.tsOption)
-  //   }
-  // },
-  // computed: {
-  //   updateEuy: function() {
-  //     return this.tsOption;
-  //   }
-  // },
-  // mounted() {
-  //   console.log(this.tsOption.particles.move.speed);
-  //   setTimeout(() => {
-  //     this.tsOption.particles.move.speed = 0
-  //     this.tsOption.particles.move.enable = false
-  //     console.log(this.tsOption.particles.move.speed);
-  //   }, 5000)
-  // },
-  methods: {
-    // change() {
-    //   // this.isEnable = false
-    //   // clearTimeout(this.timer)
-    //   console.log()
-    // }
-  }
 }
 </script>
 <style scoped>
