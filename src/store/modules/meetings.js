@@ -50,7 +50,6 @@ export default {
             let response = res.data
             if (response.retCode == 0) {
                 const data = response.data
-                console.log(data);
                 localStorage.setItem('meetingDetails', data)
                 commit('SET', ['meetingDetails', data])
             }
@@ -64,22 +63,18 @@ export default {
                 commit('DELETE', ['lists', payload])
 
                 return 1;
-
-                console.log(res);
-                console.log(response);
-                console.log(data);
             }
         },
         meetingQuickStart: async function({commit}, payload) {
-            const res = await API.meeting_quick_start(payload.data)
+            const res = await API.meeting_quick_start(payload)
+            console.log(res);
             let response = res.data
             console.log(response);
             if (response.retCode == 0) {
-                console.log(response);
-                // const data = response.data
-                // console.log(data);
-                // localStorage.setItem('meetingDetails', data)
-                // commit('SET', ['meetingDetails', data])
+                let { hostCode, hostEmail, hostName, meetingNum, meetingSerialNum } = response.data;
+                console.log(response.retCode, 'DONE');
+                let meetUrl = `/rtc/dispatch?meetingNum=${meetingNum}&userName=${hostName}&email=${hostEmail}&sn=${meetingSerialNum}&isAuto=true`
+                return meetUrl;
             }
         },
     }

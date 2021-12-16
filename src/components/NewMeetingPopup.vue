@@ -1,7 +1,7 @@
 <template>
 	<div id="newMeetingPopup" class="overlay-bg fixed top-0 left-0 h-screen w-screen z-50 flex flex-col items-center justify-center">
 		<transition name="slide-down" appear>
-			<div class="bg-white fixed max-h-90 max-w-65 w-2/3 rounded-px5 shadow-custom p-5 lg:p-6 xl:p-7 2xl:p-8 flex flex-col gap-2.5 lg:gap-3 xl:gap-4 2xl:gap-5">
+			<div class="bg-white fixed max-h-90 max-w-screen-sm lg:max-w-screen-md xl:max-w-screen-lg w-2/3 rounded-px5 shadow-custom p-5 lg:p-6 xl:p-7 2xl:p-8 flex flex-col gap-2.5 lg:gap-3 xl:gap-4 2xl:gap-5">
 				<div class="">
 					<h2 class="text-grey-dark font-bold text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl">
 						{{ !moreOption && !invitePopup ? 'New Meeting' : '' }}
@@ -148,7 +148,7 @@
 							<label class="text-px8 lg:text-px10 xl:text-xs 2xl:text-sm text-grey-dark">Time Zone</label>
 							<div class="custom-select flex items-center justify-between text-px10 lg:text-xs xl:text-sm 2xl:text-base text-grey-dark">
 								<select v-model="timeZone">
-									<option value="" selected disabled>(GMT+07:00) Jakarta</option>
+									<option value="Asia/Jakarta" selected disabled>(GMT+07:00) Jakarta</option>
 									<option value="Asia/Jakarta">(GMT+07:00) Jakarta</option>
 									<option value="Asia">(GMT+07:00) Jakarta</option>
 								</select>
@@ -322,6 +322,7 @@
 
 <script>
 import md5 from 'crypto-js/md5'
+import CONFIG from "../js/config";
 import useValidate from '@vuelidate/core'
 import { required, minLength, maxLength, email } from '@vuelidate/validators'
 export default {
@@ -346,10 +347,8 @@ export default {
 			},
 			meetingLayouts: '',
 			muted: false,
-			// organizer: localStorage.getItem('account'),
-			// orgEmail: localStorage.getItem('email'),
-			organizer: 'andikar',
-			orgEmail: 'andika@mail.test',
+			organizer: localStorage.getItem('account'),
+			orgEmail: localStorage.getItem('email'),
 			password: '',
 			presentation: false,
 			record: false,
@@ -449,7 +448,6 @@ export default {
             durHr: { required },
             durMn: { required },
             invitees: {
-				required, 
 				maxLength: maxLength(this.meetingPlan.participants),
 			},
 			locked: {  },
@@ -475,27 +473,15 @@ export default {
         newMeeting: async function() {
             this.v$.$validate()
             if (!this.v$.$error) {
-				console.log(this.subject);
-				console.log(this.password);
-				console.log(this.invitees);
-				console.log(this.timeZone);
-				console.log(this.durHr);
-				console.log(this.durMn);
-				console.log('record:'+this.record);
-				console.log('locked:'+this.locked);
-				console.log('chat:'+this.chat);
-				console.log('muted:'+this.muted);
-				console.log('attend:'+this.attendList);
-				console.log('presentation:'+this.presentation);
-				console.log('beep:'+ this.beep);
-				console.log(this.organizer);
-				console.log(this.orgEmail);
-                // await this.$store.dispatch('meetings/newMeeting', {
-                //     meetingPlan: this.meetingPlan,
-                //     subject: this.subject,
-                //     password: md5(this.password),
-                //     invitees: this.invitees,
-                // });
+                const res = await this.$store.dispatch('meetings/meetingQuickStart', {
+					subject: this.subject,
+					password: this.password,
+					inviteInfos: [],
+
+                });
+				if (res) {
+					window.open(CONFIG.SERVER_DOMAIN + res, '_blank')
+				}
             }
         },
 

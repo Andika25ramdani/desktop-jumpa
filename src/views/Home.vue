@@ -35,7 +35,7 @@
     <transition name="slide-right" appear>
       <div class="home-rs bg-white py-4 lg:py-5 xl:py-6 2xl:py-7 px-6 lg:px-7 xl:px-8 2xl:px-9 border border-grey-lighter rounded-t-px10 rounded-r-px10 min-w-380 w-half mr-5">
         <h4 class="kanit text-grey-dark font-bold text-sm lg:text-base xl:text-lg 2xl:text-xl mb-2.5 lg:mb-3 xl:mb-4 2xl:mb-5">Upcoming Meeting</h4>
-        <div class="grid grid-cols-1 gap-2.5 lg:gap-3 xl:gap-4 2xl:gap-5 sticky flex-col flex-wrap overflow-hidden overflow-y-auto h-full pr-2.5">
+        <div class="grid grid-cols-1 gap-2.5 lg:gap-3 xl:gap-4 2xl:gap-5 sticky flex-col flex-wrap overflow-hidden overflow-y-auto pr-2.5">
           <transition-group name="slide-right" v-if="upcomingMeetings.length > 1" appear>
             <div v-for="upcoming in upcomingMeetings" :key=upcoming.meetingNum class="rounded-px10 bg-primary text-white p-px15 relative">
               <h5 class="mr-px35 mb-px5 text-sm lg:text-base xl:text-lg 2xl:text-xl font-bold">{{ upcoming.subject }}</h5>
