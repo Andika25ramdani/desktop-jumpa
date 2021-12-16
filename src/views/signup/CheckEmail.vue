@@ -31,12 +31,13 @@ export default {
         }
     },
     created() {
-        this.email = this.$route.query.email
-        this.displayName = this.$route.query.displayName
+        this.email = this.$route.params.email
+        this.displayName = this.$route.params.displayName
     },
     methods: {
         resendEmail() {
             console.log('Email Resend');
+            // this.$router.push({name: 'SetupAccount', params: {email: this.email, displayName: this.displayName}})
             location.reload()
         }
     }

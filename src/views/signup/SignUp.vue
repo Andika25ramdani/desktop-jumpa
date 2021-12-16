@@ -46,7 +46,7 @@ export default {
             this.v$.$validate()
             if (!this.v$.$error) {
 				console.log('OKE')
-				this.$router.push({path: '/check-your-email', query: {email: this.signUpData.email, displayName: this.signUpData.displayName}})
+				this.$router.push({name: 'CheckEmail', params: {email: this.signUpData.email, displayName: this.signUpData.displayName}})
                 // let res = await this.$store.dispatch('auth/signUp', {
                 //     email: this.email,
                 //     displayName: this.displayName,

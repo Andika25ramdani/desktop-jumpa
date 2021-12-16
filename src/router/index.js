@@ -35,6 +35,14 @@ const routes = [
         }
     },
     {
+        path: '/setup-account',
+        name: 'SetupAccount',
+        component: () => import('../views/signup/SetupAccount.vue'),
+        meta: {
+            requireAuth: false,
+        }
+    },
+    {
         path: '/join-meeting',
         name: 'JoinMeeting',
         component: () => import('../views/JoinMeeting.vue'),
