@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+h1.card-header-text {
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: 700;
+  text-align: center;
+  color: #424242;
+}
+
+@media screen and (min-width: 1280px) {
+  h1.card-header-text {
+    font-size: 30px;
+    line-height: 45px;
+  }
+}
+
+p {
+  font-size: 12px;
+  line-height: 18px;
+}
+
+@media screen and (min-width: 1280px) {
+  p {
+    font-size: 14px;
+    line-height: 21px;
+  }
+}
+
+input {
+  outline: none;
+  border: none;
+  color: #A0A0A0;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+@media screen and (min-width: 1280px) {
+  input {
+    color: #9B9999;
+    font-size: 14px;
+    line-height: 21px;
+  }
+}
+
+.sign-in-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+}
+
+.sign-in-form input {
+  width: 100%;
+}
+
+@media screen and (min-width: 1280px) {
+  .sign-in-form {
+    gap: 20px;
+  }
+}
+
+.form-control {
+  border: 1px solid #9B9999;
+  border-radius: 5px;
+}
+
+a.primary-button, button.primary-button, input[type=submit].primary-button {
+  background-color: #790F19;
+  color: white;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 7.5px 0;
+  -webkit-transition: .25s all ease-in-out;
+  transition: .25s all ease-in-out;
+}
+
+a.primary-button:hover, button.primary-button:hover, input[type=submit].primary-button:hover {
+  -webkit-box-shadow: -10px 10px 15px rgba(121, 15, 25, 0.25);
+          box-shadow: -10px 10px 15px rgba(121, 15, 25, 0.25);
+}
+
+@media screen and (min-width: 1280px) {
+  a.primary-button, button.primary-button, input[type=submit].primary-button {
+    padding: 9.5px 0;
+    font-size: 14px;
+    line-height: 21px;
+  }
+}
+
+a.primary-button:disabled, button.primary-button:disabled, input[type=submit].primary-button:disabled {
+  background-color: #E9E9E9;
+  color: #9B9999;
+  cursor: not-allowed;
+}
+
+a.text-url {
+  font-size: 12px;
+  line-height: 18px;
+  color: #424242;
+  text-decoration: none;
+}
+
+a.text-url:hover {
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+@media screen and (min-width: 1280px) {
+  a.text-url {
+    font-size: 14px;
+    line-height: 21px;
+  }
+}
+
+.sign-in-card {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin: 0 auto;
+  min-width: 312px;
+  -webkit-box-shadow: -10px 10px 15px rgba(0, 0, 0, 0.25);
+          box-shadow: -10px 10px 15px rgba(0, 0, 0, 0.25);
+}
+
+@media screen and (min-width: 1280px) {
+  .sign-in-card {
+    min-width: 460px;
+  }
+}
+
+.sign-in-card .card-body {
+  padding: 25px 30px 35px;
+}
+
+@media screen and (min-width: 1280px) {
+  .sign-in-card .card-body {
+    padding: 40px 50px 45px;
+  }
+}
+
+section.card-page-section {
+  background-color: #790F19;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+/*# sourceMappingURL=jumpa.css.map */

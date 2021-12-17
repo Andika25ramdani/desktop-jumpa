@@ -1,0 +1,31 @@
+a.primary-button, button.primary-button, input[type=submit].primary-button
+    background-color: $maroon
+    color: white
+    border-radius: 5px
+    font-weight: 700
+    font-size: 12px
+    line-height: 18px
+    padding: 7.5px 0
+    transition: .25s all ease-in-out
+    &:hover
+        box-shadow: -10px 10px 15px rgba(121, 15, 25, 0.25)
+    @media screen and (min-width: 1280px)
+        padding: 9.5px 0
+        font-size: 14px
+        line-height: 21px
+    &:disabled
+        background-color: $bordergray
+        color: $gray
+        cursor: not-allowed
+
+a.text-url
+    font-size: 12px
+    line-height: 18px
+    color: $black
+    text-decoration: none
+    &:hover
+        text-decoration: underline
+        font-weight: 700
+    @media screen and (min-width: 1280px)
+        font-size: 14px
+        line-height: 21px
