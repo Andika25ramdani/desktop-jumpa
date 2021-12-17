@@ -220,6 +220,27 @@ select {
 .input-number-icon {
 	right: -1.75px;
 }
+
+.primary-button {
+	margin: 5px 0 0;
+	background-color: #790F19;
+	font-weight: 700;
+	text-transform: uppercase;
+	padding: 9px 0;
+	color: white;
+	border-radius: 5px;
+}
+.primary-button:hover {
+	box-shadow: -10px 10px 15px rgba(0, 0, 0, 0.25);
+}
+.primary-button:disabled {
+	background-color: #E9E9E9;
+	color: #9B9999;
+	cursor: not-allowed;
+}
+.primary-button:disabled:hover {
+    box-shadow: none;
+}
 @media screen and (min-width: 1024px){
 	.join-btn {
 		width: 35vw;

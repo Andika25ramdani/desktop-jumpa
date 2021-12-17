@@ -11,7 +11,8 @@
 					<input type="text" v-model="signUpData.displayName" placeholder="Display Name" id="inputDisplayName" class="border border-grey-ce rounded-px5 red-input outline-none ">
                     <span v-if="v$.signUpData.displayName.$error" class="text-red ">{{ v$.signUpData.displayName.$errors[0].$message }}</span>
 				</div>
-				<button type="submit" class="mt-5 xl:mt-px30 bg-primary font-bold uppercase py-px9 text-white rounded-px5 hover:shadow-custom">SIGN UP</button>
+				<button v-if="v$.signUpData.displayName.$error || v$.signUpData.email.$error" type="submit" class="primary-button mt-2.5" disabled>SIGN UP</button>
+				<button v-else type="submit" class="primary-button mt-2.5">SIGN UP</button>
 			</form>
 			<p class="text-xs xl:text-sm text-grey-dark my-2.5 ml-2.5">Already have an account? 
 				<router-link to="/sign-in" class="font-bold hover:underline">Sign In</router-link>
@@ -41,6 +42,11 @@ export default {
 			}
         }
     },
+	computed: {
+		checkEmptyInput: async function () {
+			this.v$.$validate()
+		}
+	},
 	methods: {
 		signUp: async function() {
             this.v$.$validate()

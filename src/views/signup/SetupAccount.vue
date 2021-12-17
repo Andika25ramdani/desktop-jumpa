@@ -23,7 +23,8 @@
 					<input type="password" v-model="setupAccountData.confirmPassword" placeholder="Confirm Password" id="inputConfirmPassword" class="border border-grey-ce rounded-px5 red-input outline-none ">
                     <span v-if="v$.setupAccountData.confirmPassword.$error" class="text-red ">{{ v$.setupAccountData.confirmPassword.$errors[0].$message }}</span>
 				</div>
-				<button type="submit" class="mt-5 xl:mt-px30 bg-primary font-bold uppercase py-px9 text-white rounded-px5 hover:shadow-custom">SIGN UP</button>
+				<button v-if="v$.setupAccountData.email.$error || v$.setupAccountData.displayName.$error || v$.setupAccountData.username.$error || v$.setupAccountData.password.$error || v$.setupAccountData.confirmPassword.$error" type="submit" class="primary-button mt-2.5" disabled>SIGN UP</button>
+				<button v-else type="submit" class="primary-button mt-2.5">SIGN UP</button>
 			</form>
 			<p class="text-xs xl:text-sm text-grey-dark my-2.5 ml-2.5">Already have an account? 
 				<router-link to="/sign-in" class="font-bold hover:underline">Sign In</router-link>
@@ -67,7 +68,7 @@ export default {
             this.v$.$validate()
             if (!this.v$.$error) {
 				console.log('OKE')
-				this.$router.push({name: 'SignIn'})
+				this.$router.push({name: 'RegistrationSuccess', params: {email: this.setupAccountData.email, displayName: this.setupAccountData.displayName}})
                 // let res = await this.$store.dispatch('auth/setupAccount', {
                 //     email: this.email,
                 //     displayName: this.displayName,

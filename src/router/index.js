@@ -43,6 +43,14 @@ const routes = [
         }
     },
     {
+        path: '/registration-success',
+        name: 'RegistrationSuccess',
+        component: () => import('../views/signup/RegistrationSuccess.vue'),
+        meta: {
+            requireAuth: false,
+        }
+    },
+    {
         path: '/join-meeting',
         name: 'JoinMeeting',
         component: () => import('../views/JoinMeeting.vue'),
