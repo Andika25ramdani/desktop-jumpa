@@ -19,6 +19,14 @@ const routes = [
         }
     },
     {
+        path: '/forgot-password',
+        name: 'ForgotPassword',
+        component: () => import('../views/forgotpassword/ForgotPassword.vue'),
+        meta: {
+            requireAuth: false,
+        }
+    },
+    {
         path: '/sign-up',
         name: 'SignUp',
         component: () => import('../views/signup/SignUp.vue'),

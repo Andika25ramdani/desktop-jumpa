@@ -16,11 +16,25 @@
                     <span v-if="v$.setupAccountData.username.$error" class="text-red ">{{ v$.setupAccountData.username.$errors[0].$message }}</span>
 				</div>
 				<div class="flex flex-col gap">
-					<input type="password" v-model="setupAccountData.password" placeholder="Password" id="inputPassword" class="border border-grey-ce rounded-px5 red-input outline-none ">
+					<div class="flex gap-px5 border border-grey-ce rounded-px5 red-input">
+						<input v-if="showPassword" type="text" v-model="setupAccountData.password" placeholder="Password" id="inputPassword" class="flex-1 outline-none">
+						<input v-else type="password" v-model="setupAccountData.password" placeholder="Password" id="inputPassword" class="flex-1 outline-none">
+						<button @click="visiblePassword" class="pr-2.5">
+							<i v-if="showPassword" class="fas fa-eye text-grey-dark text-xs"></i>
+							<i v-else class="fas fa-eye-slash text-grey-dark text-xs"></i>
+						</button>
+					</div>
                     <span v-if="v$.setupAccountData.password.$error" class="text-red ">{{ v$.setupAccountData.password.$errors[0].$message }}</span>
 				</div>
 				<div class="flex flex-col gap">
-					<input type="password" v-model="setupAccountData.confirmPassword" placeholder="Confirm Password" id="inputConfirmPassword" class="border border-grey-ce rounded-px5 red-input outline-none ">
+					<div class="flex gap-px5 border border-grey-ce rounded-px5 red-input">
+						<input v-if="showConfirmPassword" type="text" v-model="setupAccountData.confirmPassword" placeholder="Confirm Password" id="inputConfirmPassword" class="flex-1 outline-none">
+						<input v-else type="password" v-model="setupAccountData.confirmPassword" placeholder="Confirm Password" id="inputConfirmPassword" class="flex-1 outline-none">
+						<button @click="visibleConfirmPassword" class="pr-2.5">
+							<i v-if="showConfirmPassword" class="fas fa-eye text-grey-dark text-xs"></i>
+							<i v-else class="fas fa-eye-slash text-grey-dark text-xs"></i>
+						</button>
+					</div>
                     <span v-if="v$.setupAccountData.confirmPassword.$error" class="text-red ">{{ v$.setupAccountData.confirmPassword.$errors[0].$message }}</span>
 				</div>
 				<button v-if="v$.setupAccountData.email.$error || v$.setupAccountData.displayName.$error || v$.setupAccountData.username.$error || v$.setupAccountData.password.$error || v$.setupAccountData.confirmPassword.$error" type="submit" class="primary-button mt-2.5" disabled>SIGN UP</button>
@@ -39,6 +53,8 @@ export default {
 	name: 'SetupAccount',
 	data() {
 		return{
+			showPassword: false,
+			showConfirmPassword: false,
             v$: useValidate(),
 			setupAccountData: {
 				email: this.$route.params.email,
@@ -64,6 +80,12 @@ export default {
         }
     },
 	methods: {
+		visiblePassword() {
+			this.showPassword = !this.showPassword
+		},
+		visibleConfirmPassword() {
+			this.showConfirmPassword = !this.showConfirmPassword
+		},
 		setupAccount: async function() {
             this.v$.$validate()
             if (!this.v$.$error) {
