@@ -27,6 +27,30 @@ const routes = [
         }
     },
     {
+        path: '/check-email',
+        name: 'ForgotPasswordCheckEmail',
+        component: () => import('../views/forgotpassword/ForgotPasswordCheckEmail.vue'),
+        meta: {
+            requireAuth: false,
+        }
+    },
+    {
+        path: '/new-password',
+        name: 'CreateNewPassword',
+        component: () => import('../views/forgotpassword/CreateNewPassword.vue'),
+        meta: {
+            requireAuth: false,
+        }
+    },
+    {
+        path: '/reset-success',
+        name: 'ResetPasswordSuccess',
+        component: () => import('../views/forgotpassword/ResetPasswordSuccess.vue'),
+        meta: {
+            requireAuth: false,
+        }
+    },
+    {
         path: '/sign-up',
         name: 'SignUp',
         component: () => import('../views/signup/SignUp.vue'),
@@ -36,8 +60,8 @@ const routes = [
     },
     {
         path: '/check-your-email',
-        name: 'CheckEmail',
-        component: () => import('../views/signup/CheckEmail.vue'),
+        name: 'SignUpCheckEmail',
+        component: () => import('../views/signup/SignUpCheckEmail.vue'),
         meta: {
             requireAuth: false,
         }

@@ -21,6 +21,11 @@
 }
 
 /* INPUTS */
+input:disabled {
+	background-color: #F3F3F3;
+	color: #9B9999;
+	cursor: not-allowed;
+}
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {
 	input[type=checkbox],
 	input[type=radio] {

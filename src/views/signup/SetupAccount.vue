@@ -4,16 +4,16 @@
 			<h2 class="font-bold text-grey-dark text-2xl xl:text-3xl text-center mb-5 xl:mb-px30">Set up account</h2>
 			<form @submit.prevent="setupAccount" class="flex flex-col gap-2.5 xl:gap-5 px-2.5 text-xs xl:text-sm">
 				<div class="flex flex-col gap">
-					<input type="email" v-model="setupAccountData.email" placeholder="Email" id="inputEmail" class="border border-grey-ce rounded-px5 red-input outline-none ">
-                    <span v-if="v$.setupAccountData.email.$error" class="text-red ">{{ v$.setupAccountData.email.$errors[0].$message }}</span>
+					<input type="email" v-model="setupAccountData.email" placeholder="Email" id="inputEmail" class="border border-grey-ce rounded-px5 red-input outline-none" :disabled="setupAccountData.email">
+                    <span v-if="v$.setupAccountData.email.$error" class="text-red text-px8 xl:text-px10 mt-px5">{{ v$.setupAccountData.email.$errors[0].$message }}</span>
 				</div>
 				<div class="flex flex-col gap">
-					<input type="text" v-model="setupAccountData.displayName" placeholder="Display Name" id="inputDisplayName" class="border border-grey-ce rounded-px5 red-input outline-none ">
-                    <span v-if="v$.setupAccountData.displayName.$error" class="text-red ">{{ v$.setupAccountData.displayName.$errors[0].$message }}</span>
+					<input type="text" v-model="setupAccountData.displayName" placeholder="Display Name" id="inputDisplayName" class="border border-grey-ce rounded-px5 red-input outline-none" :disabled="setupAccountData.displayName">
+                    <span v-if="v$.setupAccountData.displayName.$error" class="text-red text-px8 xl:text-px10 mt-px5">{{ v$.setupAccountData.displayName.$errors[0].$message }}</span>
 				</div>
 				<div class="flex flex-col gap">
 					<input type="text" v-model="setupAccountData.username" placeholder="Username" id="inputUsername" class="border border-grey-ce rounded-px5 red-input outline-none ">
-                    <span v-if="v$.setupAccountData.username.$error" class="text-red ">{{ v$.setupAccountData.username.$errors[0].$message }}</span>
+                    <span v-if="v$.setupAccountData.username.$error" class="text-red text-px8 xl:text-px10 mt-px5">{{ v$.setupAccountData.username.$errors[0].$message }}</span>
 				</div>
 				<div class="flex flex-col gap">
 					<div class="flex gap-px5 border border-grey-ce rounded-px5 red-input">
@@ -24,7 +24,7 @@
 							<i v-else class="fas fa-eye-slash text-grey-dark text-xs"></i>
 						</button>
 					</div>
-                    <span v-if="v$.setupAccountData.password.$error" class="text-red ">{{ v$.setupAccountData.password.$errors[0].$message }}</span>
+                    <span v-if="v$.setupAccountData.password.$error" class="text-red text-px8 xl:text-px10 mt-px5">{{ v$.setupAccountData.password.$errors[0].$message }}</span>
 				</div>
 				<div class="flex flex-col gap">
 					<div class="flex gap-px5 border border-grey-ce rounded-px5 red-input">
@@ -35,7 +35,7 @@
 							<i v-else class="fas fa-eye-slash text-grey-dark text-xs"></i>
 						</button>
 					</div>
-                    <span v-if="v$.setupAccountData.confirmPassword.$error" class="text-red ">{{ v$.setupAccountData.confirmPassword.$errors[0].$message }}</span>
+                    <span v-if="v$.setupAccountData.confirmPassword.$error" class="text-red text-px8 xl:text-px10 mt-px5">{{ v$.setupAccountData.confirmPassword.$errors[0].$message }}</span>
 				</div>
 				<button v-if="v$.setupAccountData.email.$error || v$.setupAccountData.displayName.$error || v$.setupAccountData.username.$error || v$.setupAccountData.password.$error || v$.setupAccountData.confirmPassword.$error" type="submit" class="primary-button mt-2.5" disabled>SIGN UP</button>
 				<button v-else type="submit" class="primary-button mt-2.5">SIGN UP</button>
@@ -48,7 +48,7 @@
 </template>
 <script>
 import useValidate from '@vuelidate/core'
-import { required, email, sameAs } from '@vuelidate/validators'
+import { required, email, sameAs, minLength, maxLength } from '@vuelidate/validators'
 export default {
 	name: 'SetupAccount',
 	data() {
@@ -71,7 +71,11 @@ export default {
 				email: { required, email },
 				displayName: { required },
 				username: { required },
-                password: { required },
+                password: {
+					required,
+					minLength: minLength(8),
+					maxLength: maxLength(16)
+				},
                 confirmPassword: {
                     required,
                     password: sameAs(this.setupAccountData.password)

@@ -5,11 +5,11 @@
             <form @submit.prevent="onSubmit" class="flex flex-col gap-2.5 xl:gap-5 px-2.5 text-xs xl:text-sm">
                 <div class="flex flex-col gap">
                     <input v-model="signInData.account" type="text" placeholder="Username or Email" class="border border-grey-ce rounded-px5 red-input outline-none"/>
-                    <span v-if="v$.signInData.account.$error" class="text-red text-xs">{{ v$.signInData.account.$errors[0].$message }}</span>
+                    <span v-if="v$.signInData.account.$error" class="text-red text-xs mt-px5">{{ v$.signInData.account.$errors[0].$message }}</span>
                 </div>
                 <div class="flex flex-col gap">
                     <input v-model="signInData.password" type="password" placeholder="Password" class="border border-grey-ce rounded-px5 red-input outline-none"/>
-                    <span v-if="v$.signInData.password.$error" class="text-red text-xs">{{ v$.signInData.password.$errors[0].$message }}</span>
+                    <span v-if="v$.signInData.password.$error" class="text-red text-xs mt-px5">{{ v$.signInData.password.$errors[0].$message }}</span>
                 </div>
                 <p class="text-xs xl:text-sm text-grey-dark ml-2.5 hover:font-bold hover:underline">
                     <router-link to="/forgot-password">Forgot your password?</router-link>

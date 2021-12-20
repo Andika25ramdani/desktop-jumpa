@@ -8,7 +8,7 @@
             <form @submit.prevent="sendToEmail" class="flex flex-col gap-2.5 xl:gap-5 px-2.5 text-xs xl:text-sm">
 				<div class="flex flex-col gap">
 					<input type="email" v-model="email" placeholder="Email" id="inputEmail" class="border border-grey-ce rounded-px5 red-input outline-none ">
-                    <span v-if="v$.email.$error" class="text-red ">{{ v$.email.$errors[0].$message }}</span>
+                    <span v-if="v$.email.$error" class="text-red text-px8 xl:text-px10 mt-px5">{{ v$.email.$errors[0].$message }}</span>
 				</div>
 				<button v-if="v$.email.$error" type="submit" class="primary-button mt-2.5" disabled>SEND LINK</button>
 				<button v-else type="submit" class="primary-button mt-2.5">SEND LINK</button>
@@ -42,6 +42,7 @@ export default {
             this.v$.$validate()
             if (!this.v$.$error) {
                 console.log('Email SENT!', this.email);
+				this.$router.push({name: 'ForgotPasswordCheckEmail', params: {email: this.email}})
             }
         }
     }

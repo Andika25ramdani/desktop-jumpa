@@ -5,11 +5,11 @@
 			<form @submit.prevent="signUp" class="flex flex-col gap-2.5 xl:gap-5 px-2.5 text-xs xl:text-sm">
 				<div class="flex flex-col gap">
 					<input type="email" v-model="signUpData.email" placeholder="Email" id="inputEmail" class="border border-grey-ce rounded-px5 red-input outline-none ">
-                    <span v-if="v$.signUpData.email.$error" class="text-red ">{{ v$.signUpData.email.$errors[0].$message }}</span>
+                    <span v-if="v$.signUpData.email.$error" class="text-red text-px8 xl:text-px10 mt-px5">{{ v$.signUpData.email.$errors[0].$message }}</span>
 				</div>
 				<div class="flex flex-col gap">
 					<input type="text" v-model="signUpData.displayName" placeholder="Display Name" id="inputDisplayName" class="border border-grey-ce rounded-px5 red-input outline-none ">
-                    <span v-if="v$.signUpData.displayName.$error" class="text-red ">{{ v$.signUpData.displayName.$errors[0].$message }}</span>
+                    <span v-if="v$.signUpData.displayName.$error" class="text-red text-px8 xl:text-px10 mt-px5">{{ v$.signUpData.displayName.$errors[0].$message }}</span>
 				</div>
 				<button v-if="v$.signUpData.displayName.$error || v$.signUpData.email.$error" type="submit" class="primary-button mt-2.5" disabled>SIGN UP</button>
 				<button v-else type="submit" class="primary-button mt-2.5">SIGN UP</button>
@@ -52,7 +52,7 @@ export default {
             this.v$.$validate()
             if (!this.v$.$error) {
 				console.log('OKE')
-				this.$router.push({name: 'CheckEmail', params: {email: this.signUpData.email, displayName: this.signUpData.displayName}})
+				this.$router.push({name: 'SignUpCheckEmail', params: {email: this.signUpData.email, displayName: this.signUpData.displayName}})
                 // let res = await this.$store.dispatch('auth/signUp', {
                 //     email: this.email,
                 //     displayName: this.displayName,
