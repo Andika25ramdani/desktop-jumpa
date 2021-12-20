@@ -279,7 +279,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from 'vuex'
 export default {
     name: 'HistoryMeetingDetail',
     props: ['serialNum'],
@@ -287,22 +287,26 @@ export default {
         return {
             currentTab: 'meetingInfo',
             serialNum: this.$route.params.serial,
-            // detailData: localStorage.getItem('meetingDetailData')
         }
     },
     computed: {
         ...mapGetters({
-            detailData: 'meetings/getMeetingDetails'
+            detailData: 'meetings/getMeetingDetails',
+            inviteeLists: 'meetings/getInviteeLists',
+            participantLists: 'meetings/getParticipantLists',
         })
     },
 	async created() {
 		await this.$store.dispatch('meetings/meetingDetails', {
 			meetingSerialNum: this.serialNum,
 		})
+        await this.$store.dispatch('meetings/participantLists', {
+            meetingSerialNum: this.serialNum,
+        })
+		await this.$store.dispatch('meetings/inviteeLists', {
+			meetingSerialNum: this.serialNum,
+		})
 	},
-    mounted(){
-        console.log(this.detailData);
-    },
     methods: {
         changeTab(newTab) {
             this.currentTab = newTab

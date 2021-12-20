@@ -21,9 +21,14 @@ export default {
         })
     },
 	// async mounted() {
-	// 	let res = await axios.get('https://sidinda.jumpa.id:8099/signup/')
-	// 	console.error('jfksjdfkshfh', res)
-	// }
+    //     console.log(this.serialNum)
+    //     console.log(localStorage.getItem('accessToken'))
+	// 	let res = await axios.get('https://dinda.jumpa.id/v1.0.0/layanan/history/partisipant',{
+    //         meetingSernum: 'B8454C0A48764B13A0C01225396EB316',
+    //         token: localStorage.getItem('accessToken')
+    //     })
+	// 	console.log('GET', res.data)
+	// },
 }
 </script>
 <style>
