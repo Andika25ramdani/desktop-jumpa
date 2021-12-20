@@ -1,5 +1,6 @@
 <template>
   <NewMeetingPopup v-if="meetingPopup" @close="meetingPopup = false"/>
+  <join-meeting-popup v-if="joinPopup" @close="joinPopup = false" />
   <div class="fixed flex justify-between w-full">
     <div class="home-ls">
       <transition-group name="slide-left" appear>
@@ -17,7 +18,7 @@
             </div>
             <p class="text-px8 lg:text-px10 xl:text-xs 2xl:text-sm text-center">New Meeting</p>
           </div>
-          <div class="flex flex-col items-center gap-2.5 w-max cursor-pointer">
+          <div @click="joinPopup = true" class="flex flex-col items-center gap-2.5 w-max cursor-pointer">
             <div class="bg-primary rounded-px10 w-16 h-16 lg:w-20 lg:h-20 xl:w-24 xl:h-24 p-px13 flex items-center">
               <i class="fas fa-sign-in-alt text-white text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl mx-auto"></i>
             </div>
@@ -59,13 +60,15 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import JoinMeetingPopup from '../components/JoinMeetingPopup.vue'
 import NewMeetingPopup from '../components/NewMeetingPopup.vue'
 export default {
-  components: { NewMeetingPopup },
+  components: { NewMeetingPopup, JoinMeetingPopup },
   name: 'Home',
   data(){
     return{
       meetingPopup: false,
+      joinPopup: false,
       pageIndex: 1,
       pageSize: 15,
       account: localStorage.getItem('account')
