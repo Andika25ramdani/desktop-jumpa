@@ -1,5 +1,5 @@
 <template>
-  <div class="min-w-screen min-h-screen absolute bg-grey-background bg-cover">
+  <div class="min-w-screen min-h-screen h-full fixed bg-grey-background bg-cover">
     <NavigationBar />
     <div class="m-0">
       <router-view/>
