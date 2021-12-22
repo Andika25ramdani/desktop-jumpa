@@ -1,6 +1,7 @@
 <template>
 	<NewMeetingPopup v-if="meetingPopup" @close="meetingPopup = false"/>
 	<join-meeting-popup v-if="joinPopup" @close="joinPopup = false" />
+	<schedule-meeting-popup v-if="schedulePopup" @close="schedulePopup = false" />
 	<confirm-popup
 		v-if="popupDelete"
 		@close="popupDelete = false"
@@ -33,11 +34,23 @@
 					</div>
 					<p class="text-px8 xl:text-xs text-center">Join Meeting</p>
 				</div>
-				<div class="flex flex-col items-center gap-2.5 w-max cursor-pointer">
+				<div @click="scheduleClicked = !scheduleClicked" class="flex flex-col items-center gap-2.5 w-max cursor-pointer relative">
 					<div class="bg-primary rounded-px10 w-16 xl:w-px100 h-16 xl:h-px100 p-px13 xl:p-7 flex items-center">
 						<i class="fas fa-calendar-alt text-white text-3xl xl:text-5xl mx-auto"></i>
 					</div>
 					<p class="text-px8 xl:text-xs text-center">Schedule</p>
+					<transition name="slide-left" appear>
+						<ul v-if="scheduleClicked" class="bg-grey-dark text-white text-sm rounded-px5 py-3 px-px15 absolute md:-right-36 top-16 md:top-4">
+							<li @click="schedulePopup = true" class="option-list flex gap-2.5 mb-3">
+								<i class="fas fa-users"></i>
+								<p>Meeting</p>
+							</li>
+							<li class="option-list flex gap-2.5">
+								<i class="fas fa-user"></i>
+								<p>Webinar</p>
+							</li>
+						</ul>
+					</transition>
 				</div>
 			</div>
 		</transition-group>
@@ -90,8 +103,9 @@ import ConfirmPopup from '../components/ConfirmPopup.vue'
 import CopyMeeting from '../components/CopyMeeting.vue'
 import JoinMeetingPopup from '../components/JoinMeetingPopup.vue'
 import NewMeetingPopup from '../components/NewMeetingPopup.vue'
+import ScheduleMeetingPopup from '../components/ScheduleMeetingPopup.vue'
 export default {
-  components: { NewMeetingPopup, JoinMeetingPopup, ConfirmPopup, CopyMeeting },
+  components: { NewMeetingPopup, JoinMeetingPopup, ConfirmPopup, CopyMeeting, ScheduleMeetingPopup },
   name: 'Home',
   data(){
     return{
@@ -101,6 +115,8 @@ export default {
 		joinPopup: false,
 		meetingPopup: false,
 		popupDelete: false,
+		scheduleClicked: false,
+		schedulePopup: false,
 
 		dataToCopy: {
 			hostEmail: '',
@@ -124,7 +140,7 @@ export default {
 	async created() {
 		await this.$store.dispatch('meetings/getLists', {
 			pageSize: this.pageSize,
-			meetingState: 1
+			meetingState: 0
 		})
 	},
   methods: {
@@ -200,7 +216,7 @@ export default {
 .inactive {
 	display: none;
 }
-.dropdown-text {
+.dropdown-text, .option-list {
 	font-size: 14px;
 	line-height: 21px;
 	color: #9B9999;
@@ -208,6 +224,10 @@ export default {
 }
 .dropdown-text:hover {
 	color: #424242;
+	font-weight: 700;
+}
+.option-list:hover {
+	color: white;
 	font-weight: 700;
 }
 @media screen and (min-width: 640px) {

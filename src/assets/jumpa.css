@@ -36,7 +36,7 @@ input:disabled {
 		--disabled-inner: #E1E6F9;
 		-webkit-appearance: none;
 		-moz-appearance: none;
-		height: 10px;
+		height: 15px;
 		outline: none;
 		display: inline-block;
 		vertical-align: top;
@@ -85,7 +85,7 @@ input:disabled {
 	}
 	input[type=checkbox]:not(.switch),
 	input[type=radio]:not(.switch) {
-		width: 10px;
+		width: 15px;
 	}
 	input[type=checkbox]:not(.switch):after,
 	input[type=radio]:not(.switch):after {
@@ -96,13 +96,13 @@ input:disabled {
 		--o: 1;
 	}
 	input[type=checkbox]:not(.switch):after {
-		width: 4px;
-		height: 7px;
+		width: 6px;
+		height: 11px;
 		border: 2px solid var(--active-inner);
 		border-top: 0;
 		border-left: 0;
 		left: 25%;
-		top: 1.25%;
+		top: 1%;
 		transform: rotate(var(--r, 20deg));
 	}
 	input[type=checkbox]:not(.switch):checked {
@@ -115,8 +115,8 @@ input:disabled {
 		left: 2px;
 		top: 2px;
 		border-radius: 50%;
-		width: 10px;
-		height: 10px;
+		width: 15px;
+		height: 15px;
 		background: var(--ab, var(--border));
 		transform: translateX(var(--x, 0));
 	}
@@ -221,22 +221,11 @@ select {
     .custom-select {
         font-size: 12px;
         line-height: 21px;
-        padding: 10px 20px;
+        padding: 9px 15px;
     }
-    /* .input-number-icon {
-        right: -9.5px;
-    } */
 }
 @media screen and (min-width: 1536px){
     .join-btn {
         width: 25vw;
     }
-    .custom-select {
-        font-size: 14px;
-        line-height: 24px;
-        padding: 12.5px 20px;
-    }
-    /* .input-number-icon {
-        right: -12.25px;
-    } */
 }
