@@ -168,7 +168,7 @@ select {
     background-color: rgba(66, 66, 66, .8);
 }
 .input-number-icon {
-    right: -1.75px;
+    right: -14px;
 }
 
 /* BUTTON */
@@ -207,9 +207,9 @@ select {
         line-height: 18px;
         padding: 7.5px 15px;
     }
-    .input-number-icon {
+    /* .input-number-icon {
         right: -6px;
-    }
+    } */
 }
 @media screen and (min-width: 1280px){
     .red-input {
@@ -223,9 +223,9 @@ select {
         line-height: 21px;
         padding: 10px 20px;
     }
-    .input-number-icon {
+    /* .input-number-icon {
         right: -9.5px;
-    }
+    } */
 }
 @media screen and (min-width: 1536px){
     .join-btn {
@@ -236,7 +236,7 @@ select {
         line-height: 24px;
         padding: 12.5px 20px;
     }
-    .input-number-icon {
+    /* .input-number-icon {
         right: -12.25px;
-    }
+    } */
 }

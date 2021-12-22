@@ -1,6 +1,20 @@
 <template>
-  <NewMeetingPopup v-if="meetingPopup" @close="meetingPopup = false"/>
-  <join-meeting-popup v-if="joinPopup" @close="joinPopup = false" />
+	<NewMeetingPopup v-if="meetingPopup" @close="meetingPopup = false"/>
+	<join-meeting-popup v-if="joinPopup" @close="joinPopup = false" />
+	<confirm-popup
+		v-if="popupDelete"
+		@close="popupDelete = false"
+		@function=endMeeting(currentSerial)
+		buttonTitle="End"
+		popupMessage="Are you sure you would like to end the meeting?"
+		popupTitle="End meeting">
+	</confirm-popup>
+	<copy-meeting
+		v-if="copyMeetingPopup"
+		@close="copyMeetingPopup = false"
+		:dataToCopy=dataToCopy
+		:serial=currentSerial
+	/>
   <div class="fixed flex flex-col sm:flex-row justify-between w-full">
     <div class="home-ls">
 		<transition-group name="slide-left" appear>
@@ -31,27 +45,33 @@
     <transition name="slide-right" appear>
 		<div class="home-rs bg-white border border-grey-lighter rounded-t-px10">
 			<nav role="navigation" class="w-full bg-grey-lighter rounded-t-px10 flex justify-between text-center text-sm xl:text-lg font-bold text-grey-sb">
-                <a @click="changeTab('meetingInfo')" class="w-1/2 py-5 cursor-pointer bg-white text-grey-dark rounded-t-px10" :class="{ active: currentTab === 'meetingInfo'}">Upcoming Meeting</a>
-                <a @click="changeTab('participants')" class="w-1/2 py-5 cursor-pointer" :class="{ active: currentTab === 'participants'}">Scheduled Meeting</a>
+                <a @click="changeTab('upcomingMeeting')" class="w-1/2 py-5 cursor-pointer" :class="{ 'bg-white text-grey-dark rounded-t-px10': currentTab === 'upcomingMeeting'}">Upcoming Meeting</a>
+                <a @click="changeTab('scheduleMeeting')" class="w-1/2 py-5 cursor-pointer" :class="{ 'bg-white text-grey-dark rounded-t-px10': currentTab === 'scheduleMeeting'}">Scheduled Meeting</a>
             </nav>
-			<div class="h-full pt-2.5 xl:pt-px30 px-2.5 md:px-px25 xl:px-px45">
-				<div class="h-full grid grid-cols-1 gap-2.5 xl:gap-5 sticky flex-col flex-wrap overflow-hidden overflow-y-auto">
+			<div v-if="currentTab === 'upcomingMeeting'" class="h-full pt-2.5 xl:pt-px30 px-2.5 md:px-px25 xl:px-px45">
+				<div id="upcomingList" class="h-full pb-32 grid grid-cols-1 gap-2.5 xl:gap-5 sticky flex-col flex-wrap overflow-hidden overflow-y-auto hasInactive">
 					<transition-group name="slide-right" v-if="upcomingMeetings.length > 1" appear>
 						<div v-for="upcoming in upcomingMeetings" :key=upcoming.meetingNum class="sch-upc-meeting rounded-px10 bg-primary text-white p-px15 xl:p-5 relative">
 							<div class="flex gap-2.5 xl:gap-px15 items-center text-px8 xl:text-xs">
 								<p class="text-white">Meeting ID: {{ upcoming.meetingNum }}</p>
-								<p class="bg-green rounded-full py-0.5 xl:py-1 px-4">In Process</p>
-								<!-- <p class="bg-yellow-500 rounded-full py-0.5 xl:py-1 px-4">To Be Hosted</p> -->
+								<p v-if="upcoming.state === 2" class="bg-green rounded-full py-0.5 xl:py-1 px-4">In Process</p>
+								<p v-if="upcoming.state === 0" class="bg-yellow-500 rounded-full py-0.5 xl:py-1 px-4">To Be Hosted</p>
 							</div>
 							<h5 class="mr-px35 mb-px5 xl:mb-2.5 text-sm xl:text-lg font-bold mt-1.5">{{ upcoming.subject }}</h5>
 							<p class="mr-px35 mb-2.5 xl:mb-5 text-px10 xl:text-xs">
 								<i class="fas fa-clock mr-2.5"></i>
 								{{ upcoming.startDateVal }} • {{ upcoming.startTimeVal }} - {{ upcoming.endTimeVal }}</p>
-							<button class="bg-green py-2 px-5 rounded-full font-bold">HOST MEETING</button>
-							<!-- <button class="bg-grey-background border border-grey-sb text-grey-dark py-2 px-5 rounded-full font-bold">HOST MEETING</button> -->
-							<button class="w-5 xl:w-px25 h-5 xl:h-px25 rounded-full bg-white absolute top-4 xl:top-5 right-4 xl:right-5">
-								<i class="fas fa-ellipsis-h text-grey-dark text-xs xl:text-sm"></i>
-							</button>
+							<button v-if="upcoming.state === 2" class="bg-green py-2 px-5 rounded-full font-bold">HOST MEETING</button>
+							<button v-else class="bg-grey-background border border-grey-sb text-grey-dark py-2 px-5 rounded-full font-bold">HOST MEETING</button>
+							<div class="absolute top-4 xl:top-5 right-4 xl:right-5">
+								<button @click="openToggle(upcoming.meetingSerialNum)" class="w-5 xl:w-px25 h-5 xl:h-px25 rounded-full bg-white">
+									<i class="fas fa-ellipsis-h text-grey-dark text-xs xl:text-sm"></i>
+								</button>
+								<div :key=upcoming.meetingSerialNum :id=upcoming.meetingSerialNum class="flex flex-col rounded-px5 shadow-sm bg-white py-2.5 px-px15 absolute top-3 right-3 gap-px5 inactive w-max">
+									<p @click="copyMeeting(upcoming.hostEamil, upcoming.hostName, upcoming.meetingNum, upcoming.subject, upcoming.startDateVal, upcoming.startTimeVal, upcoming.meetingSerialNum)" class="dropdown-text">Copy Invitation</p>
+									<p @click="popupDelete = true" class="dropdown-text">End Meeting</p>
+								</div>
+							</div>
 						</div>
 					</transition-group>
 					<transition name="slide-right" appear v-else>
@@ -66,18 +86,34 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import ConfirmPopup from '../components/ConfirmPopup.vue'
+import CopyMeeting from '../components/CopyMeeting.vue'
 import JoinMeetingPopup from '../components/JoinMeetingPopup.vue'
 import NewMeetingPopup from '../components/NewMeetingPopup.vue'
 export default {
-  components: { NewMeetingPopup, JoinMeetingPopup },
+  components: { NewMeetingPopup, JoinMeetingPopup, ConfirmPopup, CopyMeeting },
   name: 'Home',
   data(){
     return{
-      meetingPopup: false,
-      joinPopup: false,
-      pageIndex: 1,
-      pageSize: 15,
-      account: localStorage.getItem('account')
+		copyMeetingPopup: false,
+		currentSerial: '',
+		currentTab: 'upcomingMeeting',
+		joinPopup: false,
+		meetingPopup: false,
+		popupDelete: false,
+
+		dataToCopy: {
+			hostEmail: '',
+			hostName: '',
+			meetingNum: 0,
+			subject: '',
+			startDateVal: '',
+			startTimeVal: ''
+		},
+
+		pageIndex: 1,
+		pageSize: 15,
+		account: localStorage.getItem('account')
     }
   },
   computed: {
@@ -92,9 +128,44 @@ export default {
 		})
 	},
   methods: {
+    openToggle(elId) {
+		console.log(elId);
+		if (document.getElementById(elId).classList.contains('inactive')) {
+			if (document.getElementById("upcomingList").classList.contains('hasInactive')) {
+				this.currentSerial = elId
+				document.getElementById(elId).classList.remove('inactive')
+				document.getElementById(elId).classList.add('active')
+				document.getElementById("upcomingList").classList.remove('hasInactive')
+				document.getElementById("upcomingList").classList.add('hasActive')
+			}
+		} else {
+			document.getElementById(elId).classList.remove('active')
+			document.getElementById(elId).classList.add('inactive')
+			document.getElementById("upcomingList").classList.remove('hasActive')
+			document.getElementById("upcomingList").classList.add('hasInactive')
+		}
+    },
+	changeTab(newTab) {
+		this.currentTab = newTab
+	},
     newMeeting() {
       this.meetingPopup = true
-    }
+    },
+	endMeeting(meetingSerialNum) {
+		console.log('ENDED', meetingSerialNum);
+		location.reload()	
+	},
+	copyMeeting(email, name, meetId, subject, startDate, startTime, meetingSerialNum) {
+		console.log('COPIED', meetingSerialNum);
+		this.dataToCopy.hostEmail = email
+		this.dataToCopy.hostName = name
+		this.dataToCopy.meetingNum = meetId
+		this.dataToCopy.subject = subject
+		this.dataToCopy.startDateVal = startDate
+		this.dataToCopy.startTimeVal = startTime
+		console.log(this.dataToCopy);
+		this.copyMeetingPopup = true
+	}
   }
 }
 </script>
@@ -122,6 +193,22 @@ export default {
 .sch-upc-meeting {
 	background: url('/../img/bg-upc-sch.png') no-repeat center;
 	background-size: cover;
+}
+.active {
+	display: flex;
+}
+.inactive {
+	display: none;
+}
+.dropdown-text {
+	font-size: 14px;
+	line-height: 21px;
+	color: #9B9999;
+	cursor: pointer;
+}
+.dropdown-text:hover {
+	color: #424242;
+	font-weight: 700;
 }
 @media screen and (min-width: 640px) {
 	.home-ls {

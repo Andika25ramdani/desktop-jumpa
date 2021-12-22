@@ -14,28 +14,28 @@
 	<div class="default-page">
 		<div class="card p-5 lg:p-6 xl:p-7 2xl:p-8">
 			<h2 class="font-bold text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl text-grey-dark mb-5 lg:mb-6 xl:mb-7 2xl:mb-8">Meeting History</h2>
-			<div class="grid gap-pc25 history-list pt-0 pr-5 pb-2.5 lg:pb-3 xl:pb-4 2xl:pb-5 pl-2.5 lg:pl-3 xl:pl-4 2xl:pl-5">
-				<h6 class="text-px10 lg:text-xs xl:text-sm 2xl:text-base  font-bold text-grey-sb">Date/Time</h6>
-				<h6 class="text-px10 lg:text-xs xl:text-sm 2xl:text-base  font-bold text-grey-sb">Subject</h6>
-				<h6 class="text-px10 lg:text-xs xl:text-sm 2xl:text-base  font-bold text-grey-sb">Meeting ID</h6>
-				<h6 class="text-px10 lg:text-xs xl:text-sm 2xl:text-base  font-bold text-grey-sb">Status</h6>
-				<h6 class="text-px10 lg:text-xs xl:text-sm 2xl:text-base  font-bold text-grey-sb"></h6>
+			<div class="grid gap-pc25 history-list pt-0 pr-5 pb-2.5 lg:pb-3 xl:pb-4 2xl:pb-5 pl-2.5">
+				<h6 class="text-px10  font-bold text-grey-sb">Date/Time</h6>
+				<h6 class="text-px10  font-bold text-grey-sb">Subject</h6>
+				<h6 class="text-px10  font-bold text-grey-sb">Meeting ID</h6>
+				<h6 class="text-px10  font-bold text-grey-sb">Status</h6>
+				<h6 class="text-px10  font-bold text-grey-sb"></h6>
 			</div>
-			<div id="listHistory" class="flex flex-col gap-px5 lg:gap-2 xl:gap-3 2xl:gap-4 lg:px-2 xl:px-3 2xl:px-4 sticky flex-nowrap overflow-hidden overflow-y-auto pr-2.5 h-full hasInactive pb-40">
+			<div id="listHistory" class="flex flex-col gap-px5 sticky flex-nowrap overflow-hidden overflow-y-auto pr-2.5 h-full hasInactive pb-40">
 				<transition-group name="slide-up" appear>
-					<div class="grid history-list gap-pc25 items-center rounded-tr-px5 px-2.5 lg:px-3 xl:px-4 2xl:px-5 py-px11 lg:py-3 xl:py-4 2xl:py-5 border-grey-lighter border hover:bg-grey-background focus:bg-grey-background cursor-pointer" v-for="history in lists" :key=history.meetingNum @dblclick="toDetail(history.meetingSerialNum)">
-						<p class="text-grey-ed text-px10 lg:text-xs xl:text-sm 2xl:text-base ">{{ history.endDateVal }} {{ history.endTimeVal }}</p>
-						<p class="text-grey-ed text-px10 lg:text-xs xl:text-sm 2xl:text-base ">{{ history.subject }}</p>
-						<p class="text-grey-ed text-px10 lg:text-xs xl:text-sm 2xl:text-base ">{{ history.meetingNum }}</p>
-						<p class="text-grey-ed text-px10 lg:text-xs xl:text-sm 2xl:text-base " :class="{'text-red': history.state === -1, 'text-green': history.state === 3}">{{ history.state === 3 ? 'Ended' : '' }}{{ history.state === -1 ? 'Canceled' : '' }}</p>
+					<div class="grid history-list gap-pc25 items-center rounded-tr-px5 px-2.5 py-px11 border-grey-lighter border hover:bg-grey-background focus:bg-grey-background cursor-pointer" v-for="history in lists" :key=history.meetingNum @dblclick="toDetail(history.meetingSerialNum)">
+						<p class="text-grey-ed text-px10 ">{{ history.endDateVal }} {{ history.endTimeVal }}</p>
+						<p class="text-grey-ed text-px10 ">{{ history.subject }}</p>
+						<p class="text-grey-ed text-px10 ">{{ history.meetingNum }}</p>
+						<p class="text-grey-ed text-px10 " :class="{'text-red': history.state === -1, 'text-green': history.state === 3}">{{ history.state === 3 ? 'Ended' : '' }}{{ history.state === -1 ? 'Canceled' : '' }}</p>
 						<div class="">
-							<button @click="openToggle(history.meetingSerialNum)" class="bg-gradient-to-b w-max from-white to-grey-f4 border border-grey-lighter text-grey-ed text-px10 lg:text-xs xl:text-sm 2xl:text-base  rounded-px5 flex gap-px15 items-center justify-center px-2 lg:px-3 xl:px-4 2xl:px-5">
-								Action <i class="fas fa-sort text-grey-dark text-px8 lg:text-px10 xl:text-xs 2xl:text-sm"></i>
+							<button @click="openToggle(history.meetingSerialNum)" class="bg-gradient-to-b w-max from-white to-grey-f4 border border-grey-lighter text-grey-ed text-px10  rounded-px5 flex gap-px15 items-center justify-center px-2">
+								Action <i class="fas fa-sort text-grey-dark text-px8"></i>
 							</button>
-							<div :key=history.meetingSerialNum :id=history.meetingSerialNum class="flex flex-col rounded-px5 shadow-sm bg-white py-2.5 px-px15 absolute gap-px5 lg:gap-2 lg:px-4 xl:px-5 2xl:px-6 inactive">
-								<p @click="restartMeeting(history.meetingSerialNum)" class="text-px10 lg:text-xs xl:text-sm 2xl:text-base  text-grey-sb cursor-pointer hover:text-grey-ed hover:font-bold">Restart meeting</p>
-								<p @click="reschedule(history.meetingSerialNum)" class="text-px10 lg:text-xs xl:text-sm 2xl:text-base  text-grey-sb cursor-pointer hover:text-grey-ed hover:font-bold">Reschedule</p>
-								<p @click="popupDelete = true" class="text-px10 lg:text-xs xl:text-sm 2xl:text-base  text-grey-sb cursor-pointer hover:text-grey-ed hover:font-bold">Delete</p>
+							<div :key=history.meetingSerialNum :id=history.meetingSerialNum class="flex flex-col rounded-px5 shadow-sm bg-white py-2.5 px-px15 absolute gap-px5 lg:gap-2 inactive">
+								<p @click="restartMeeting(history.meetingSerialNum)" class="text-px10  text-grey-sb cursor-pointer hover:text-grey-ed hover:font-bold">Restart meeting</p>
+								<p @click="reschedule(history.meetingSerialNum)" class="text-px10  text-grey-sb cursor-pointer hover:text-grey-ed hover:font-bold">Reschedule</p>
+								<p @click="popupDelete = true" class="text-px10  text-grey-sb cursor-pointer hover:text-grey-ed hover:font-bold">Delete</p>
 							</div>
 						</div>
 					</div>
