@@ -105,23 +105,24 @@
             <div v-if="currentTab === 'participants'" id="participants" class="text-px10 xl:text-sm text-grey-ed px-4 sm:px-px30 overflow-hidden overflow-y-auto mr-1">
                 <table class="text-left table-auto w-full">
                     <thead>
-                        <tr>
+                        <tr class="flex items-center justify-between">
                             <th class="pb-1 xl:pb-px15 pt-2.5 xl:pt-px25">Name</th>
-                            <th>Email</th>
-                            <th>Device type</th>
-                            <th>Joined  at</th>
-                            <th>Left at</th>
+                            <th class="pb-1 xl:pb-px15 pt-2.5 xl:pt-px25">Email</th>
+                            <th class="pb-1 xl:pb-px15 pt-2.5 xl:pt-px25">Device type</th>
+                            <th class="pb-1 xl:pb-px15 pt-2.5 xl:pt-px25">Joined  at</th>
+                            <th class="pb-1 xl:pb-px15 pt-2.5 xl:pt-px25">Left at</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="id in participantLists" :key=id>
+                        <tr v-for="participant in participantLists" :key=participant.email class="flex items-center justify-between">
                             <td class="py-2 xl:py-2.5 flex items-center gap-1 sm:gap-px15">
                                 <img src="/img/icons/jumpa.png" class="rounded-full bg-grey-dark w-px35 object-contain">
-                                Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
+                                {{ participant.displayName }}
+                            </td>
+                            <td class="py-2 xl:py-2.5">{{ participant.email }}</td>
+                            <td class="py-2 xl:py-2.5">{{ participant.userAgent }}</td>
+                            <td class="py-2 xl:py-2.5">{{ participant.joinTime }}</td>
+                            <td class="py-2 xl:py-2.5">{{ participant.leaveTime }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -129,23 +130,21 @@
             <div v-if="currentTab === 'invitees'" id="invitees" class="text-px10 xl:text-sm text-grey-ed px-px30 overflow-hidden overflow-y-auto mr-1">
                 <table class="text-left table-auto w-full">
                     <thead>
-                        <tr class="flex items-center w-full justify-between">
+                        <tr class="flex items-center justify-between">
                             <th class="pb-1 xl:pb-px15 pt-2.5 xl:pt-px25">Name</th>
                             <th>Email</th>
-                            <th>Device type</th>
                             <th>Joined  at</th>
                             <th>Left at</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="flex items-center w-full justify-between" v-for="id in 9" :key=id>
+                        <tr class="flex items-center justify-between" v-for="invitee in inviteeLists" :key=invitee>
                             <td class="py-2 xl:py-2.5 flex items-center gap-px15">
                                 <img src="/img/icons/jumpa.png" class="rounded-full bg-grey-dark w-px35 object-contain">
-                                Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
+                                {{ invitee.displayName }}</td>
+                            <td>{{ invitee.email }}</td>
+                            <td>{{ invitee.joinTime }}</td>
+                            <td>{{ invitee.leaveTime }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -181,7 +180,7 @@ export default {
     computed: {
         ...mapGetters({
             detailData: 'meetings/getMeetingDetails',
-            // inviteeLists: 'meetings/getInviteeLists',
+            inviteeLists: 'meetings/getInviteeLists',
             participantLists: 'meetings/getParticipantLists',
         })
     },
@@ -193,9 +192,10 @@ export default {
             meetingSerialNum: this.serialNum,
             token: localStorage.getItem('accessToken')
         })
-		// await this.$store.dispatch('meetings/inviteeLists', {
-		// 	meetingSerialNum: this.serialNum,
-		// })
+		await this.$store.dispatch('meetings/inviteeLists', {
+            meetingSerialNum: this.serialNum,
+            token: localStorage.getItem('accessToken')
+		})
 	},
     methods: {
         changeTab(newTab) {
