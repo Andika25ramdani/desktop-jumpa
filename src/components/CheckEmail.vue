@@ -22,7 +22,6 @@ export default {
             if (this.countDown > 0) {
                 setTimeout(() => {
                     this.countDown--
-                    console.log(this.countDown);
                 }, 1000);
             }
         }

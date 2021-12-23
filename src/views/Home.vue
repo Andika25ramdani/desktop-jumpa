@@ -1,7 +1,8 @@
 <template>
 	<NewMeetingPopup v-if="meetingPopup" @close="meetingPopup = false"/>
 	<join-meeting-popup v-if="joinPopup" @close="joinPopup = false" />
-	<schedule-meeting-popup v-if="schedulePopup" @close="schedulePopup = false" />
+	<schedule-meeting-popup v-if="scheduleMeeting" @close="scheduleMeeting = false" />
+	<schedule-webinar-popup v-if="scheduleWebinar" @close="scheduleWebinar = false" />
 	<confirm-popup
 		v-if="popupDelete"
 		@close="popupDelete = false"
@@ -41,12 +42,12 @@
 					<p class="text-px8 xl:text-xs text-center">Schedule</p>
 					<transition name="slide-left" appear>
 						<ul v-if="scheduleClicked" class="bg-grey-dark text-white text-sm rounded-px5 py-3 px-px15 absolute md:-right-36 top-16 md:top-4">
-							<li @click="schedulePopup = true" class="option-list flex gap-2.5 mb-3">
+							<li @click="scheduleMeeting = true" class="option-list flex gap-2.5 mb-3">
 								<i class="fas fa-users"></i>
 								<p>Meeting</p>
 							</li>
-							<li class="option-list flex gap-2.5">
-								<i class="fas fa-user"></i>
+							<li @click="scheduleWebinar = true" class="option-list flex gap-2.5">
+								<i class="fas fa-users"></i>
 								<p>Webinar</p>
 							</li>
 						</ul>
@@ -104,8 +105,9 @@ import CopyMeeting from '../components/CopyMeeting.vue'
 import JoinMeetingPopup from '../components/JoinMeetingPopup.vue'
 import NewMeetingPopup from '../components/NewMeetingPopup.vue'
 import ScheduleMeetingPopup from '../components/ScheduleMeetingPopup.vue'
+import ScheduleWebinarPopup from '../components/ScheduleWebinarPopup.vue'
 export default {
-  components: { NewMeetingPopup, JoinMeetingPopup, ConfirmPopup, CopyMeeting, ScheduleMeetingPopup },
+  components: { NewMeetingPopup, JoinMeetingPopup, ConfirmPopup, CopyMeeting, ScheduleMeetingPopup, ScheduleWebinarPopup },
   name: 'Home',
   data(){
     return{
@@ -116,7 +118,9 @@ export default {
 		meetingPopup: false,
 		popupDelete: false,
 		scheduleClicked: false,
-		schedulePopup: false,
+		scheduleMeeting: false,
+		scheduleWebinar: false,
+		webinarPopup: false,
 
 		dataToCopy: {
 			hostEmail: '',

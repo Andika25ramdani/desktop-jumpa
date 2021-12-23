@@ -13,7 +13,7 @@ export default {
             let a = Object.keys(obj)[i].toString();
             data += Object.keys(obj)[i] + '=' + obj[a] + "&";
         }
-        console.error('data signature: ', data);
+        // console.error('data signature: ', data);
         if (body_param) {
             return sha256(data + body_param + '&');
         } else {

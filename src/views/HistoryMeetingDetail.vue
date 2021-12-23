@@ -1,34 +1,34 @@
 <template>
     <div class="default-page">
         <div class="card m-0">
-			<h2 class="font-bold text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl text-grey-dark p-5 lg:p-6 xl:p-7 2xl:p-8">Meeting Details</h2>
-            <nav role="navigation" class="w-full flex gap-px25 border-b border-grey-lighter px-7 lg:px-8 xl:px-9 2xl:px-10 m-0">
+			<h2 class="font-bold text-2xl xl:text-3xl text-grey-dark py-5 px-px30 xl:py-10">Meeting Details</h2>
+            <nav role="navigation" class="w-full flex items-center text-center gap-4 sm:gap-px25 xl:gap-15 border-b border-grey-lighter px-4 sm:px-px30 xl:px-10 m-0">
                 <a @click="changeTab('meetingInfo')" class="tab-menu cursor-pointer" :class="{ active: currentTab === 'meetingInfo'}">Meeting Info</a>
                 <a @click="changeTab('participants')" class="tab-menu cursor-pointer" :class="{ active: currentTab === 'participants'}">Participants</a>
                 <a @click="changeTab('invitees')" class="tab-menu cursor-pointer" :class="{ active: currentTab === 'invitees'}">Invitees</a>
                 <a @click="changeTab('attachments')" class="tab-menu cursor-pointer" :class="{ active: currentTab === 'attachments'}">Attachments</a>
             </nav>
-            <div v-if="currentTab === 'meetingInfo'" id="meetingInfo" class="text-px10 text-grey-ed py-2.5 px-7 lg:px-8 xl:px-9 2xl:px-10 overflow-hidden overflow-y-auto mr-1">
+            <div v-if="currentTab === 'meetingInfo'" id="meetingInfo" class="text-px10 xl:text-sm text-grey-ed py-2.5 xl:py-px25 px-4 sm:px-px30 overflow-hidden overflow-y-auto mr-1">
                 <table class="text-left table-auto">
                     <tr>
-                        <th class="py-px5 pr-7 lg:pr-8 xl:pr-9 2xl:pr-10">Subject</th>
+                        <th class="pb-2.5 pr-12">Subject</th>
                         <td>{{ detailData.subject }}</td>
                     </tr>
                     <tr>
-                        <th class=" pr-7 lg:pr-8 xl:pr-9 2xl:pr-10">Start Time</th>
+                        <th class="pr-12 pb-2.5">Start Time</th>
                         <td>{{ detailData.startTime }}</td>
                     </tr>
                     <tr>
-                        <th class="py-px5 pr-7 lg:pr-8 xl:pr-9 2xl:pr-10">Duration</th>
+                        <th class="pb-2.5 pr-12">Duration</th>
                         <td>{{ detailData.duration }}min</td>
                     </tr>
                     <tr>
-                        <th class="py-px5 pr-7 lg:pr-8 xl:pr-9 2xl:pr-10">Meeting ID</th>
+                        <th class="pb-2.5 pr-12">Meeting ID</th>
                         <td>{{ detailData.meetingNum }}</td>
                     </tr>
                     <tr>
-                        <th class="py-px5 pr-7 lg:pr-8 xl:pr-9 2xl:pr-10 align-top">Meeting Setting</th>
-                        <td class="flex flex-col gap-px5">
+                        <th class="pb-2.5 pr-12 align-top">Meeting Setting</th>
+                        <td class="flex flex-col gap-px5 pb-2.5">
                             <div class="flex gap-px5 items-center">
                                 <input v-if="detailData.isAutoRecord === 1" type="checkbox" name="autoRecord" id="autoRecord" checked disabled>
                                 <input v-else type="checkbox" name="autoRecord" id="autoRecord" disabled>
@@ -42,8 +42,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="py-px5 pr-7 lg:pr-8 xl:pr-9 2xl:pr-10 align-top">Attendee Controls</th>
-                        <td class="flex flex-col gap-px5">
+                        <th class="pb-2.5 pr-12 align-top">Attendee Controls</th>
+                        <td class="flex flex-col gap-px5 pb-2.5">
                             <div class="flex gap-px5 items-center">
                                 <input v-if="detailData.isMutedWhenJoinRoom === 1" type="checkbox" name="mutedByHost" id="mutedByHost" disabled checked>
                                 <input v-else type="checkbox" name="mutedByHost" id="mutedByHost" disabled>
@@ -77,24 +77,36 @@
                         </td>
                     </tr>
                     <tr>
-                        <th class="py-px5 pr-7 lg:pr-8 xl:pr-9 2xl:pr-10">Plan</th>
+                        <th class="pb-2.5 pr-12">Plan</th>
                         <td>Platinum</td>
                     </tr>
                     <tr>
-                        <th class="py-px5 pr-7 lg:pr-8 xl:pr-9 2xl:pr-10">Organizer</th>
+                        <th class="pb-2.5 pr-12">Organizer</th>
                         <td>{{ detailData.HostName }} ({{ detailData.hostEmail }})</td>
                     </tr>
                     <tr>
-                        <th class="py-px5 pr-7 lg:pr-8 xl:pr-9 2xl:pr-10">Host Code</th>
+                        <th class="pb-2.5 pr-12">Host Code</th>
                         <td>{{ detailData.hostCode }}</td>
+                    </tr>
+                    <tr>
+                        <th class="pb-2.5 pr-12">Server Location</th>
+                        <td>{{ detailData.hostCode_ }}</td>
+                    </tr>
+                    <tr>
+                        <th class="pb-2.5 pr-12">Meeting Layout</th>
+                        <td>{{ detailData.hostCode_ }}</td>
+                    </tr>
+                    <tr>
+                        <th class="pb-2.5 pr-12">Email Reminder</th>
+                        <td>{{ detailData.cycle }}</td>
                     </tr>
                 </table>
             </div>
-            <div v-if="currentTab === 'participants'" id="participants" class="text-px10 text-grey-ed px-7 lg:px-8 xl:px-9 2xl:px-10 overflow-hidden overflow-y-auto mr-1">
+            <div v-if="currentTab === 'participants'" id="participants" class="text-px10 xl:text-sm text-grey-ed px-4 sm:px-px30 overflow-hidden overflow-y-auto mr-1">
                 <table class="text-left table-auto w-full">
                     <thead>
                         <tr>
-                            <th class="pb-1 pt-2.5">Name</th>
+                            <th class="pb-1 xl:pb-px15 pt-2.5 xl:pt-px25">Name</th>
                             <th>Email</th>
                             <th>Device type</th>
                             <th>Joined  at</th>
@@ -102,71 +114,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
+                        <tr v-for="id in participantLists" :key=id>
+                            <td class="py-2 xl:py-2.5 flex items-center gap-1 sm:gap-px15">
+                                <img src="/img/icons/jumpa.png" class="rounded-full bg-grey-dark w-px35 object-contain">
+                                Anang Pudjijanto, SIK, MSi</td>
                             <td>anang.pudjijanto@gmail.com</td>
                             <td>Chrome</td>
                             <td>13:47</td>
@@ -175,11 +126,11 @@
                     </tbody>
                 </table>
             </div>
-            <div v-if="currentTab === 'invitees'" id="invitees" class="text-px10 text-grey-ed px-7 lg:px-8 xl:px-9 2xl:px-10 overflow-hidden overflow-y-auto mr-1">
+            <div v-if="currentTab === 'invitees'" id="invitees" class="text-px10 xl:text-sm text-grey-ed px-px30 overflow-hidden overflow-y-auto mr-1">
                 <table class="text-left table-auto w-full">
                     <thead>
                         <tr>
-                            <th class="pb-1 pt-2.5">Name</th>
+                            <th class="pb-1 xl:pb-px15 pt-2.5 xl:pt-px25">Name</th>
                             <th>Email</th>
                             <th>Device type</th>
                             <th>Joined  at</th>
@@ -187,71 +138,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
-                            <td>anang.pudjijanto@gmail.com</td>
-                            <td>Chrome</td>
-                            <td>13:47</td>
-                            <td>16:46</td>
-                        </tr>
-                        <tr>
-                            <td class="py-2">Anang Pudjijanto, SIK, MSi</td>
+                        <tr v-for="id in 9" :key=id>
+                            <td class="py-2 xl:py-2.5 flex items-center gap-px15">
+                                <img src="/img/icons/jumpa.png" class="rounded-full bg-grey-dark w-px35 object-contain">
+                                Anang Pudjijanto, SIK, MSi</td>
                             <td>anang.pudjijanto@gmail.com</td>
                             <td>Chrome</td>
                             <td>13:47</td>
@@ -260,16 +150,16 @@
                     </tbody>
                 </table>
             </div>
-            <div v-if="currentTab === 'attachments'" id="attachments" class="text-px10 text-grey-ed pl-7 pr-6 py-5 overflow-hidden overflow-y-auto mr-1">
-                <div class="grid gap-px13 lg:gap-4 xl:gap-5 2xl:gap-6 grid-flow-row grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7">
-                    <div v-for="id in 10" :key=id class="bg-white w-40 lg:w-44 xl:w-48 2xl:w-52 h-36 lg:h-40 xl:h-44 2xl:h-48 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2 relative">
-                        <i class="fas fa-file text-primary text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl"></i>
-                        <p class="font-bold text-px10 text-center">
+            <div v-if="currentTab === 'attachments'" id="attachments" class="text-px10 xl:text-xs text-grey-ed pl-px30 pr-6 py-5 overflow-hidden overflow-y-auto mr-1">
+                <div class="grid justify-center gap-1 sm:gap-px13 xl:gap-5 grid-flow-row auto-rows-auto grid-cols-1 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6">
+                    <div v-for="id in 10" :key=id class="bg-white w-40 xl:w-px188 h-36 xl:h-40 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2 relative mx-auto">
+                        <i class="fas fa-file text-primary text-5xl xl:text-7xl"></i>
+                        <p class="font-bold text-px10 xl:text-xs text-center">
                             Meeting details.pdf<br>
-                            <span class="font-normal">784KB</span>
+                            <span class="font-normal text-px10">784KB</span>
                         </p>
                         <div class="absolute bg-grey-dark rounded-full px-1 top-2.5 right-2.5 cursor-pointer">
-                            <i class="fas fa-download text-white text-px8"></i>
+                            <i class="fas fa-download text-white text-px8 xl:text-base"></i>
                         </div>
                     </div>
                 </div>
@@ -282,7 +172,6 @@
 import { mapGetters } from 'vuex'
 export default {
     name: 'HistoryMeetingDetail',
-    props: ['serialNum'],
     data() {
         return {
             currentTab: 'meetingInfo',
@@ -303,9 +192,9 @@ export default {
         await this.$store.dispatch('meetings/participantLists', {
             meetingSerialNum: this.serialNum,
         })
-		await this.$store.dispatch('meetings/inviteeLists', {
-			meetingSerialNum: this.serialNum,
-		})
+		// await this.$store.dispatch('meetings/inviteeLists', {
+		// 	meetingSerialNum: this.serialNum,
+		// })
 	},
     methods: {
         changeTab(newTab) {
@@ -338,25 +227,14 @@ export default {
 .inactive {
 	display: none;
 }
-@media screen and (min-width: 1024px){
-    .tab-menu {
-        font-size: 12px;
-        line-height: 18px;
-        padding: 5px 0;
-    }
-}
 @media screen and (min-width: 1280px){
     .tab-menu {
         font-size: 14px;
         line-height: 21px;
-        padding: 6px 0;
+        padding: 15px 0;
     }
-}
-@media screen and (min-width: 1536px){
-    .tab-menu {
-        font-size: 16px;
-        line-height: 24px;
-        padding: 7px 0;
+    .tab-menu:active, .tab-menu:hover, .tab-menu.active {
+        border-bottom: 4px solid #790F19;
     }
 }
 </style>
