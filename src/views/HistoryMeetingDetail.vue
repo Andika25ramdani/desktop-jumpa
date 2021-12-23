@@ -129,7 +129,7 @@
             <div v-if="currentTab === 'invitees'" id="invitees" class="text-px10 xl:text-sm text-grey-ed px-px30 overflow-hidden overflow-y-auto mr-1">
                 <table class="text-left table-auto w-full">
                     <thead>
-                        <tr>
+                        <tr class="flex items-center w-full justify-between">
                             <th class="pb-1 xl:pb-px15 pt-2.5 xl:pt-px25">Name</th>
                             <th>Email</th>
                             <th>Device type</th>
@@ -138,7 +138,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="id in 9" :key=id>
+                        <tr class="flex items-center w-full justify-between" v-for="id in 9" :key=id>
                             <td class="py-2 xl:py-2.5 flex items-center gap-px15">
                                 <img src="/img/icons/jumpa.png" class="rounded-full bg-grey-dark w-px35 object-contain">
                                 Anang Pudjijanto, SIK, MSi</td>
@@ -181,7 +181,7 @@ export default {
     computed: {
         ...mapGetters({
             detailData: 'meetings/getMeetingDetails',
-            inviteeLists: 'meetings/getInviteeLists',
+            // inviteeLists: 'meetings/getInviteeLists',
             participantLists: 'meetings/getParticipantLists',
         })
     },
@@ -191,6 +191,7 @@ export default {
 		})
         await this.$store.dispatch('meetings/participantLists', {
             meetingSerialNum: this.serialNum,
+            token: localStorage.getItem('accessToken')
         })
 		// await this.$store.dispatch('meetings/inviteeLists', {
 		// 	meetingSerialNum: this.serialNum,

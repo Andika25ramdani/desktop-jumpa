@@ -20,15 +20,34 @@ export default {
           isAuth: 'auth/isAuth'
         })
     },
-	// async mounted() {
-    //     console.log(this.serialNum)
-    //     console.log(localStorage.getItem('accessToken'))
-	// 	let res = await axios.get('https://dinda.jumpa.id/v1.0.0/layanan/history/partisipant',{
-    //         meetingSernum: 'B8454C0A48764B13A0C01225396EB316',
-    //         token: localStorage.getItem('accessToken')
-    //     })
-	// 	console.log('GET', res.data)
-	// },
+	async mounted() {
+        // console.log(this.serialNum)
+        // console.log(localStorage.getItem('accessToken'))
+        // COBA 1
+        // var bodyFormData = new FormData()
+        // bodyFormData.append('email', 'yadi@jumpa.id')
+        // bodyFormData.append('token', localStorage.getItem('accessToken'))
+        // axios({
+        //     method: "get",
+        //     url: "http://103.157.46.61:8099/v1.0.0/profile/editInfo",
+        //     data: bodyFormData,
+        // })
+        // .then(function (response) {
+        //     //handle success
+        //     console.log(response);
+        // })
+        // .catch(function (response) {
+        //     //handle error
+        //     console.log(response);
+        // })
+        // COBA 2
+		// let res = await axios.post('http://surampak.jumpa.id:8099/v1.0.0/history/partisipant',{
+        //     meetingSernum: 'B8454C0A48764B13A0C01225396EB316',
+        //     token: localStorage.getItem('accessToken')
+        //     // token: 'skladjaskdnhaksnkashndnhkasudhkauwdhuas'
+        // })
+		// console.log('GET', res)
+	},
 }
 </script>
 <style>

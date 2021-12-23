@@ -64,7 +64,8 @@ export default {
             }
         },
         inviteeLists: async function({commit}, payload) {
-            let res = await axios.post('http://103.157.46.61:8099/v1.0.0/history/invitees',qs.stringify({
+            let res = await axios.post('https://surampak.jumpa.id/layanan/history/invitees', qs.stringify({
+            // let res = await axios.post('http://103.157.46.61:8099/v1.0.0/history/invitees',qs.stringify({
                 meetingSernum: payload.meetingSerialNum,
                 token: localStorage.getItem('accessToken')
             }))
@@ -72,22 +73,22 @@ export default {
             // let response = res.data
             // if (response.retCode == 0) {
                 //     const data = response.data
-            //     localStorage.setItem('inviteeLists', data)
-            //     commit('SET', ['inviteeLists', data])
-            // }
-        },
-        participantLists: async function({commit}, payload) {
-            let res = await axios.post('http://103.157.46.61:8099/v1.0.0/history/partisipant',qs.stringify({
+                //     localStorage.setItem('inviteeLists', data)
+                //     commit('SET', ['inviteeLists', data])
+                // }
+            },
+            participantLists: async function({commit}, payload) {
+            let res = await axios.post('https://surampak.jumpa.id/layanan/history/partisipant', qs.stringify({
                 meetingSernum: payload.meetingSerialNum,
-                token: localStorage.getItem('accessToken')
+                token: payload.token
             }))
-            console.log(res);
-            // let response = res.data
-            // if (response.retCode == 0) {
-            //     const data = response.data
-            //     localStorage.setItem('participantLists', data)
-            //     commit('SET', ['participantLists', data])
-            // }
+            console.log('HELOO', res.data);
+            let response = res.data
+            if (response.retCode == 0) {
+                const data = response.data
+                localStorage.setItem('participantLists', data)
+                commit('SET', ['participantLists', data])
+            }
         },
 
         // MEETING DELETE

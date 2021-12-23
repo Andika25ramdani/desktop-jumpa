@@ -95,12 +95,12 @@
 							</div>
 						</div>
                         <!-- <input type="datetime" name="" id=""> -->
-                        <input type="datetime-local" name="" id="">
+                        <!-- <input type="datetime-local" name="" id=""> -->
                         <!-- TIMEZONE -->
 						<div class="flex flex-col gap-px5">
 							<label class="text-px8 xl:text-xs text-grey-dark">Time Zone</label>
 							<div class="custom-select flex items-center justify-between text-px10 xl:text-sm text-grey-dark" placeholder="Timezone">
-								<select v-model="timeZone">
+								<select v-model="scheduleMeetingData.timeZone">
 									<option value="Asia/Jakarta" selected disabled>(GMT+07:00) Jakarta</option>
 									<option value="Asia/Jakarta">(GMT+07:00) Jakarta</option>
 									<option value="Asia">(GMT+07:00) Jakarta</option>
@@ -116,7 +116,7 @@
 										<i class="fas fa-minus text-px8 text-grey-dark px-1 lg:px-2 xl:px-3 2xl:px-4 absolute top-0 input-number-icon"></i>
 									</button>
 									<div class="flex gap-0.5 items-center">
-										<input type="number" v-model="durHr" min="0" max="6" id="durationHour" class="outline-none text-px10 xl:text-sm w-max text-center">
+										<input type="number" v-model="scheduleMeetingData.durHr" min="0" max="6" id="durationHour" class="outline-none text-px10 xl:text-sm w-max text-center">
 										<p class="text-px8 text-grey-ao">hr</p>
 									</div>
 									<button @click="inputIncrease('durationHour', 6)" class="rounded-full bg-grey-lighter h-px11 w-px11 relative">
@@ -128,7 +128,7 @@
 										<i class="fas fa-minus text-px8 text-grey-dark px-1 lg:px-2 xl:px-3 2xl:px-4 absolute top-0 input-number-icon"></i>
 									</button>
 									<div class="flex gap-0.5 items-center">
-										<input type="number" v-model="durMn" min="0" max="60" id="durationMinute" class="outline-none text-px10 xl:text-sm w-max text-center">
+										<input type="number" v-model="scheduleMeetingData.durMn" min="0" max="60" id="durationMinute" class="outline-none text-px10 xl:text-sm w-max text-center">
 										<p class="text-px8 text-grey-ao">min</p>
 									</div>
 									<button @click="inputIncrease('durationMinute', 60)" class="rounded-full bg-grey-lighter h-px11 w-px11 relative">
@@ -140,8 +140,8 @@
                         <!-- RECURRING -->
 						<div class="flex flex-col gap-px5">
 							<div class="flex gap-2.5 items-center">
-								<input type="checkbox" id="record" v-model="scheduleMeetingData.isCycle" @click="scheduleMeetingData.isCycle === 1 ? scheduleMeetingData.isCycle = 0 : scheduleMeetingData.isCycle = 1">
-								<label for="record" class="text-px10 xl:text-sm text-grey-ed">Automatic Recording</label>
+								<input type="checkbox" id="isCivle" v-model="scheduleMeetingData.isCycle" @click="scheduleMeetingData.isCycle === 1 ? scheduleMeetingData.isCycle = 0 : scheduleMeetingData.isCycle = 1">
+								<label for="isCivle" class="text-px10 xl:text-sm text-grey-ed">Automatic Recording</label>
 							</div>
 							<div  v-if="scheduleMeetingData.isCycle === 1" class="flex gap-2.5">
 								<div class="rounded border border-grey-ce py-px5 px-2.5 xl:py-px9 w-max flex items-center gap-4">
