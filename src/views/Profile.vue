@@ -1,12 +1,12 @@
 <template>
 	<div class="default-page">
-		<div class="card p-px35 lg:px-9 xl:px-10 2xl:px-11">
-            <div class="flex flex-nowrap gap-px35 lg:gap-9 xl:gap-10 2xl:gap-11">
+		<div class="card p-px35 xl:p-12">
+            <div class="flex flex-nowrap gap-px35 xl:gap-15">
                 <div class="h-full relative">
                     <figure @click="isImageClicked = !isImageClicked" class="relative cursor-pointer">
-                        <img src="img/icons/jumpa-logo.png" class="rounded-full w-36 lg:w-40 xl:w-44 2xl:w-48 h-36 lg:h-40 xl:h-44 2xl:h-48 object-cover">
-                        <div v-if="isImageClicked" @click.right="photoClicked = !photoClicked" class="absolute bg-grey-dark bg-opacity-50 w-36 lg:w-40 xl:w-44 2xl:w-48 h-36 lg:h-40 xl:h-44 2xl:h-48 rounded-full top-0 flex items-center cursor-pointer">
-                            <i class="fas fa-camera text-white text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl mx-auto"></i>
+                        <img src="img/icons/jumpa-logo.png" class="rounded-full w-36 h-36 object-contain">
+                        <div v-if="isImageClicked" @click.right="photoClicked = !photoClicked" class="absolute bg-grey-dark bg-opacity-50 w-36 h-36 rounded-full top-0 flex items-center cursor-pointer">
+                            <i class="fas fa-camera text-white text-xl mx-auto"></i>
                         </div>
                         <div v-if="photoClicked" class="bg-white rounded-px5 shadow-custom text-px10 py-2.5 px-px15 flex flex-col gap-px5 text-grey-sb w-max absolute top-1/2 left-1/2">
                             <p class="cursor-pointer hover:font-bold">View photo</p>
@@ -19,52 +19,49 @@
                 <div class="flex-1">
                     <div class="border-b border-grey-lighter pb-px15">
                         <div class="flex gap-2.5 items-center">
-                            <h2 class="kanit font-bold text-grey-dark text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl">Dinda Jumpa Indonesia</h2>
+                            <h2 class="kanit font-bold text-grey-dark text-2xl xl:text-3xl">{{ userInfo.displayName }}</h2>
                             <div class="bg-red rounded py-1 lg:py-2 px-2.5 text-px8 text-white">PLATINUM</div>
                         </div>
-                        <p class="text-px10 text-grey-sb">@{{ userInfo.account }}</p>
-                        <p class="text-px10 text-grey-dark py-2.5">
-                            IT Analyst, Novelist, Photographer, Aquarius girl, and also a Cat lover, “If cats could write history, their history would be mostly about cats.”
-                            <br>–Eugen Weber
-                        </p>
+                        <p class="text-px10 xl:text-sm text-grey-sb">@{{ userInfo.account }}</p>
+                        <p class="text-px10 xl:text-sm text-grey-dark py-2.5">{{ userInfo.bio }}</p>
                         <div class="flex gap-px5 items-center">
                             <i class="fas fa-map-marker-alt text-red text-xs lg:text-sm xl:text-base 2xl:text-lg"></i>
-                            <p class="text-px10 text-grey-sb">Jakarta, West Java, Indonesia</p>
+                            <p class="text-px10 xl:text-sm text-grey-sb">Jakarta, West Java, Indonesia</p>
                         </div>
                     </div>
-                    <table class="text-px10">
+                    <table class="text-px10 xl:text-sm">
                         <tr>
-                            <td colspan="2" class="font-bold text-px10 text-grey-dark kanit pb-2.5 lg:pb-3 xl:pb-4 2xl:pb-5 pt-px15 lg:pt-4 xl:pt-5 2xl:pt-6">BASIC PROFILE</td>
+                            <td colspan="2" class="font-bold text-px10 xl:text-sm text-grey-dark kanit pb-2.5 pt-px15">BASIC PROFILE</td>
                         </tr>
                         <tr>
-                            <td class="text-grey-sb pb-px5 lg:pb-2 xl:pb-3 2xl:pb-4 pr-12 lg:pr-14 xl:pr-16 2xl:pr-20">Email</td>
+                            <td class="text-grey-sb pb-px5 pr-12">Email</td>
                             <td class="text-grey-dark">{{ userInfo.email }}</td>
                         </tr>
                         <tr>
-                            <td class="text-grey-sb pb-px5 lg:pb-2 xl:pb-3 2xl:pb-4 pr-12 lg:pr-14 xl:pr-16 2xl:pr-20">Phone</td>
+                            <td class="text-grey-sb pb-px5 pr-12">Phone</td>
                             <td class="text-grey-dark">0810-0810-8108</td>
                         </tr>
                         <tr>
-                            <td class="text-grey-sb pb-px5 lg:pb-2 xl:pb-3 2xl:pb-4 pr-12 lg:pr-14 xl:pr-16 2xl:pr-20">Date Format</td>
+                            <td class="text-grey-sb pb-px5 pr-12">Date Format</td>
                             <td class="text-grey-dark">DD/MM/YYYY</td>
                         </tr>
                         <tr>
-                            <td class="text-grey-sb pb-px5 lg:pb-2 xl:pb-3 2xl:pb-4 pr-12 lg:pr-14 xl:pr-16 2xl:pr-20">First Day of the Week</td>
+                            <td class="text-grey-sb pb-px5 pr-12">First Day of the Week</td>
                             <td class="text-grey-dark">Sunday</td>
                         </tr>
                         <tr>
-                            <td class="text-grey-sb pb-px5 lg:pb-2 xl:pb-3 2xl:pb-4 pr-12 lg:pr-14 xl:pr-16 2xl:pr-20">Time</td>
+                            <td class="text-grey-sb pb-px5 pr-12">Time</td>
                             <td class="text-grey-dark">24-hour time</td>
                         </tr>
                         <tr>
-                            <td class="text-grey-sb pb-px5 lg:pb-2 xl:pb-3 2xl:pb-4 pr-12 lg:pr-14 xl:pr-16 2xl:pr-20">Time Zone</td>
+                            <td class="text-grey-sb pb-px5 pr-12">Time Zone</td>
                             <td class="text-grey-dark">(GMT+07:00) Jakarta</td>
                         </tr>
                         <tr>
-                            <td colspan="2" class="font-bold text-px10 text-grey-dark kanit pt-px15 lg:pt-4 xl:pt-5 2xl:pt-6 pb-2.5 lg:pb-3 xl:pb-4 2xl:pb-5">Security</td>
+                            <td colspan="2" class="font-bold text-px10 xl:text-sm text-grey-dark kanit pt-px15 pb-2.5">Security</td>
                         </tr>
                         <tr>
-                            <td class="text-grey-sb pb-px5 lg:pb-2 xl:pb-3 2xl:pb-4 pr-12 lg:pr-14 xl:pr-16 2xl:pr-20">Password</td>
+                            <td class="text-grey-sb pb-px5 pr-12">Password</td>
                             <td class="text-grey-dark">Change Password</td>
                         </tr>
                     </table>
@@ -75,6 +72,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
     data() {
         return {
@@ -82,13 +80,24 @@ export default {
             photoClicked: false,
             userInfo: {
                 account: localStorage.getItem('account'),
-                email: localStorage.getItem('email')
+                bio: localStorage.getItem('bio'),
+                displayName: localStorage.getItem('comment'),
+                email: localStorage.getItem('email'),
             }
         }
     },
-    mounted() {
-        console.log(this.photoClicked)
-    }
+	async created() {
+		await this.$store.dispatch('profile/getInfo', {
+            email: localStorage.getItem('email'),
+            token: localStorage.getItem('accessToken')
+        })
+		// await this.$store.dispatch('profile/updateInfo', {
+        //     email: localStorage.getItem('email'),
+        //     comment: 'Y A D I',
+        //     bio: 'Just Live and Keep Breath',
+        //     token: localStorage.getItem('accessToken')
+        // })
+	},
 }
 </script>
 

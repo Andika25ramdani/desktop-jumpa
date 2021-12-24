@@ -20,8 +20,8 @@
   <div class="fixed flex flex-col sm:flex-row justify-between w-full">
     <div class="home-ls">
 		<transition-group name="slide-left" appear>
-			<h3 key="0" class="kanit font-bold text-xl lg:text-3xl text-grey-dark mt-4 mb-px5 xl:mb-px15 px-4 sm:px-16">Hi, {{ account }}</h3>
-			<p key="1" class="text-px10 xl:text-base text-grey-sb mb-5 xl:mb-px30 px-4 sm:px-16">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni assumenda iste reprehenderit ab maiores enim placeat, cum excepturi sit labore veritatis odit adipisci perferendis animi facere qui ut facilis numquam.</p>
+			<h3 key="0" class="kanit font-bold text-xl lg:text-3xl text-grey-dark mt-4 mb-px5 xl:mb-px15 px-4 sm:px-16">Hi, {{ userInfo.displayName }}</h3>
+			<p key="1" class="text-px10 xl:text-base text-grey-sb mb-5 xl:mb-px30 px-4 sm:px-16">{{ userInfo.bio }}</p>
 			<div key="2" class="mx-auto bg-white w-max py-px15 px-5 xl:p-px25 border-grey-lighter border rounded-px10 flex items-center justify-evenly gap-5 xl:gap-6">
 				<div @click="newMeeting" class="flex flex-col items-center gap-2.5 w-max cursor-pointer">
 					<div class="bg-primary rounded-px10 w-16 xl:w-px100 h-16 xl:h-px100 p-px13 xl:p-7 flex items-center">
@@ -133,7 +133,11 @@ export default {
 
 		pageIndex: 1,
 		pageSize: 15,
-		account: localStorage.getItem('account')
+		userInfo: {
+			displayName: localStorage.getItem('displayName'),
+			bio: localStorage.getItem('bio'),
+			email: localStorage.getItem('email')
+		}
     }
   },
   computed: {
@@ -198,6 +202,7 @@ export default {
 }
 .home-ls {
 	min-width: 340px;
+	width: 100%;
 	padding: 0 0 25%;
 	background: url('/../img/sumpah-pemuda.png') center bottom;
 	background-size: contain;
