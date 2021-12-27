@@ -9,7 +9,7 @@ const intialState = () => {
         accessToken: '',
         account: '',
         bio: '',
-        checkCode: '',
+        captcha: '',
         displayName: '',
         email: '',
         accountInfo: {}
@@ -27,16 +27,19 @@ export default {
         isAuth: (state) => state.isAuth,
         getToken: (state) => () => state.accessToken,
         getAccount: (state) => () => state.account,
-        getCheckCode: (state) => () => state.checkCode,
+        getCaptcha: (state) => () => state.captcha,
         getEmail: (state) => () => state.email,
         getAccountInfo: (state) => () => state.accountInfo,
     },
     actions: {
-        getCheckcode: async function({commit}, payload) {
+        getCheckcode: async function({commit}) {
             let res = await axios.get('https://surampak.jumpa.id/checkcode')
-            console.log('CHECKCODE', res.data);
-            localStorage.setItem('checkCode', res.data)
-            commit('SET', ['checkCode', res.data])
+            console.log('CHECKCODE', res.status);
+            if (res.status === 200) {
+                const { data } = res
+                localStorage.setItem('captcha', data)
+                commit('SET', ['captcha', data])
+            }
         },
         CheckcodeVerificataion: async function({commit}, payload) {
             let res = await axios.get('https://surampak.jumpa.id/ajax/checkcode', qs.stringify({
