@@ -1,5 +1,10 @@
 <template>
 	<div class="default-page">
+        <div v-if="changePasswordPopup" class="overlay-bg fixed top-0 left-0 h-screen w-screen z-50 flex flex-col items-center justify-center">
+            <transition name="slide-down" appear>
+                <create-new-password />
+            </transition>
+        </div>
 		<div class="card p-px35 xl:p-12">
             <div class="flex flex-nowrap gap-px35 xl:gap-15">
                 <div class="h-full relative flex flex-col items-center gap-5 xl:gap-10">
@@ -70,7 +75,7 @@
                         </tr>
                         <tr>
                             <td class="text-grey-sb pb-px5 pr-12">Password</td>
-                            <td class="text-grey-dark">Change Password</td>
+                            <td @click="changePasswordPopup = true" class="text-grey-dark">Change Password</td>
                         </tr>
                     </table>
                 </div>
@@ -80,9 +85,12 @@
 </template>
 
 <script>
+import CreateNewPassword from './forgotpassword/CreateNewPassword.vue'
 export default {
+  components: { CreateNewPassword },
     data() {
         return {
+            changePasswordPopup: false,
             editPhotoMenu: false,
             userInfo: {
                 account: localStorage.getItem('account'),

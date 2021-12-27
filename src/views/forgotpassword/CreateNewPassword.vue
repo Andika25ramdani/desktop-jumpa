@@ -7,6 +7,18 @@
             <form @submit.prevent="createNewPassword" class="flex flex-col gap-2.5 xl:gap-5 px-2.5 text-xs xl:text-sm">
                 <div class="flex flex-col gap">
 					<div class="flex gap-px5 border border-grey-ce rounded-px5 red-input">
+						<input v-if="showOldPassword" type="text" v-model="newPasswordData.oldPassword" placeholder="Old Password" id="inputOldPassword" class="flex-1 outline-none">
+						<input v-else type="password" v-model="newPasswordData.oldPassword" placeholder="Old Password" id="inputOldPassword" class="flex-1 outline-none">
+						<button @click="visibleOldPassword" class="pr-2.5">
+							<i v-if="showOldPassword" class="fas fa-eye text-grey-dark text-xs"></i>
+							<i v-else class="fas fa-eye-slash text-grey-dark text-xs"></i>
+						</button>
+					</div>
+                    <span v-if="v$.newPasswordData.oldPassword.$error" class="text-red text-px8 xl:text-px10 mt-px5">{{ v$.newPasswordData.oldPassword.$errors[0].$message }}</span>
+                    <span v-else class="text-px8 xl:text-px10 text-grey-sb mt-px5">8-16 characters, contain two types of digits, letters or symbols</span>
+				</div>
+                <div class="flex flex-col gap">
+					<div class="flex gap-px5 border border-grey-ce rounded-px5 red-input">
 						<input v-if="showPassword" type="text" v-model="newPasswordData.password" placeholder="New Password" id="inputPassword" class="flex-1 outline-none">
 						<input v-else type="password" v-model="newPasswordData.password" placeholder="New Password" id="inputPassword" class="flex-1 outline-none">
 						<button @click="visiblePassword" class="pr-2.5">
@@ -35,12 +47,14 @@
 	</div>
 </template>
 <script>
+import md5 from 'crypto-js/md5'
 import useValidate from '@vuelidate/core'
 import { required, minLength, maxLength, sameAs } from '@vuelidate/validators'
 export default {
 	name: 'CreateNewPassword',
     data() {
         return {
+			showOldPassword: false,
 			showPassword: false,
 			showConfirmPassword: false,
 
@@ -48,14 +62,18 @@ export default {
 
             v$: useValidate(),
             newPasswordData: {
+				oldPassword: '',
                 password: '',
-                confirmPassword: ''
+                confirmPassword: '',
             },
         }
     },
     validations() {
         return {
             newPasswordData: {
+                oldPassword: {
+                    required,
+                },
                 password: {
                     required,
                     minLength: minLength(8),
@@ -74,6 +92,9 @@ export default {
 		}
 	},
     methods: {
+		visibleOldPassword() {
+			this.showOldPassword = !this.showOldPassword
+		},
 		visiblePassword() {
 			this.showPassword = !this.showPassword
 		},
@@ -83,7 +104,13 @@ export default {
         createNewPassword: async function() {
             this.v$.$validate()
             if (!this.v$.$error) {
-				this.$router.push({name: 'ResetPasswordSuccess'})
+				console.log(md5(this.newPasswordData.oldPassword));
+				console.log(md5(this.newPasswordData.password));
+				await this.$store.dispatch('auth/changePassword', {
+					oldPwd: md5(md5(this.newPasswordData.oldPassword)),
+					newPwd: md5(md5(this.newPasswordData.password))
+				})
+				// this.$router.push({name: 'ResetPasswordSuccess'})
             }
         }
     }

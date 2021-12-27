@@ -7,7 +7,9 @@ const intialState = () => {
     return {
         bio: '',
         comment: '',
-        photo: ''
+        photo: '',
+
+        timezoneLists: []
     }
 }
     
@@ -24,6 +26,7 @@ export default {
         getBio: (state) => state.bio,
         getComment: (state) => state.comment,
         getPhoto: (state) => state.photo,
+        getTimezone: (state) => state.timezoneLists,
     },
     actions: {
         // GET PICTURE
@@ -71,6 +74,17 @@ export default {
             }))
             // console.log(payload.token);
             console.log(res);
+        },
+        // GET SYSTEM DATA
+        getSystemData: async function({commit}, payload) {            
+            let systemRes = await axios.post('https://surampak.jumpa.id/layanan/profile/editSistemGet', qs.stringify({
+                email: payload.email,
+                token: payload.accessToken,
+            }))
+            console.warn(systemRes.data.timezoneList);
+            localStorage.setItem('timezoneLists', systemRes.data.timezoneList)
+            commit('SET', ['timezoneLists', systemRes.data.timezoneList])
         }
+        
     }
 }

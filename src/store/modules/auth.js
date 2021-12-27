@@ -9,6 +9,7 @@ const intialState = () => {
         accessToken: '',
         account: '',
         bio: '',
+        checkCode: '',
         displayName: '',
         email: '',
         accountInfo: {}
@@ -26,22 +27,50 @@ export default {
         isAuth: (state) => state.isAuth,
         getToken: (state) => () => state.accessToken,
         getAccount: (state) => () => state.account,
+        getCheckCode: (state) => () => state.checkCode,
         getEmail: (state) => () => state.email,
         getAccountInfo: (state) => () => state.accountInfo,
     },
     actions: {
+        getCheckcode: async function({commit}, payload) {
+            let res = await axios.get('https://surampak.jumpa.id/checkcode')
+            console.log('CHECKCODE', res.data);
+            localStorage.setItem('checkCode', res.data)
+            commit('SET', ['checkCode', res.data])
+        },
+        CheckcodeVerificataion: async function({commit}, payload) {
+            let res = await axios.get('https://surampak.jumpa.id/ajax/checkcode', qs.stringify({
+                checkcode: payload.checkcode
+            }))
+            console.log('CHECKCODE VERIFICATION', res.data);
+        },
+        signUp: async function({commit}, payload) {
+            let res = await axios.post('https://surampak.jumpa.id/signup', qs.stringify({
+                email: payload.email,
+                contact: payload.displayName,
+                name: payload.bussinessName,
+                enterprisePeople: payload.enterprisePeople,
+                checkcode: payload.checkcode,
+                phone: payload.phone,
+                country: payload.country,
+                mac: payload.mac,
+                province: payload.province,
+                companySize: payload.companySize
+            }))
+            console.log('SIGN UP', res);
+        },
         signIn: async function({commit}, payload) {
             const signInRes = await API.account_login(payload.account, payload.password);
             let data = signInRes.data
             if (data.retCode == 0) {
                 const { accessToken, account, email } = data.data
-                let results = await axios.post('https://surampak.jumpa.id/layanan/profile/editInfoGet', qs.stringify({
+                let infoRes = await axios.post('https://surampak.jumpa.id/layanan/profile/editInfoGet', qs.stringify({
                     email: email,
                     token: accessToken,
                 }))
-                let output = results.data
-                if (output.error == false) {
-                    const { bio, comment } = output
+                let infos = infoRes.data
+                if (infos.error == false) {
+                    const { bio, comment } = infos
                     
                     localStorage.setItem('accessToken', accessToken)
                     localStorage.setItem('account', account)
@@ -59,6 +88,19 @@ export default {
                     router.push(router.currentRoute.value.query.redirect || '/home')
                 }
             }
+        },
+        changePassword: async function({commit}, payload) {
+            let res = await axios.post('https://surampak.jumpa.id/settings/password', qs.stringify({
+                oldPwd: payload.oldPwd,
+                newPwd: payload.newPwd,
+            }))
+            console.log('PASSWORD CHANGE', res);
+            // let response = res.data
+            // if (response.error == false) {
+            //     // const { photo } = response
+            //     // localStorage.setItem('photo', photo)
+            //     // commit('SET', ['photo', photo])
+            // }
         },
         
         signOut: async function({commit}) {

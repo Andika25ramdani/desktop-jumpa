@@ -153,9 +153,7 @@
 							<label class="text-px8 xl:text-xs text-grey-dark">Time Zone</label>
 							<div class="custom-select flex items-center justify-between text-px10 xl:text-sm text-grey-dark" placeholder="Timezone">
 								<select v-model="timeZone">
-									<option value="Asia/Jakarta" selected disabled>(GMT+07:00) Jakarta</option>
-									<option value="Asia/Jakarta">(GMT+07:00) Jakarta</option>
-									<option value="Asia">(GMT+07:00) Jakarta</option>
+									<option v-for="tz in timeZones" :key=tz :value=tz.timezone>{{ tz.timezone }}</option>
 								</select>
 							</div>
 						</div>
@@ -330,6 +328,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import md5 from 'crypto-js/md5'
 import CONFIG from "../js/config";
 import useValidate from '@vuelidate/core'
@@ -482,6 +481,17 @@ export default {
             }
         }
     },
+	computed: {
+		...mapGetters({
+			timeZones: 'profile/getTimezone'
+		})
+	},
+	async created() {
+		await this.$store.dispatch('profile/getSystemData', {
+			email: localStorage.getItem('email'),
+			accessToken: localStorage.getItem('accessToken')
+		})
+	},
     methods: {
         newMeeting: async function() {
             this.v$.$validate()
