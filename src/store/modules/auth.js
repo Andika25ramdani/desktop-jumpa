@@ -1,11 +1,15 @@
 import router from '../../router'
 import API from '../../js/api_interface'
+import axios from 'axios'
+import qs from 'querystring'
 
 const intialState = () => {
     return {
         isAuth: false,
         accessToken: '',
         account: '',
+        bio: '',
+        displayName: '',
         email: '',
         accountInfo: {}
     }
@@ -27,20 +31,33 @@ export default {
     },
     actions: {
         signIn: async function({commit}, payload) {
-            const res = await API.account_login(payload.account, payload.password);
-            let data = res.data
+            const signInRes = await API.account_login(payload.account, payload.password);
+            let data = signInRes.data
             if (data.retCode == 0) {
                 const { accessToken, account, email } = data.data
-                localStorage.setItem('accessToken', accessToken)
-                localStorage.setItem('account', account)
-                localStorage.setItem('email', email)
+                let results = await axios.post('https://surampak.jumpa.id/layanan/profile/editInfoGet', qs.stringify({
+                    email: email,
+                    token: accessToken,
+                }))
+                let output = results.data
+                if (output.error == false) {
+                    const { bio, comment } = output
+                    
+                    localStorage.setItem('accessToken', accessToken)
+                    localStorage.setItem('account', account)
+                    localStorage.setItem('bio', bio)
+                    localStorage.setItem('displayName', comment)
+                    localStorage.setItem('email', email)
 
-                commit('SET', ['isAuth', true])
-                commit('SET', ['accessToken', accessToken])
-                commit('SET', ['account', account])
-                commit('SET', ['email', email])
+                    commit('SET', ['isAuth', true])
+                    commit('SET', ['accessToken', accessToken])
+                    commit('SET', ['email', email])
+                    commit('SET', ['bio', bio])
+                    commit('SET', ['displayName', comment])
+                    commit('SET', ['account', account])
 
-                router.push(router.currentRoute.value.query.redirect || '/home')
+                    router.push(router.currentRoute.value.query.redirect || '/home')
+                }
             }
         },
         

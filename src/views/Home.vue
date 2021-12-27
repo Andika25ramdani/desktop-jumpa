@@ -69,7 +69,7 @@
 							<div class="flex gap-2.5 xl:gap-px15 items-center text-px8 xl:text-xs">
 								<p class="text-white">Meeting ID: {{ upcoming.meetingNum }}</p>
 								<p v-if="upcoming.state === 2" class="bg-green rounded-full py-0.5 xl:py-1 px-4">In Process</p>
-								<p v-if="upcoming.state === 0" class="bg-yellow-500 rounded-full py-0.5 xl:py-1 px-4">To Be Hosted</p>
+								<p v-if="upcoming.state === 0" class="bg-orange rounded-full py-0.5 xl:py-1 px-4">To Be Hosted</p>
 							</div>
 							<h5 class="mr-px35 mb-px5 xl:mb-2.5 text-sm xl:text-lg font-bold mt-1.5">{{ upcoming.subject }}</h5>
 							<p class="mr-px35 mb-2.5 xl:mb-5 text-px10 xl:text-xs">
