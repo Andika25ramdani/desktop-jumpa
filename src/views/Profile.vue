@@ -110,7 +110,6 @@ export default {
     methods: {
         submitData: async function() {
             let uploadInfo = document.forms['formGambar']['inputImage'].files[0]
-            console.warn('SUBMIT', uploadInfo);
             await this.$store.dispatch('profile/uploadPicture', {
                 email: localStorage.getItem('email'),
                 file: uploadInfo,

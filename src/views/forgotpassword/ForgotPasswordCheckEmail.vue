@@ -23,7 +23,6 @@ export default {
     },
     methods: {
         resendEmail() {
-            console.log('Email Resend');
             // this.$router.push({name: 'CreateNewPassword', params: {email: this.email}})
             location.reload()
         }

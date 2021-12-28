@@ -535,7 +535,6 @@ export default {
 		updatePlans(name, participants) {
 			this.scheduleWebinarData.meetingPlan.name = name
 			this.scheduleWebinarData.meetingPlan.participants = participants
-			console.log(this.scheduleWebinarData.meetingPlan);
 		},
 
 		addFromContacts() {

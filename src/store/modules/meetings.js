@@ -1,5 +1,5 @@
-import router from '../../router'
 import API from '../../js/api_interface'
+import CONFIG from '../../js/config.js'
 import axios from 'axios'
 import qs from 'querystring'
 
@@ -64,7 +64,7 @@ export default {
             }
         },
         inviteeLists: async function({commit}, payload) {
-            let res = await axios.post('https://surampak.jumpa.id/layanan/history/invitees', qs.stringify({
+            let res = await axios.post(CONFIG.SERVER_DOMAIN+'/layanan/history/invitees', qs.stringify({
                 meetingSernum: payload.meetingSerialNum,
                 token: payload.token
             }))
@@ -76,7 +76,7 @@ export default {
             }
         },
         participantLists: async function({commit}, payload) {
-            let res = await axios.post('https://surampak.jumpa.id/layanan/history/partisipant', qs.stringify({
+            let res = await axios.post(CONFIG.SERVER_DOMAIN+'/layanan/history/partisipant', qs.stringify({
                 meetingSernum: payload.meetingSerialNum,
                 token: payload.token
             }))
@@ -104,9 +104,7 @@ export default {
         // NEW MEETING
         meetingQuickStart: async function({commit}, payload) {
             const res = await API.meeting_quick_start(payload)
-            console.log(res);
             let response = res.data
-            console.log(response);
             if (response.retCode == 0) {
                 let { hostCode, hostEmail, hostName, meetingNum, meetingSerialNum } = response.data;
                 let meetUrl = `/rtc/dispatch?meetingNum=${meetingNum}&userName=${hostName}&email=${hostEmail}&sn=${meetingSerialNum}&isAuto=true`

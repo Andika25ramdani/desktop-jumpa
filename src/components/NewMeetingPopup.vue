@@ -16,7 +16,7 @@
 							<label class="text-px8 xl:text-xs">Choose your meeting plan</label>
 							<div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
 								<div class="flex items-center -ml-2">
-									<input type="radio" name="meetingPlan" id="platinum" class="absolute left-8">
+									<input type="radio" name="meetingPlan" v-model="meetingPlan" id="platinum" class="absolute left-8">
 									<label for="platinum" @click="updatePlans('platinum', 3000)" class="meet-plan flex items-center gap-2.5 pl-12 py-4 border border-grey-lightjumpa rounded w-full">
 										<div class="">
 											<h6 class="text-px10 xl:text-sm font-bold">Platinum</h6>
@@ -25,7 +25,7 @@
 									</label>
 								</div>
 								<div class="flex items-center -ml-2">
-									<input type="radio" name="meetingPlan" id="gold" class="absolute left-8">
+									<input type="radio" name="meetingPlan" v-model="meetingPlan" id="gold" class="absolute left-8">
 									<label for="gold" @click="updatePlans('gold', 2000)" class="meet-plan flex items-center gap-2.5 pl-12 py-4 border border-grey-lightjumpa rounded w-full">
 										<div class="">
 											<h6 class="text-px10 xl:text-sm font-bold">Gold</h6>
@@ -34,7 +34,7 @@
 									</label>
 								</div>
 								<div class="flex items-center -ml-2">
-									<input type="radio" name="meetingPlan" id="silver" class="absolute left-8">
+									<input type="radio" name="meetingPlan" v-model="meetingPlan" id="silver" class="absolute left-8">
 									<label for="silver" @click="updatePlans('silver', 1500)" class="meet-plan flex items-center gap-2.5 pl-12 py-4 border border-grey-lightjumpa rounded w-full">
 										<div class="">
 											<h6 class="text-px10 xl:text-sm font-bold">Silver</h6>
@@ -43,7 +43,7 @@
 									</label>
 								</div>
 								<div class="flex items-center -ml-2">
-									<input type="radio" name="meetingPlan" id="business" class="absolute left-8">
+									<input type="radio" name="meetingPlan" v-model="meetingPlan" id="business" class="absolute left-8">
 									<label for="business" @click="updatePlans('business', 750)" class="meet-plan flex items-center gap-2.5 pl-12 py-4 border border-grey-lightjumpa rounded w-full">
 										<div class="">
 											<h6 class="text-px10 xl:text-sm font-bold">Business</h6>
@@ -52,7 +52,7 @@
 									</label>
 								</div>
 								<div class="flex items-center -ml-2">
-									<input type="radio" name="meetingPlan" id="pro" class="absolute left-8">
+									<input type="radio" name="meetingPlan" v-model="meetingPlan" id="pro" class="absolute left-8">
 									<label for="pro" @click="updatePlans('pro', 500)" class="meet-plan flex items-center gap-2.5 pl-12 py-4 border border-grey-lightjumpa rounded w-full">
 										<div class="">
 											<h6 class="text-px10 xl:text-sm font-bold">Pro</h6>
@@ -61,7 +61,7 @@
 									</label>
 								</div>
 								<div class="flex items-center -ml-2">
-									<input type="radio" name="meetingPlan" id="basic" class="absolute left-8">
+									<input type="radio" name="meetingPlan" v-model="meetingPlan" id="basic" class="absolute left-8">
 									<label for="basic" @click="updatePlans('basic', 300)" class="meet-plan flex items-center gap-2.5 pl-12 py-4 border border-grey-lightjumpa rounded w-full">
 										<div class="">
 											<h6 class="text-px10 xl:text-sm font-bold">Basic</h6>
@@ -359,7 +359,7 @@ export default {
                 organizer: localStorage.getItem('account'),
                 orgEmail: localStorage.getItem('email'),
                 password: '',
-                subject: '',
+                subject: localStorage.getItem('displayName')+" Meetings's",
                 timeZone: '',
                 presentation: false,
                 record: false,
@@ -544,7 +544,6 @@ export default {
 		updatePlans(name, participants) {
 			this.newMeetingData.meetingPlan.name = name
 			this.newMeetingData.meetingPlan.participants = participants
-			console.log(this.newMeetingData.meetingPlan);
 		},
 
 		addFromContacts() {

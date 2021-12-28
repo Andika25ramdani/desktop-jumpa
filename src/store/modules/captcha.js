@@ -1,5 +1,4 @@
-import router from '../../router'
-import API from '../../js/api_interface'
+import CONFIG from '../../js/config.js'
 import axios from 'axios'
 import qs from 'querystring'
 
@@ -22,7 +21,7 @@ export default {
     actions: {
         // GET CAPTCHA IMAGE
         getCheckcode: async function({commit}) {
-            let res = await axios.get('https://surampak.jumpa.id/checkcode')
+            let res = await axios.get(CONFIG.SERVER_DOMAIN+'/checkcode')
             if (res.status === 200) {
                 const { data } = res
                 localStorage.setItem('captcha', data)
@@ -30,11 +29,11 @@ export default {
             }
         },
         // VERIFICATION CAPTCHA
-        CheckcodeVerificataion: async function({commit}, payload) {
-            let res = await axios.post('https://surampak.jumpa.id/ajax/checkcode', qs.stringify({
-                checkcode: payload.checkcode
+        CheckcodeVerificataion: async function(checkcode) {
+            let captchaResult = await axios.post(CONFIG.SERVER_DOMAIN+'/ajax/checkcode', qs.stringify({
+                checkcode: checkcode
             }))
-            // console.log('CHECKCODE VERIFICATION', res);
+            return captchaResult
         },
     }
 }

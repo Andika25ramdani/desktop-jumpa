@@ -30,6 +30,7 @@ module.exports = {
       red: '#FF2727',
       green: '#32BA7C',
       orange: '#FF9820',
+      linkblue: '#24A0ED',
       transparent: 'transparent',
       
       current: 'currentColor',
@@ -86,6 +87,7 @@ module.exports = {
       px114: '7.125rem',
       32: '8rem',
       36: '9rem',
+      px150: '9.375rem',
       40: '10rem',
       44: '11rem',
       px188: '11.75rem',

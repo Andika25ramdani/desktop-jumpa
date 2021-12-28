@@ -41,12 +41,19 @@ export default {
         //     console.log(response);
         // })
         // COBA 2
-		// let res = await axios.post('http://surampak.jumpa.id:8099/v1.0.0/history/partisipant',{
-        //     meetingSernum: 'B8454C0A48764B13A0C01225396EB316',
-        //     token: localStorage.getItem('accessToken')
-        //     // token: 'skladjaskdnhaksnkashndnhkasudhkauwdhuas'
+		// let res = await axios.post('https://surampak.jumpa.id/layanan/signup',{
+        //     email: 'andika15ramdani@gmail.com',
+        //     contact: 'Andika',
+        //     name: 'Bussiness Name',
+        //     enterprisePeople: '',
+        //     checkcode: '',
+        //     phone: 1,
+        //     country: '',
+        //     mac: '',
+        //     province: '',
+        //     companySize: ''
         // })
-		// console.log('GET', res)
+		// console.log('SIGNUP', res)
 	},
 }
 </script>

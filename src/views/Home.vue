@@ -153,7 +153,6 @@ export default {
 	},
   methods: {
     openToggle(elId) {
-		console.log(elId);
 		if (document.getElementById(elId).classList.contains('inactive')) {
 			if (document.getElementById("upcomingList").classList.contains('hasInactive')) {
 				this.currentSerial = elId
@@ -180,14 +179,12 @@ export default {
 		location.reload()	
 	},
 	copyMeeting(email, name, meetId, subject, startDate, startTime, meetingSerialNum) {
-		console.log('COPIED', meetingSerialNum);
 		this.dataToCopy.hostEmail = email
 		this.dataToCopy.hostName = name
 		this.dataToCopy.meetingNum = meetId
 		this.dataToCopy.subject = subject
 		this.dataToCopy.startDateVal = startDate
 		this.dataToCopy.startTimeVal = startTime
-		console.log(this.dataToCopy);
 		this.copyMeetingPopup = true
 	}
   }

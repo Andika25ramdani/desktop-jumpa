@@ -1,5 +1,4 @@
-import router from '../../router'
-import API from '../../js/api_interface'
+import CONFIG from '../../js/config.js'
 import axios from 'axios'
 import qs from 'querystring'
 
@@ -31,7 +30,7 @@ export default {
     actions: {
         // GET PICTURE
         getPicture: async function({commit}, payload) {
-            let res = await axios.post('https://surampak.jumpa.id/layanan/profile/editPictureGet', qs.stringify({
+            let res = await axios.post(CONFIG.SERVER_DOMAIN+'/layanan/profile/editPictureGet', qs.stringify({
                 email: payload.email,
                 token: payload.token,
             }))
@@ -51,7 +50,7 @@ export default {
             bodyFormData.append('token', payload.token)
             axios({
                 method: "post",
-                url: "https://surampak.jumpa.id/layanan/profile/editPicture",
+                url: CONFIG.SERVER_DOMAIN+"/layanan/profile/editPicture",
                 data: bodyFormData,
                 headers: {'Content-Type': 'multipart/form-data' }
             })
@@ -66,7 +65,7 @@ export default {
         },
         // UPDATE INFO
         updateInfo: async function({commit}, payload) {
-            let res = await axios.post('https://surampak.jumpa.id/layanan/profile/editInfo', qs.stringify({
+            let res = await axios.post(CONFIG.SERVER_DOMAIN+'/layanan/profile/editInfo', qs.stringify({
                 email: payload.email,
                 comment: payload.comment,
                 bio: payload.bio,
@@ -76,7 +75,7 @@ export default {
         },
         // GET SYSTEM DATA
         getSystemData: async function({commit}, payload) {            
-            let systemRes = await axios.post('https://surampak.jumpa.id/layanan/profile/editSistemGet', qs.stringify({
+            let systemRes = await axios.post(CONFIG.SERVER_DOMAIN+'/layanan/profile/editSistemGet', qs.stringify({
                 email: payload.email,
                 token: payload.accessToken,
             }))

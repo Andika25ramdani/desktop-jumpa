@@ -88,7 +88,6 @@ export default {
 			this.popupDelete = true
 		},
 		deleteRecording(serialNumber) {
-			console.error('Delete Recording Meeting No. '+serialNumber);
 			this.popupDelete = false
 			this.toastActive = true
 			setTimeout(() => {

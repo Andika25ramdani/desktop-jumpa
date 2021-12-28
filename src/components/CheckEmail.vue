@@ -6,6 +6,11 @@
         <img src="img/check-email.png" alt="" class="mx-auto py-px30">
         <p class="text-xs xl:text-sm text-grey-dark text-center mb-px30">{{ footerMessage }}</p>
         <button @click="$emit('buttonClicked')" type="button" class="primary-button red-input" :disabled="countDown != 0">RESEND EMAIL {{ timeLeft ? '' : ( countDown == 0 ? '' : '('+countDown+')') }}</button>
+        <div class="flex text-xs xl:text-sm text-linkblue mt-5 lg:mt-5 px-2.5 w-full text-center">
+            <router-link to='/' class="back-button flex-1">
+                <i class="fas fa-chevron-left pr-1"></i> Change Email
+            </router-link>
+        </div>
     </div>
 </template>
 <script>

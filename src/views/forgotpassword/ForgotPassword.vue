@@ -41,7 +41,6 @@ export default {
         sendToEmail: async function() {
             this.v$.$validate()
             if (!this.v$.$error) {
-                console.log('Email SENT!', this.email);
 				this.$router.push({name: 'ForgotPasswordCheckEmail', params: {email: this.email}})
             }
         }

@@ -4,19 +4,14 @@
       id="tsparticles"
       :options="tsOption"
     />
-    <transition name="slide-left" appear>
-      <router-link to='/' v-if="$router.currentRoute.value.path === '/sign-in' || $router.currentRoute.value.path === '/sign-up' || $router.currentRoute.value.path === '/join-meeting' || $router.currentRoute.value.path === '/host-meeting'" class="back-button absolute top-px25 left-px25 z-50 text-white text-xs xl:text-sm">
-        <i class="fas fa-chevron-left pr-1"></i> Back to Welcome
-      </router-link>
-    </transition>
     <div class="mx-auto min-w-min relative h-screen flex flex-nowrap flex-col items-center justify-center">
         <router-view/>
     </div>
-		<footer class="absolute mx-auto py-4 w-full bottom-0 text-white text-center text-xs xl:text-sm">
+		<footer class="absolute mx-auto py-4 w-full bottom-0">
 			<transition name="slide-up" appear>
-				<p>
-					<a href="/">PT. Jumpa Daring Indonesia</a><br>
-					<span>V1.0.0</span>
+				<p class="text-white text-center text-xs">
+					Version: 1.0.0 
+					<a href="/" class="font-bold">PT. Jumpa Daring Indonesia</a><br>
 				</p>
 			</transition>
 		</footer>
@@ -104,14 +99,4 @@ export default {
 }
 </script>
 <style scoped>
-.back-button {
-  transition: ease 1.5 all;
-}
-.back-button:hover {
-  background-color: white;
-  color: #790F19;
-  border-radius: 1rem;
-  font-weight: 700;
-  padding: .125rem .5rem;
-}
 </style>

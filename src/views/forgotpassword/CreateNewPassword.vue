@@ -104,8 +104,6 @@ export default {
         createNewPassword: async function() {
             this.v$.$validate()
             if (!this.v$.$error) {
-				console.log(md5(this.newPasswordData.oldPassword));
-				console.log(md5(this.newPasswordData.password));
 				await this.$store.dispatch('auth/changePassword', {
 					oldPwd: md5(md5(this.newPasswordData.oldPassword)),
 					newPwd: md5(md5(this.newPasswordData.password))

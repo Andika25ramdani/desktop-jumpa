@@ -25,8 +25,8 @@ export default {
     },
     methods: {
         resendEmail() {
-            this.$router.push({name: 'SetupAccount', params: {email: this.email, displayName: this.displayName}})
-            // location.reload()
+            // this.$router.push({name: 'SetupAccount', params: {email: this.email, displayName: this.displayName}})
+            location.reload()
         }
     }
 }

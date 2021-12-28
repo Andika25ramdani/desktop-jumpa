@@ -1,8 +1,8 @@
 <template>
 	<div class="setupAccount">
-		<div class="bg-white rounded-px5 p-px25 shadow-custom xl:p-10">
-			<h2 class="font-bold text-grey-dark text-2xl xl:text-3xl text-center mb-5 xl:mb-px30">Set up account</h2>
-			<form @submit.prevent="setupAccount" class="flex flex-col gap-2.5 xl:gap-5 px-2.5 text-xs xl:text-sm">
+		<div class="bg-white rounded-px5 p-px25 shadow-custom lg:p-10 max-w-lg">
+			<h2 class="font-bold text-grey-dark text-2xl lg:text-3xl text-center mb-5 lg:mb-px30">Set up account</h2>
+			<form @submit.prevent="setupAccount" class="flex flex-col gap-2.5 lg:gap-5 px-2.5 text-xs lg:text-sm">
 				<div class="flex flex-col gap">
 					<input type="email" v-model="setupAccountData.email" placeholder="Email" id="inputEmail" class="border border-grey-ce rounded-px5 red-input outline-none" :disabled="setupAccountData.email">
                     <span v-if="v$.setupAccountData.email.$error" class="text-red text-px8 xl:text-px10 mt-px5">{{ v$.setupAccountData.email.$errors[0].$message }}</span>
@@ -37,12 +37,15 @@
 					</div>
                     <span v-if="v$.setupAccountData.confirmPassword.$error" class="text-red text-px8 xl:text-px10 mt-px5">{{ v$.setupAccountData.confirmPassword.$errors[0].$message }}</span>
 				</div>
-				<button v-if="v$.setupAccountData.email.$error || v$.setupAccountData.displayName.$error || v$.setupAccountData.username.$error || v$.setupAccountData.password.$error || v$.setupAccountData.confirmPassword.$error" type="submit" class="primary-button mt-2.5" disabled>SIGN UP</button>
-				<button v-else type="submit" class="primary-button mt-2.5">SIGN UP</button>
+				<button v-if="v$.setupAccountData.email.$error || v$.setupAccountData.displayName.$error || v$.setupAccountData.username.$error || v$.setupAccountData.password.$error || v$.setupAccountData.confirmPassword.$error" type="submit" class="primary-button mt-2.5" disabled>REGISTER</button>
+				<button v-else type="submit" class="primary-button mt-2.5">REGISTER</button>
 			</form>
-			<p class="text-xs xl:text-sm text-grey-dark my-2.5 ml-2.5">Already have an account? 
+			<p class="text-xs xl:text-sm text-grey-dark mt-2.5 lg:mt-5 mx-auto w-max">Already have an account? 
 				<router-link to="/sign-in" class="font-bold hover:underline">Sign In</router-link>
 			</p>
+			<div class="flex text-xs xl:text-sm text-linkblue mt-5 lg:mt-5 px-2.5 w-full text-center">
+				<router-link to='/' class="back-button flex-1">Cancel</router-link>
+			</div>
 		</div>
 	</div>
 </template>
@@ -93,8 +96,7 @@ export default {
 		setupAccount: async function() {
             this.v$.$validate()
             if (!this.v$.$error) {
-				console.log('OKE')
-				this.$router.push({name: 'RegistrationSuccess', params: {email: this.setupAccountData.email, displayName: this.setupAccountData.displayName}})
+				// this.$router.push({name: 'RegistrationSuccess', params: {email: this.setupAccountData.email, displayName: this.setupAccountData.displayName}})
                 // let res = await this.$store.dispatch('auth/setupAccount', {
                 //     email: this.email,
                 //     displayName: this.displayName,

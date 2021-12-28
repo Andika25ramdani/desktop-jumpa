@@ -1,7 +1,7 @@
 <template>
 	<div class="default-page">
-		<div class="card p-5 lg:p-6 xl:p-7 2xl:p-8">
-			<h2 class="font-bold text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl text-grey-dark mb-5 lg:mb-6 xl:mb-7 2xl:mb-8">Contacts</h2>
+		<div class="card p-5">
+			<h2 class="font-bold text-2xl text-grey-dark mb-5">Contacts</h2>
 			<div class="flex gap-7 lg:gap-8 xl:gap-9 2xl:gap-10">
 				<div class="pt-8 lg:pt-9 xl:pt-10 2xl:pt-11 flex flex-col gap-2.5 max-w-xs">
 					<h4 class="font-bold text-px10 text-primary">My Contacts</h4>
@@ -15,8 +15,8 @@
 					</div>
 				</div>
 				<div class="contact-rs flex flex-col flex-1">
-					<div class="grid grid-cols-3 items-center w-full justify-between ml-2.5 lg:ml-3 xl:ml-4 2xl:ml-5 pr-2.5 pb-px5 lg:pb-2 xl:pb-3 2xl:pb-4">
-						<div class="flex items-center gap-px15 lg:gap-4 xl:gap-5 2xl:gap-6 cursor-pointer">
+					<div class="grid grid-cols-3 items-center w-full justify-between ml-2.5 lg:ml-3 xl:ml-4 2xl:ml-5 pr-2.5 pb-px5">
+						<div class="flex items-center gap-px15 cursor-pointer">
 							<input type="checkbox" name="participants" id="selectAll" @click="checkedAll">
 							<p class="text-px10 text-grey-sb font-bold" id="selectButton" @click="checkedAll">Contact Name &amp; Email</p>
 						</div>

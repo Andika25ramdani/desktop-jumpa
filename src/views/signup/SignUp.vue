@@ -5,9 +5,9 @@
 		:notifType=toast.notifType />
 	<div class="sign-up">
 		<transition name="slide-up" appear>
-			<div class="bg-white rounded-px5 p-px25 shadow-custom xl:p-10 max-w-lg">
-				<h2 class="font-bold text-grey-dark text-2xl xl:text-3xl text-center mb-5 xl:mb-px30">Sign Up</h2>
-				<form @submit.prevent="signUp" class="flex flex-col gap-2.5 xl:gap-5 px-2.5 text-xs xl:text-sm">
+			<div class="bg-white rounded-px5 p-px25 shadow-custom lg:p-10 max-w-lg">
+				<h2 class="font-bold text-grey-dark text-2xl lg:text-3xl text-center mb-5 lg:mb-px30">Sign Up</h2>
+				<form @submit.prevent="signUp" class="flex flex-col gap-2.5 lg:gap-5 px-2.5 text-xs lg:text-sm">
 					<div class="flex flex-col gap">
 						<input type="email" v-model="signUpData.email" placeholder="Email" id="inputEmail" class="border border-grey-ce rounded-px5 red-input outline-none ">
 						<span v-if="v$.signUpData.email.$error" class="text-red text-px8 xl:text-px10 mt-px5">{{ v$.signUpData.email.$errors[0].$message }}</span>
@@ -26,9 +26,14 @@
 					<button v-if="v$.signUpData.displayName.$error || v$.signUpData.email.$error || v$.signUpData.checkcode.$error" type="submit" class="primary-button mt-2.5" disabled>SIGN UP</button>
 					<button v-else type="submit" class="primary-button mt-2.5">SIGN UP</button>
 				</form>
-				<p class="text-xs xl:text-sm text-grey-dark my-2.5 ml-2.5">Already have an account? 
+				<p class="text-xs xl:text-sm text-grey-dark mt-2.5 lg:mt-5 mx-auto w-max">Already have an account? 
 					<router-link to="/sign-in" class="font-bold hover:underline">Sign In</router-link>
 				</p>
+				<div class="flex text-xs xl:text-sm text-linkblue mt-5 lg:mt-px30 px-2.5 w-full text-center">
+					<router-link to='/' class="back-button flex-1">
+						<i class="fas fa-chevron-left pr-1"></i> Back to Welcome
+					</router-link>
+				</div>
 			</div>
 		</transition>
 	</div>
@@ -108,8 +113,9 @@ export default {
 					setTimeout(() => {
 						this.toast.active = false
 					}, 2975)
+				} else {
+					this.$router.push({name: 'SignUpCheckEmail', params: {email: this.signUpData.email, displayName: this.signUpData.displayName}})
 				}
-				// this.$router.push({name: 'SignUpCheckEmail', params: {email: this.signUpData.email, displayName: this.signUpData.displayName}})
             }
         }
 	}

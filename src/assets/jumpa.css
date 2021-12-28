@@ -176,25 +176,42 @@ select {
     width: 37vw;
     min-width: 274px;
 }
+.primary-button, .back-button {
+	margin: 5px 0 0;
+	text-transform: uppercase;
+	padding: 9px 0;
+	border-radius: 5px;
+}
 .primary-button {
-    margin: 5px 0 0;
-    background-color: #790F19;
-    font-weight: 700;
-    text-transform: uppercase;
-    padding: 9px 0;
-    color: white;
-    border-radius: 5px;
+	font-weight: 700;
+	background-color: #790F19;
+	color: white;
+}
+.back-button {
+    color: #24A0ED;
+}
+.primary-button:hover, .back-button:hover {
+	box-shadow: -10px 10px 15px rgba(0, 0, 0, 0.25);
 }
 .primary-button:hover {
-    box-shadow: -10px 10px 15px rgba(0, 0, 0, 0.25);
+	color: #790F19;
+	border: #790F19 1px solid;
+	padding: 8px 0;
+	background-color: transparent;
 }
-.primary-button:disabled {
-    background-color: #E9E9E9;
-    color: #9B9999;
-    cursor: not-allowed;
+.back-button:hover {
+	background-color: #24A0ED;
+	color: white;
+    font-weight: 700;
 }
-.primary-button:disabled:hover {
-    box-shadow: none;
+.primary-button:disabled, .back-button:disabled {
+	background-color: #E9E9E9;
+	color: #9B9999;
+	cursor: not-allowed;
+}
+.primary-button:disabled:hover, .back-button:disabled:hover {
+	box-shadow: none;
+	border: 1px solid transparent;
 }
 
 /* RESPONSIVE */
