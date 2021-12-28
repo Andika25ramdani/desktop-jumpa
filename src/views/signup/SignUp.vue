@@ -14,7 +14,7 @@
 					</div>
 					<div class="flex flex-col gap">
 						<div class="flex justify-between items-center gap-4">
-							<input type="text" v-model="signUpData.checkcode" placeholder="Display Name" id="inputDisplayName" minlength="4" maxlength="4" class="flex-1 border border-grey-ce rounded-px5 outline-none py-2 px-4">
+							<input type="text" v-model="signUpData.checkcode" placeholder="Verification Code" id="captcha" maxlength="4" class="flex-1 border border-grey-ce rounded-px5 outline-none py-2 px-4">
 							<img src="https://surampak.jumpa.id/checkcode">
 						</div>
 						<span v-if="v$.signUpData.checkcode.$error" class="text-red text-px8 xl:text-px10 mt-px5">{{ v$.signUpData.checkcode.$errors[0].$message }}</span>
@@ -60,26 +60,24 @@ export default {
     },
 	computed: {
 		...mapGetters({
-			checkcode: 'auth/getCaptcha'
+			checkcode: 'captcha/getCaptcha'
 		}),
 		checkEmptyInput: async function () {
 			this.v$.$validate()
 		}
 	},
 	async created() {
-		await this.$store.dispatch('auth/getCheckcode')
+		await this.$store.dispatch('captcha/getCheckcode')
 	},
 	methods: {
 		signUp: async function() {
             this.v$.$validate()
             if (!this.v$.$error) {
-				console.log('OKE')
                 await this.$store.dispatch('auth/signUp', {
 					email: this.signUpData.email,
 					displayName: this.signUpData.displayName,
 					name: '',
-					enterprisePeople: '', 
-					checkcode: '',
+					enterprisePeople: '',
 					checkcode: this.signUpData.checkcode,
 					phone: 1,
 					country: '',
@@ -87,7 +85,7 @@ export default {
 					province: '' ,
 					companySize: ''
                 });
-				this.$router.push({name: 'SignUpCheckEmail', params: {email: this.signUpData.email, displayName: this.signUpData.displayName}})
+				// this.$router.push({name: 'SignUpCheckEmail', params: {email: this.signUpData.email, displayName: this.signUpData.displayName}})
             }
         }
 	}

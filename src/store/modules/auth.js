@@ -1,5 +1,6 @@
 import router from '../../router'
 import API from '../../js/api_interface'
+import Captcha from './captcha'
 import axios from 'axios'
 import qs from 'querystring'
 
@@ -9,7 +10,6 @@ const intialState = () => {
         accessToken: '',
         account: '',
         bio: '',
-        captcha: '',
         displayName: '',
         email: '',
         accountInfo: {}
@@ -32,36 +32,36 @@ export default {
         getAccountInfo: (state) => () => state.accountInfo,
     },
     actions: {
-        getCheckcode: async function({commit}) {
-            let res = await axios.get('https://surampak.jumpa.id/checkcode')
-            console.log('CHECKCODE', res.status);
-            if (res.status === 200) {
-                const { data } = res
-                localStorage.setItem('captcha', data)
-                commit('SET', ['captcha', data])
+        // SIGNUP
+        signUp: async function({commit}, payload) {
+            let checkEmailRes = await axios.post('https://surampak.jumpa.id/ajax/checkEmail', qs.stringify({
+                email: payload.email
+            }))
+            if (checkEmailRes.data.state === 0) {
+                let captchaRes = await axios.post('https://surampak.jumpa.id/ajax/checkcode', qs.stringify({
+                    checkode: payload.checkcode
+                }))
+                console.log(captchaRes);
+                if (captchaRes.data.state === 0) {
+                    let res = await axios.post('https://surampak.jumpa.id/signup', qs.stringify({
+                        email: payload.email,
+                        contact: payload.displayName,
+                        name: payload.bussinessName,
+                        enterprisePeople: payload.enterprisePeople,
+                        checkcode: payload.checkcode,
+                        phone: payload.phone,
+                        country: payload.country,
+                        mac: payload.mac,
+                        province: payload.province,
+                        companySize: payload.companySize
+                    }))
+                    console.log('SIGN UP', res);
+                }
+            } else {
+                return checkEmailRes.data.msg
             }
         },
-        CheckcodeVerificataion: async function({commit}, payload) {
-            let res = await axios.get('https://surampak.jumpa.id/ajax/checkcode', qs.stringify({
-                checkcode: payload.checkcode
-            }))
-            console.log('CHECKCODE VERIFICATION', res.data);
-        },
-        signUp: async function({commit}, payload) {
-            let res = await axios.post('https://surampak.jumpa.id/signup', qs.stringify({
-                email: payload.email,
-                contact: payload.displayName,
-                name: payload.bussinessName,
-                enterprisePeople: payload.enterprisePeople,
-                checkcode: payload.checkcode,
-                phone: payload.phone,
-                country: payload.country,
-                mac: payload.mac,
-                province: payload.province,
-                companySize: payload.companySize
-            }))
-            console.log('SIGN UP', res);
-        },
+        // SIGNIN
         signIn: async function({commit}, payload) {
             const signInRes = await API.account_login(payload.account, payload.password);
             let data = signInRes.data
@@ -92,6 +92,7 @@ export default {
                 }
             }
         },
+        // CHANGE PASSWORD
         changePassword: async function({commit}, payload) {
             let res = await axios.post('https://surampak.jumpa.id/settings/password', qs.stringify({
                 oldPwd: payload.oldPwd,

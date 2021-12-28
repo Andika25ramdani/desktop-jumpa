@@ -25,7 +25,6 @@ export default {
     },
     methods: {
         resendEmail() {
-            console.log('Email Resend');
             this.$router.push({name: 'SetupAccount', params: {email: this.email, displayName: this.displayName}})
             // location.reload()
         }

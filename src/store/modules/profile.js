@@ -72,7 +72,6 @@ export default {
                 bio: payload.bio,
                 token: payload.token,
             }))
-            // console.log(payload.token);
             console.log(res);
         },
         // GET SYSTEM DATA
@@ -81,7 +80,6 @@ export default {
                 email: payload.email,
                 token: payload.accessToken,
             }))
-            console.warn(systemRes.data.timezoneList);
             localStorage.setItem('timezoneLists', systemRes.data.timezoneList)
             commit('SET', ['timezoneLists', systemRes.data.timezoneList])
         }
