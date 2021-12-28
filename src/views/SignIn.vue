@@ -1,4 +1,8 @@
 <template>
+	<notification-toast
+		v-if=toast.active
+		:notifMessage=toast.notifMessage
+		:notifType=toast.notifType />
     <div id="signIn">
 		<div class="bg-white rounded-px5 p-px25 shadow-custom xl:p-10">
 			<h2 class="font-bold text-grey-dark text-2xl xl:text-3xl text-center mb-5 xl:mb-px30">Sign In</h2>
@@ -36,13 +40,20 @@
 import md5 from 'crypto-js/md5'
 import useValidate from '@vuelidate/core'
 import { required } from '@vuelidate/validators'
+import NotificationToast from '../components/NotificationToast.vue';
 
 export default {
+  components: { NotificationToast },
     name: 'SignIn',
     data() {
         return {
 			showPassword: false,
             v$: useValidate(),
+			toast: {
+				active: false,
+				notifMessage: '',
+				notifType: 0
+			},
             signInData: {
                 account: '',
                 password: '',
@@ -64,10 +75,19 @@ export default {
         onSubmit: async function() {
             this.v$.$validate()
             if (!this.v$.$error) {
-                await this.$store.dispatch('auth/signIn', {
+                let signInResult = await this.$store.dispatch('auth/signIn', {
                     account: this.signInData.account,
                     password: md5(this.signInData.password),
                 });
+				if (signInResult[0] !== 0) {
+					console.error(signInResult[1]);
+                    this.toast.notifMessage = signInResult[1]
+					this.toast.active = true
+					this.toast.notifType = 2
+					setTimeout(() => {
+						this.toast.active = false
+					}, 2975)
+				}
             }
         },
     }

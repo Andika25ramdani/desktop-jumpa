@@ -1,7 +1,8 @@
-import router from '../../router'
 import API from '../../js/api_interface'
+import CONFIG from '../../js/config.js'
 import Captcha from './captcha'
 import axios from 'axios'
+import router from '../../router'
 import qs from 'querystring'
 
 const intialState = () => {
@@ -34,16 +35,13 @@ export default {
     actions: {
         // SIGNUP
         signUp: async function({commit}, payload) {
-            let checkEmailRes = await axios.post('https://surampak.jumpa.id/ajax/checkEmail', qs.stringify({
+            let checkEmailRes = await axios.post(CONFIG.SERVER_DOMAIN+'/ajax/checkEmail', qs.stringify({
                 email: payload.email
             }))
             if (checkEmailRes.data.state === 0) {
-                let captchaRes = await axios.post('https://surampak.jumpa.id/ajax/checkcode', qs.stringify({
-                    checkode: payload.checkcode
-                }))
-                console.log(captchaRes);
+                let captchaRes = await Captcha.actions.CheckcodeVerificataion(payload.checkcode)
                 if (captchaRes.data.state === 0) {
-                    let res = await axios.post('https://surampak.jumpa.id/signup', qs.stringify({
+                    let res = await axios.post(CONFIG.SERVER_DOMAIN+'/signup', qs.stringify({
                         email: payload.email,
                         contact: payload.displayName,
                         name: payload.bussinessName,
@@ -55,10 +53,12 @@ export default {
                         province: payload.province,
                         companySize: payload.companySize
                     }))
-                    console.log('SIGN UP', res);
+                    return [0, '']
+                } else {
+                    return [2, captchaRes.data.msg]
                 }
             } else {
-                return checkEmailRes.data.msg
+                return [1, checkEmailRes.data.msg]
             }
         },
         // SIGNIN
@@ -67,7 +67,7 @@ export default {
             let data = signInRes.data
             if (data.retCode == 0) {
                 const { accessToken, account, email } = data.data
-                let infoRes = await axios.post('https://surampak.jumpa.id/layanan/profile/editInfoGet', qs.stringify({
+                let infoRes = await axios.post(CONFIG.SERVER_DOMAIN+'/layanan/profile/editInfoGet', qs.stringify({
                     email: email,
                     token: accessToken,
                 }))
@@ -89,12 +89,17 @@ export default {
                     commit('SET', ['account', account])
 
                     router.push(router.currentRoute.value.query.redirect || '/home')
+                    return [0, '']
+                } else {
+                    return [1, infos]
                 }
+            } else {
+                return [1, data.errorMsg]
             }
         },
         // CHANGE PASSWORD
         changePassword: async function({commit}, payload) {
-            let res = await axios.post('https://surampak.jumpa.id/settings/password', qs.stringify({
+            let res = await axios.post(CONFIG.SERVER_DOMAIN+'/settings/password', qs.stringify({
                 oldPwd: payload.oldPwd,
                 newPwd: payload.newPwd,
             }))

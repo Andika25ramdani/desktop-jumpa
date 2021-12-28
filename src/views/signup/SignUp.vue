@@ -1,4 +1,8 @@
 <template>
+	<notification-toast
+		v-if=toast.active
+		:notifMessage=toast.notifMessage
+		:notifType=toast.notifType />
 	<div class="sign-up">
 		<transition name="slide-up" appear>
 			<div class="bg-white rounded-px5 p-px25 shadow-custom xl:p-10 max-w-lg">
@@ -33,11 +37,18 @@
 import { mapGetters } from 'vuex'
 import useValidate from '@vuelidate/core'
 import { required, email, minLength, maxLength } from '@vuelidate/validators'
+import NotificationToast from '../../components/NotificationToast.vue'
 export default {
+  components: { NotificationToast },
 	name: 'SignUp',
 	data() {
 		return{
             v$: useValidate(),
+			toast: {
+				active: false,
+				notifMessage: '',
+				notifType: 0
+			},
 			signUpData: {
 				email: '',
 				displayName: '',
@@ -73,7 +84,7 @@ export default {
 		signUp: async function() {
             this.v$.$validate()
             if (!this.v$.$error) {
-                await this.$store.dispatch('auth/signUp', {
+                let signUpResult = await this.$store.dispatch('auth/signUp', {
 					email: this.signUpData.email,
 					displayName: this.signUpData.displayName,
 					name: '',
@@ -85,6 +96,19 @@ export default {
 					province: '' ,
 					companySize: ''
                 });
+				if (signUpResult[0] !== 0) {
+					if (signUpResult[0] === 1) {
+						this.toast.notifMessage = 'The Email already in use'
+					} else {
+						this.toast.notifMessage = signUpResult[1]
+					}
+					console.error(signUpResult[1]);
+					this.toast.active = true
+					this.toast.notifType = 2
+					setTimeout(() => {
+						this.toast.active = false
+					}, 2975)
+				}
 				// this.$router.push({name: 'SignUpCheckEmail', params: {email: this.signUpData.email, displayName: this.signUpData.displayName}})
             }
         }
