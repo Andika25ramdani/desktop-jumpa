@@ -1,10 +1,10 @@
 <template>
     <div class="bg-white rounded-px5 p-px30 shadow-custom xl:p-10 flex items-center flex-col max-w-md">
-        <h2 class="font-bold text-grey-dark text-2xl xl:text-3xl text-center mb-2.5">Check Your Email</h2>
-        <p class="text-xs xl:text-sm text-grey-dark text-center">{{ message }}</p>
-        <p class="text-xs xl:text-sm text-grey-dark text-center font-bold">{{ param }}</p>
+        <h2 class="font-bold text-grey-black text-2xl xl:text-3xl text-center mb-2.5">Check Your Email</h2>
+        <p class="text-xs xl:text-sm text-grey-black text-center">{{ message }}</p>
+        <p class="text-xs xl:text-sm text-grey-black text-center font-bold">{{ param }}</p>
         <img src="img/check-email.png" alt="" class="mx-auto py-px30">
-        <p class="text-xs xl:text-sm text-grey-dark text-center mb-px30">{{ footerMessage }}</p>
+        <p class="text-xs xl:text-sm text-grey-black text-center mb-px30">{{ footerMessage }}</p>
         <button @click="$emit('buttonClicked')" type="button" class="primary-button red-input" :disabled="countDown != 0">RESEND EMAIL {{ timeLeft ? '' : ( countDown == 0 ? '' : '('+countDown+')') }}</button>
         <div class="flex text-xs xl:text-sm text-linkblue mt-5 lg:mt-5 px-2.5 w-full text-center">
             <router-link to='/' class="back-button flex-1">

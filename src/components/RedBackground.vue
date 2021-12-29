@@ -1,5 +1,5 @@
 <template>
-  <div class="w-screen h-screen fixed bg-primary items-center red-background bg-cover">
+  <div class="w-screen h-screen fixed bg-maroon items-center red-background bg-cover">
     <Particles
       id="tsparticles"
       :options="tsOption"

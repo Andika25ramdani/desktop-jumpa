@@ -3,7 +3,7 @@
     <nav class="flex w-full justify-between items-center py-px15 xl:py-px30 px-5 xl:px-px50 gap-5 sm:gap-16 xl:gap-28">
       <div class="flex items-center gap-4 sm:gap-5 xl:gap-9 w-9/12 sm:w-4/12 xl:w-2/5">
         <img :src=logoJumpa alt="Logo Jumpa" class="h-8 xl:h-px38">
-        <form class="bg-grey-lighter rounded-px5 flex items-center py-px5 xl:py-2 px-2.5 xl:px-px15 text-px8 xl:text-sm text-grey-lightjumpa flex-1">
+        <form class="bg-grey-disable rounded-px5 flex items-center py-px5 xl:py-2 px-2.5 xl:px-px15 text-px8 xl:text-sm text-grey-lightjumpa flex-1">
           <i class="fas fa-search"></i>
           <input type="search" name="" id="" placeholder="Find something here..." class="outline-none pl-2.5 xl:pl-px15 bg-transparent w-full">
         </form>
@@ -16,7 +16,7 @@
       </ul>
       <div class="flex gap-2.5 xl:gap-6">
         <button @click="signOut" type="button">
-          <i class="fas fa-cog text-grey-dark text-xs xl:text-xl"></i>
+          <i class="fas fa-cog text-grey-black text-xs xl:text-xl"></i>
         </button>
         <router-link to="/profile">
           <img src="img/icons/jumpa-logo.png" alt="" class="rounded-full w-px22 xl:w-px38 h-px22 xl:h-px38 bg-white object-cover">

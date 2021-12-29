@@ -13,24 +13,26 @@ module.exports = {
       '2xl': '1536px',
     },
     colors: {
-      primary: '#790f19',
+      maroon: '#790f19',
       grey: {
-        dark: '#424242',
+        black: '#424242',
+        disable: '#E9E9E9',
+        light: '#F3F3F3',
+        gray: '#9B9999',
+        
         ed: '#6D6D6D',
-        sb: '#9B9999',
         ao: '#A0A0A0',
         lightjumpa: '#ADADAD',
         ce: '#CECECE',
-        lighter: '#E9E9E9',
         f4: '#F4F4F4',
         background: '#F2F3F5',
         f8: '#F8F8F8'
       },
       white: colors.white,
-      red: '#FF2727',
-      green: '#32BA7C',
-      orange: '#FF9820',
+      lightred: '#FF2727',
+      lightgreen: '#32BA7C',
       linkblue: '#24A0ED',
+      orange: '#FF9820',
       transparent: 'transparent',
       
       current: 'currentColor',

@@ -1,8 +1,8 @@
 <template>
     <div class="default-page">
         <div class="card m-0">
-			<h2 class="font-bold text-2xl xl:text-3xl text-grey-dark py-5 px-px30 xl:py-10">Meeting Details</h2>
-            <nav role="navigation" class="w-full flex items-center text-center gap-4 sm:gap-px25 xl:gap-15 border-b border-grey-lighter px-4 sm:px-px30 xl:px-10 m-0">
+			<h2 class="font-bold text-2xl xl:text-3xl text-grey-black py-5 px-px30 xl:py-10">Meeting Details</h2>
+            <nav role="navigation" class="w-full flex items-center text-center gap-4 sm:gap-px25 xl:gap-15 border-b border-grey-disable px-4 sm:px-px30 xl:px-10 m-0">
                 <a @click="changeTab('meetingInfo')" class="tab-menu cursor-pointer" :class="{ active: currentTab === 'meetingInfo'}">Meeting Info</a>
                 <a @click="changeTab('participants')" class="tab-menu cursor-pointer" :class="{ active: currentTab === 'participants'}">Participants</a>
                 <a @click="changeTab('invitees')" class="tab-menu cursor-pointer" :class="{ active: currentTab === 'invitees'}">Invitees</a>
@@ -116,7 +116,7 @@
                     <tbody>
                         <tr v-for="participant in participantLists" :key=participant.email class="flex items-center justify-between">
                             <td class="py-2 xl:py-2.5 flex items-center gap-1 sm:gap-px15">
-                                <img src="/img/icons/jumpa.png" class="rounded-full bg-grey-dark w-px35 object-contain">
+                                <img src="/img/icons/jumpa.png" class="rounded-full bg-grey-black w-px35 object-contain">
                                 {{ participant.displayName }}
                             </td>
                             <td class="py-2 xl:py-2.5">{{ participant.email }}</td>
@@ -140,7 +140,7 @@
                     <tbody>
                         <tr class="flex items-center justify-between" v-for="invitee in inviteeLists" :key=invitee>
                             <td class="py-2 xl:py-2.5 flex items-center gap-px15">
-                                <img src="/img/icons/jumpa.png" class="rounded-full bg-grey-dark w-px35 object-contain">
+                                <img src="/img/icons/jumpa.png" class="rounded-full bg-grey-black w-px35 object-contain">
                                 {{ invitee.displayName }}</td>
                             <td>{{ invitee.email }}</td>
                             <td>{{ invitee.joinTime }}</td>
@@ -152,12 +152,12 @@
             <div v-if="currentTab === 'attachments'" id="attachments" class="text-px10 xl:text-xs text-grey-ed pl-px30 pr-6 py-5 overflow-hidden overflow-y-auto mr-1">
                 <div class="grid justify-center gap-1 sm:gap-px13 xl:gap-5 grid-flow-row auto-rows-auto grid-cols-1 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6">
                     <div v-for="id in 10" :key=id class="bg-white w-40 xl:w-px188 h-36 xl:h-40 border border-grey-f4 rounded-px5 flex flex-col justify-center items-center gap-2 relative mx-auto">
-                        <i class="fas fa-file text-primary text-5xl xl:text-7xl"></i>
+                        <i class="fas fa-file text-maroon text-5xl xl:text-7xl"></i>
                         <p class="font-bold text-px10 xl:text-xs text-center">
                             Meeting details.pdf<br>
                             <span class="font-normal text-px10">784KB</span>
                         </p>
-                        <div class="absolute bg-grey-dark rounded-full px-1 top-2.5 right-2.5 cursor-pointer">
+                        <div class="absolute bg-grey-black rounded-full px-1 top-2.5 right-2.5 cursor-pointer">
                             <i class="fas fa-download text-white text-px8 xl:text-base"></i>
                         </div>
                     </div>

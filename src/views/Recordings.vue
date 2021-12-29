@@ -13,26 +13,26 @@
 		:notifType=0 />
 	<div class="default-page">
 		<div class="card p-5">
-			<h2 class="font-bold text-2xl text-grey-dark mb-5">Recording</h2>
+			<h2 class="font-bold text-2xl text-grey-black mb-5">Recording</h2>
 			<div class="grid gap-pc375 recording-list pt-0 pr-5 pb-2.5 pl-2.5">
-				<h6 class="text-px10 font-bold text-grey-sb">Start Time</h6>
-				<h6 class="text-px10 font-bold text-grey-sb">Subject</h6>
-				<h6 class="text-px10 font-bold text-grey-sb">Meeting ID</h6>
-				<h6 class="text-px10 font-bold text-grey-sb">Files</h6>
-				<h6 class="text-px10 font-bold text-grey-sb"></h6>
+				<h6 class="text-px10 font-bold text-grey-gray">Start Time</h6>
+				<h6 class="text-px10 font-bold text-grey-gray">Subject</h6>
+				<h6 class="text-px10 font-bold text-grey-gray">Meeting ID</h6>
+				<h6 class="text-px10 font-bold text-grey-gray">Files</h6>
+				<h6 class="text-px10 font-bold text-grey-gray"></h6>
 			</div>
 			<div id="listRecording" class="flex flex-col gap-px5 sticky flex-nowrap overflow-hidden overflow-y-auto pr-2.5 h-full hasInactive">
 				<transition-group name="slide-up" appear>
-					<div class="grid recording-list gap-pc375 items-center rounded-tr-px5 px-2.5 py-px11 border-grey-lighter border hover:bg-grey-background focus:bg-grey-background cursor-pointer" v-for="recording in recordings" :key=recording.meetingNum>
+					<div class="grid recording-list gap-pc375 items-center rounded-tr-px5 px-2.5 py-px11 border-grey-disable border hover:bg-grey-background focus:bg-grey-background cursor-pointer" v-for="recording in recordings" :key=recording.meetingNum>
 						<p class="text-grey-ed text-px10">{{ recording.endDateVal }} {{ recording.endTimeVal }}</p>
 						<p class="text-grey-ed text-px10">{{ recording.subject }}</p>
 						<p class="text-grey-ed text-px10">{{ recording.meetingNum }}</p>
 						<p class="text-grey-ed text-px10">{{ recording.files }}</p>
 						<div class="flex gap-px5 justify-end">
-							<button @click="console.log('download clicked')" class="bg-gradient-to-b from-white to-grey-f4 border border-grey-lighter text-grey-ed text-px10 rounded-px5 px-px9">
-								<i class="fas fa-download text-grey-dark text-xs lg:text-sm xl:text-base 2xl:text-lg"></i>
+							<button @click="console.log('download clicked')" class="bg-gradient-to-b from-white to-grey-f4 border border-grey-disable text-grey-ed text-px10 rounded-px5 px-px9">
+								<i class="fas fa-download text-grey-black text-xs lg:text-sm xl:text-base 2xl:text-lg"></i>
 							</button>
-							<button @click="deleteClicked(recording.meetingNum)" class="bg-red text-white text-px10 rounded-px5 px-px9 py-1">
+							<button @click="deleteClicked(recording.meetingNum)" class="bg-lightred text-white text-px10 rounded-px5 px-px9 py-1">
 								Delete
 							</button>
 						</div>

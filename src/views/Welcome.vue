@@ -7,7 +7,7 @@
     <div class="flex w-max flex-col mx-auto gap-2.5 xl:gap-px15">
       <router-link to="/join-meeting">
         <transition name="slide-up">
-          <button class="join-btn text-primary text-xs font-bold lg:text-sm bg-white rounded-full py-px9">JOIN MEETING</button>
+          <button class="join-btn text-maroon text-xs font-bold lg:text-sm bg-white rounded-full py-px9">JOIN MEETING</button>
         </transition>
       </router-link>
       <div class="flex justify-between gap-5">

@@ -5,30 +5,30 @@
 		:notifType=toast.notifType />
     <div id="signIn">
         <div class="bg-white rounded-px5 p-px25 shadow-custom lg:p-10 max-w-lg">
-            <h2 class="font-bold text-grey-dark text-2xl lg:text-3xl text-center mb-5 lg:mb-px30">Sign In</h2>
+            <h2 class="font-bold text-grey-black text-2xl lg:text-3xl text-center mb-5 lg:mb-px30">Sign In</h2>
             <form @submit.prevent="onSubmit" class="flex flex-col gap-2.5 lg:gap-5 px-2.5 text-xs lg:text-sm">
                 <div class="flex flex-col gap">
                     <input v-model="signInData.account" type="text" placeholder="Username or Email" class="border border-grey-ce rounded-px5 red-input outline-none"/>
-                    <span v-if="v$.signInData.account.$error" class="text-red text-xs mt-px5">{{ v$.signInData.account.$errors[0].$message }}</span>
+                    <span v-if="v$.signInData.account.$error" class="text-lightred text-xs mt-px5">{{ v$.signInData.account.$errors[0].$message }}</span>
                 </div>
 				<div class="flex flex-col gap">
 					<div class="flex gap-px5 border border-grey-ce rounded-px5 red-input">
 						<input v-if="showPassword" type="text" v-model="signInData.password" placeholder="Password" id="inputPassword" class="flex-1 outline-none">
 						<input v-else type="password" v-model="signInData.password" placeholder="Password" id="inputPassword" class="flex-1 outline-none">
 						<button @click="visiblePassword" class="pr-2.5">
-							<i v-if="showPassword" class="fas fa-eye text-grey-dark text-xs"></i>
-							<i v-else class="fas fa-eye-slash text-grey-dark text-xs"></i>
+							<i v-if="showPassword" class="fas fa-eye text-grey-black text-xs"></i>
+							<i v-else class="fas fa-eye-slash text-grey-black text-xs"></i>
 						</button>
 					</div>
-                    <span v-if="v$.signInData.password.$error" class="text-red text-px8 xl:text-px10 mt-px5">{{ v$.signInData.password.$errors[0].$message }}</span>
+                    <span v-if="v$.signInData.password.$error" class="text-lightred text-px8 xl:text-px10 mt-px5">{{ v$.signInData.password.$errors[0].$message }}</span>
 				</div>
-                <p class="text-xs xl:text-sm text-right text-grey-dark ml-2.5 hover:font-bold hover:underline">
+                <p class="text-xs xl:text-sm text-right text-grey-black ml-2.5 hover:font-bold hover:underline">
                     <router-link to="/forgot-password">Forgot your password?</router-link>
                 </p>
 				<button v-if="v$.signInData.account.$error || v$.signInData.password.$error" type="submit" class="primary-button mt-2.5" disabled>SIGN IN</button>
 				<button v-else type="submit" class="primary-button mt-2.5">SIGN IN</button>
             </form>
-            <p class="text-xs xl:text-sm text-grey-dark mt-2.5 lg:mt-5 mx-auto w-max">
+            <p class="text-xs xl:text-sm text-grey-black mt-2.5 lg:mt-5 mx-auto w-max">
                 Need an account?
                 <router-link to="/sign-up" class="font-bold hover:underline">Sign Up</router-link>
             </p>
