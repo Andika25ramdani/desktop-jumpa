@@ -19,7 +19,7 @@
 					<div class="flex gap-px5 border border-grey-ce rounded-px5 red-input">
 						<input v-if="showPassword" type="text" v-model="hostMeetingData.meetPassword" placeholder="Meeting Password (If Required)" id="inputPassword" class="flex-1 outline-none">
 						<input v-else type="password" v-model="hostMeetingData.meetPassword" placeholder="Meeting Password (If Required)" id="inputPassword" class="flex-1 outline-none">
-						<button @click="visiblePassword" class="pr-2.5">
+						<button @click.left="visiblePassword" class="pr-2.5">
 							<i v-if="showPassword" class="fas fa-eye text-grey-black text-xs"></i>
 							<i v-else class="fas fa-eye-slash text-grey-black text-xs"></i>
 						</button>

@@ -27,7 +27,7 @@
 						<p class="text-grey-ed text-px10 xl:text-sm">{{ history.endDateVal }} {{ history.endTimeVal }}</p>
 						<p class="text-grey-ed text-px10 xl:text-sm">{{ history.subject }}</p>
 						<p class="text-grey-ed text-px10 xl:text-sm">{{ history.meetingNum }}</p>
-						<p class="text-grey-ed text-px10 xl:text-sm" :class="{'text-red': history.state === -1, 'text-lightgreen': history.state === 3}">{{ history.state === 3 ? 'Ended' : '' }}{{ history.state === -1 ? 'Canceled' : '' }}</p>
+						<p class="text-grey-ed text-px10 xl:text-sm" :class="{'text-lightred': history.state === -1, 'text-lightgreen': history.state === 3}">{{ history.state === 3 ? 'Ended' : '' }}{{ history.state === -1 ? 'Canceled' : '' }}</p>
 						<div class="">
 							<button @click="openToggle(history.meetingSerialNum)" class="bg-gradient-to-b w-max from-white to-grey-f4 border border-grey-disable text-grey-ed text-px10 xl:text-sm rounded-px5 flex gap-px15 items-center justify-center px-2">
 								Action <i class="fas fa-sort text-grey-black text-px8 xl:text-px10"></i>

@@ -15,12 +15,12 @@
 					<div class="flex gap-px5 border border-grey-ce rounded-px5 red-input">
 						<input v-if="showPassword" type="text" v-model="signInData.password" placeholder="Password" id="inputPassword" class="flex-1 outline-none">
 						<input v-else type="password" v-model="signInData.password" placeholder="Password" id="inputPassword" class="flex-1 outline-none">
-						<button @click="visiblePassword" class="pr-2.5">
+						<button @click.left="visiblePassword" class="pr-2.5">
 							<i v-if="showPassword" class="fas fa-eye text-grey-black text-xs"></i>
 							<i v-else class="fas fa-eye-slash text-grey-black text-xs"></i>
 						</button>
 					</div>
-                    <span v-if="v$.signInData.password.$error" class="text-lightred text-px8 xl:text-px10 mt-px5">{{ v$.signInData.password.$errors[0].$message }}</span>
+                    <span v-if="v$.signInData.password.$error" class="text-lightred text-xs mt-px5">{{ v$.signInData.password.$errors[0].$message }}</span>
 				</div>
                 <p class="text-xs xl:text-sm text-right text-grey-black ml-2.5 hover:font-bold hover:underline">
                     <router-link to="/forgot-password">Forgot your password?</router-link>

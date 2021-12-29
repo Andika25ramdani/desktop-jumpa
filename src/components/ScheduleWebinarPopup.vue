@@ -142,7 +142,7 @@
 								<div class="flex gap-0 border border-grey-ce rounded w-full">
 									<input v-if="showPassword" type="text" v-model="scheduleWebinarData.password" class="py-px5 xl:py-px9 pl-2.5 xl:pl-px15 text-px10 xl:text-sm outline-none w-full" placeholder="Enter meeting password">
 									<input v-else type="password" v-model="scheduleWebinarData.password" class="py-px5 xl:py-px9 pl-2.5 xl:pl-px15 text-px10 xl:text-sm outline-none w-full" placeholder="Enter meeting password">
-									<button @click="visiblePassword" class="pr-2.5">
+									<button @click.left="visiblePassword" class="pr-2.5">
 										<i v-if="showPassword" class="fas fa-eye text-grey-black text-xs"></i>
 										<i v-else class="fas fa-eye-slash text-grey-black text-xs"></i>
 									</button>
